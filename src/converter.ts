@@ -8,6 +8,7 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from '../schemas/Config_50009.js'
 import { getAssetTrackerObjects } from './getAssetTrackerObjects.js'
+import { removeCoioteFormat } from './removeCoioteFormat.js'
 
 export type value = { value: string | number | boolean }
 export type list = Record<string, { dim: string } | value>
@@ -38,9 +39,12 @@ export const converter = async (deviceTwin: deviceTwin): Promise<any> => {
 	//console.log(input)
 	const objects = await getAssetTrackerObjects(input)
 	console.log(objects)
+	const assetTrackerLwM2M = removeCoioteFormat(objects)
+	console.log(assetTrackerLwM2M)
+	//return assetTrackerLwM2M // TODO: return this
 	/*
 	
-	const assetTrackerLwM2M = removeCoioteFormat(objects)
+	
 
 	checkLwM2MFormat(assetTrackerLwM2M)
 

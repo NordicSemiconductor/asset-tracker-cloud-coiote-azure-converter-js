@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "$id": "customObjects",
+  "title": "Custom objects JSON Schema",
+  "description": "JSON schema for custom objects",
+  "properties": {
+    "50009": {
+      "type": "object",
+      "$id": "https://github.com/OpenMobileAlliance/lwm2m-registry/raw/prod/3.xml",
+      "title": ".",
+      "description": ".",
+      "additionalProperties": false,
+      "properties": {
+        "0": {
+          "type": "boolean",
+          "title": ".",
+          "description": "."
+        },
+        "2": {
+          "type": "integer",
+          "title": ".",
+          "description": "."
+        },
+        "3": {
+          "type": "integer",
+          "title": ".",
+          "description": "."
+        },
+        "4": {
+          "type": "integer",
+          "title": ".",
+          "description": "."
+        },
+        "1": {
+          "type": "integer",
+          "title": ".",
+          "description": "."
+        },
+        "5": {
+          "type": "integer",
+          "title": ".",
+          "description": "."
+        },
+        "8": {
+          "type": "integer",
+          "title": ".",
+          "description": "."
+        },
+        "9": {
+          "type": "integer",
+          "title": ".",
+          "description": "."
+        }
+      },
+      "required": []
+    }
+  }
+}
