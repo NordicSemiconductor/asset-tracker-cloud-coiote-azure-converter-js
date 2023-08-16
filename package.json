@@ -1,0 +1,71 @@
+{
+  "name": "coiote-to-asset-tracker-v2",
+  "version": "1.0.0",
+  "description": "Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration to LwM2M Asset Tracker v2 JSON encoding",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "prepare": "husky install",
+    "prepublish": "npx swc -d dist ./src"
+  },
+  "type": "module",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./export.js",
+      "node": "./export.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MLopezJ/coiote-to-asset-tracker-v2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MLopezJ/coiote-to-asset-tracker-v2/issues"
+  },
+  "homepage": "https://github.com/MLopezJ/coiote-to-asset-tracker-v2#readme",
+  "keywords": [
+    "coiote",
+    "LwM2M",
+    "Asset Tracker v2"
+  ],
+  "author": "Nordic Semiconductor",
+  "license": "ISC",
+  "jest": {
+    "transform": {
+      "^.+\\.(t|j)sx?$": [
+        "@swc/jest"
+      ]
+    },
+    "testRegex": ".+\\.spec\\.ts$",
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ]
+  },
+  "prettier": "@nordicsemiconductor/asset-tracker-cloud-code-style/.prettierrc",
+  "lint-staged": {
+    "*.{md,json,yaml,yml}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --ext .js,.ts"
+    ]
+  },
+  "engines": {
+    "node": ">=20",
+    "npm": ">=9"
+  },
+  "release": {
+    "branches": [
+      "saga"
+    ],
+    "remoteTags": true
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
