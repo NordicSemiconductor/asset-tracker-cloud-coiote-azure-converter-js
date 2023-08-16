@@ -7,6 +7,7 @@ import {
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from '../schemas/Config_50009.js'
+import { getAssetTrackerObjects } from './getAssetTrackerObjects.js'
 
 export type value = { value: string | number | boolean }
 export type list = Record<string, { dim: string } | value>
@@ -34,10 +35,11 @@ export type deviceTwin = {
  */
 export const converter = async (deviceTwin: deviceTwin): Promise<any> => {
 	const input = deviceTwin.properties.reported.lwm2m
-	console.log(input)
-
-	/*
+	//console.log(input)
 	const objects = await getAssetTrackerObjects(input)
+	console.log(objects)
+	/*
+	
 	const assetTrackerLwM2M = removeCoioteFormat(objects)
 
 	checkLwM2MFormat(assetTrackerLwM2M)
