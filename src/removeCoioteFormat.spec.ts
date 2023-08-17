@@ -9,7 +9,7 @@ import {
 import {
 	type assetTrackerObjects,
 	Config_50009_urn,
-} from './getAssetTrackerObjects.js'
+} from './getAssetTrackerV2Objects.js'
 import { removeCoioteFormat } from './removeCoioteFormat.js'
 
 describe('removeCoioteFormat', () => {

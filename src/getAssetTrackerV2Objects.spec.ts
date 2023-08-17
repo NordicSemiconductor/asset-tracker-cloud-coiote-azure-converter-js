@@ -8,12 +8,12 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import {
 	Config_50009_urn,
-	getAssetTrackerObjects,
+	getAssetTrackerV2Objects,
 	requiredAssetTrackerObjects,
 	type assetTrackerObjects,
-} from './getAssetTrackerObjects.js'
+} from './getAssetTrackerV2Objects.js'
 
-describe('getAssetTrackerObjects', () => {
+describe('getAssetTrackerV2Objects', () => {
 	it('should pick objects required in Asset Tracker v2 LwM2M from input and build a new object from it', async () => {
 		const input = {
 			'3': {
@@ -152,7 +152,7 @@ describe('getAssetTrackerObjects', () => {
 			[Config_50009_urn]: {},
 		}
 
-		const result = await getAssetTrackerObjects(input)
+		const result = await getAssetTrackerV2Objects(input)
 		expect(Object.entries(result).length).toBe(
 			requiredAssetTrackerObjects.length,
 		)

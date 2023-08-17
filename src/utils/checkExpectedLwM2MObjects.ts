@@ -1,4 +1,4 @@
-import { requiredAssetTrackerObjects } from '../getAssetTrackerObjects.js'
+import { requiredAssetTrackerObjects } from '../getAssetTrackerV2Objects.js'
 /**
  * Check if the expected LwM2M objects in Asset Tracker web app are into the input
  */

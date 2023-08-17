@@ -36,7 +36,7 @@ export type assetTrackerObjects = {
  * transform id for those objects who belong to LwM2M
  * and return a list of new objects with respective value
  */
-export const getAssetTrackerObjects = async (
+export const getAssetTrackerV2Objects = async (
 	input: lwm2mCoiote,
 ): Promise<assetTrackerObjects> => {
 	const requiredObjects = Object.entries(input).map(

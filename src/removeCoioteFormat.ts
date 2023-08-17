@@ -17,7 +17,7 @@ import type { Config_50009 } from '../schemas/Config_50009.js'
 import {
 	type assetTrackerObjects,
 	Config_50009_urn,
-} from './getAssetTrackerObjects.js'
+} from './getAssetTrackerV2Objects.js'
 import { setCustomFormat } from './utils/setCustomFormat.js'
 import { setLwM2MFormat } from './utils/setLwM2MFormat.js'
 
