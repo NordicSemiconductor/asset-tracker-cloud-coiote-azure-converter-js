@@ -7,10 +7,11 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
+import { Config_50009_urn } from '../schemas/Config_50009.js'
+
 import type { lwm2mCoiote, instance } from './converter.js'
 
 // list of objects needed to build Asset Tracker object
-export const Config_50009_urn = '50009'
 export const requiredAssetTrackerObjects = [
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,

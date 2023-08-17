@@ -12,13 +12,11 @@ import {
 	type Temperature_3303,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { Config_50009 } from '../schemas/Config_50009.js'
-import {
-	Config_50009_urn,
-	getAssetTrackerV2Objects,
-} from './getAssetTrackerV2Objects.js'
+import { type Config_50009, Config_50009_urn } from '../schemas/Config_50009.js'
+import { getAssetTrackerV2Objects } from './getAssetTrackerV2Objects.js'
 import { removeCoioteFormat } from './removeCoioteFormat.js'
-import { checkExpectedLwM2MObjects } from './utils/checkExpectedLwM2MObjects.js'
+import { checkAssetTrackerV2Objects } from './utils/checkAssetTrackerV2Objects.js'
+import { checkLwM2MFormat } from './utils/checkLwM2MFormat.js'
 
 export type value = { value: string | number | boolean }
 export type list = Record<string, { dim: string } | value>
@@ -57,11 +55,15 @@ export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const input = deviceTwin.properties.reported.lwm2m
-	const objects = await getAssetTrackerV2Objects(input) // getAssetTrackerV2Objects
+	const objects = await getAssetTrackerV2Objects(input)
 
-	const expectedObjects = checkExpectedLwM2MObjects(Object.keys(objects)) // checkExpectedAssetTrackerv2Objects
+	const expectedObjects = checkAssetTrackerV2Objects(Object.keys(objects))
 	if ('error' in expectedObjects) console.error(expectedObjects.error)
 
-	const LwM2MAssetTrackerV2 = removeCoioteFormat(objects) //
+	const LwM2MAssetTrackerV2 = removeCoioteFormat(objects)
+
+	const LwM2MFormat = checkLwM2MFormat(LwM2MAssetTrackerV2)
+	if ('error' in LwM2MFormat) console.log(LwM2MFormat.error)
+
 	return LwM2MAssetTrackerV2
 }
