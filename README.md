@@ -1,4 +1,4 @@
-# Coiote to Asset Tracker v2
+# Coiote to LwM2M Asset Tracker v2
 
 [![Test and Release](https://github.com/MLopezJ/coiote-to-asset-tracker-v2/actions/workflows/test-and-release.yaml/badge.svg)](https://github.com/MLopezJ/coiote-to-asset-tracker-v2/actions/workflows/test-and-release.yaml)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
