@@ -20,7 +20,7 @@ describe('checkLwM2MFormat', () => {
 		expect(check.result).toBe(true)
 	})
 
-	it('should return an when the LwM2M object has wrong data type on its resources', () => {
+	it('should return an error when the LwM2M object has wrong data type on its resources', () => {
 		const input = {
 			[Device_3_urn]: {
 				'0': 1, // expecting string
