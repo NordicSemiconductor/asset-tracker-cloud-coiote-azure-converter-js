@@ -1,5 +1,5 @@
 {
-  "name": "coiote-to-asset-tracker-v2",
+  "name": "coiote-to-LwM2M-asset-tracker-v2",
   "version": "1.0.0",
   "description": "Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration to LwM2M Asset Tracker v2 JSON encoding",
   "main": "index.js",
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MLopezJ/coiote-to-asset-tracker-v2.git"
+    "url": "git+https://github.com/MLopezJ/coiote-to-LwM2M-asset-tracker-v2.git"
   },
   "bugs": {
-    "url": "https://github.com/MLopezJ/coiote-to-asset-tracker-v2/issues"
+    "url": "https://github.com/MLopezJ/coiote-to-LwM2M-asset-tracker-v2/issues"
   },
-  "homepage": "https://github.com/MLopezJ/coiote-to-asset-tracker-v2#readme",
+  "homepage": "https://github.com/MLopezJ/coiote-to-LwM2M-asset-tracker-v2#readme",
   "keywords": [
     "coiote",
     "LwM2M",
