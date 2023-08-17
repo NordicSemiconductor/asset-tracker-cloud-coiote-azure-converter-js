@@ -2,7 +2,7 @@ import { requiredAssetTrackerObjects } from '../getAssetTrackerObjects.js'
 /**
  * Check if the expected LwM2M objects in Asset Tracker web app are into the input
  */
-export const checkLwM2MAssetTrackerKeys = (
+export const checkExpectedLwM2MObjects = (
 	list: string[],
 ): { result: true } | { error: Error } => {
 	const errors = requiredAssetTrackerObjects.reduce(
