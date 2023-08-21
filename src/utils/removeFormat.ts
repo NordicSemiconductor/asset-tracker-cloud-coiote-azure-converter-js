@@ -44,8 +44,8 @@ const dataCleaning = (rawData: instance): customObjectValue[][] => {
  */
 const buildStruct = (input: customObjectValue[][]) =>
 	input.reduce((array, current) => {
-		const obj = current.reduce((p, c) => {
-			return { ...p, ...c }
+		const obj = current.reduce((previous, current) => {
+			return { ...previous, ...current }
 		}, {})
 		array.push(obj)
 		return array
