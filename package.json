@@ -69,7 +69,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@nordicsemiconductor/lwm2m-types": "2.5.0"
+    "@nordicsemiconductor/lwm2m-types": "2.5.1"
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.68",
