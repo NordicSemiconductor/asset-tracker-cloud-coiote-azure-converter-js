@@ -301,6 +301,7 @@ describe('converter', () => {
 				},
 			},
 		}
+		console.log('test')
 		const result = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
@@ -312,7 +313,6 @@ describe('converter', () => {
 				'16': 'UQ',
 				'19': '3.2.1',
 			},
-
 			[ConnectivityMonitoring_4_urn]: {
 				'0': 6,
 				'1': [6, 7],
