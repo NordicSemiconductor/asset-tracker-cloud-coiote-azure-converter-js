@@ -301,7 +301,7 @@ describe('converter', () => {
 				},
 			},
 		}
-		console.log('test')
+
 		const result = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
