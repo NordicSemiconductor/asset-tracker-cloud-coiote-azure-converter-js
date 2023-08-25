@@ -33,7 +33,7 @@ export type assetTrackerObjects = {
 }
 
 /**
- * Pick from input the required objects in Asset Tracker v2 LwM2M,
+ * Pick from input the expected objects in Asset Tracker v2 LwM2M,
  * transform id for those objects who belong to LwM2M
  * and return a list of new objects with respective value
  */
