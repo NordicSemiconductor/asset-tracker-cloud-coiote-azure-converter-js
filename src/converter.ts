@@ -63,7 +63,7 @@ export const converter = async (
 	const objects = await getAssetTrackerV2Objects(coioteLwM2M)
 
 	const expectedObjects = checkAssetTrackerV2Objects(Object.keys(objects))
-	if ('error' in expectedObjects) console.warn(expectedObjects.error)
+	if ('warning' in expectedObjects) console.warn(expectedObjects.warning)
 
 	const LwM2MAssetTrackerV2 = removeCoioteFormat(objects)
 

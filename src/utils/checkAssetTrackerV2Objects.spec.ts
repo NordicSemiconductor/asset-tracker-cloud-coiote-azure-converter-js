@@ -21,8 +21,8 @@ describe('checkAssetTrackerV2Objects', () => {
 			Temperature_3303_urn,
 			Config_50009_urn,
 		]
-		const result = checkAssetTrackerV2Objects(input) as { error: Error }
-		expect(result.error).not.toBe(undefined)
+		const result = checkAssetTrackerV2Objects(input) as { warning: Error }
+		expect(result.warning).not.toBe(undefined)
 	})
 
 	it('Should return result if list has the expected LwM2M elements', () => {
