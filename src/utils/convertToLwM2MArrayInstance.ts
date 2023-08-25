@@ -42,7 +42,7 @@ export const convertToLwM2MArrayInstance = (
 			.reduce(
 				(previous, current) =>
 					current === false ? undefined : { ...current, ...previous },
-				// false means a required resource that is not present in the given params, for that reason in changed to undefined
+				// false means a required resource is not present in the given params, for that reason is changed to undefined
 				{},
 			)
 		return instance
