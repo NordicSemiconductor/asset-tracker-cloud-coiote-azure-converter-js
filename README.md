@@ -470,7 +470,6 @@ Expected output here: [output.js](documents/output.ts)
 ## Example
 
 ```TypeScript
-import type { deviceTwin } from './converter.js'
 import { converter } from './converter.js'
 const deviceTwin = {} // ... full device twin
 const result = await converter(deviceTwin)
