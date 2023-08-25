@@ -14,7 +14,7 @@ import {
 } from './getAssetTrackerV2Objects.js'
 
 describe('getAssetTrackerV2Objects', () => {
-	it('should pick objects required in Asset Tracker v2 LwM2M from input and build a new object from it', async () => {
+	it('should pick objects expected in Asset Tracker v2 LwM2M from input and build a new object from it', async () => {
 		const input = {
 			'3': {
 				'0': {
