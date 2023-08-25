@@ -1,11 +1,11 @@
-import type { instance, value } from '../converter'
+import type { Instance, Value } from '../converter'
 import type { customObjectValue } from './setCustomFormat'
 
 /**
  * Remove the Coiote format from custom object
  */
 export const removeFormat = (
-	input: instance,
+	input: Instance,
 ): customObjectValue | customObjectValue[] | undefined => {
 	const data = dataCleaning(input)
 	const result = buildStruct(data)
@@ -17,7 +17,7 @@ export const removeFormat = (
  * Remove the 'value' key from element
  * and remove empty elements
  */
-const dataCleaning = (rawData: instance): customObjectValue[][] => {
+const dataCleaning = (rawData: Instance): customObjectValue[][] => {
 	const cleanData = Object.values(rawData).map((object) => {
 		const attributesList = Object.entries(object)
 		return attributesList
@@ -28,7 +28,7 @@ const dataCleaning = (rawData: instance): customObjectValue[][] => {
 				// empty value
 				if (Object.keys(value).length === 0) return undefined
 
-				const newValue = value as value
+				const newValue = value as Value
 
 				return {
 					[id]: newValue.value,

@@ -1,4 +1,4 @@
-import type { value } from 'src/converter'
+import type { Value } from 'src/converter'
 import { checkResource } from './checkResource.js'
 
 describe('checkResource', () => {
@@ -10,7 +10,7 @@ describe('checkResource', () => {
 
 	it('should return false when required resource value is undefined', () => {
 		const isRequired = true
-		const input = {} as value
+		const input = {} as Value
 		expect(checkResource(input, isRequired)).toBe(false)
 	})
 
@@ -24,7 +24,7 @@ describe('checkResource', () => {
 
 	it('should return true when a not required value is undefined', () => {
 		const isRequired = false
-		const input = {} as value
+		const input = {} as Value
 		expect(checkResource(input, isRequired)).toBe(true)
 	})
 

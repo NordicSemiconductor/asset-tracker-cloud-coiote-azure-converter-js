@@ -1,7 +1,7 @@
-import type { deviceTwin } from './converter.js'
+import type { DeviceTwin } from './converter.js'
 import { converter } from './converter.js'
 
-const deviceTwin: deviceTwin = {
+const deviceTwin: DeviceTwin = {
 	properties: {
 		desired: {
 			$metadata: {

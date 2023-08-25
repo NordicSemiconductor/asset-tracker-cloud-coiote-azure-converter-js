@@ -1,6 +1,6 @@
-import type { deviceTwin } from '../src/converter.js'
+import type { DeviceTwin } from '../src/converter.js'
 
-export const input: deviceTwin = {
+export const input: DeviceTwin = {
 	properties: {
 		desired: {
 			$metadata: {

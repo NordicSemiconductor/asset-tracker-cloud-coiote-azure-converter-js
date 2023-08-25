@@ -1,4 +1,4 @@
-import type { list, value } from '../converter'
+import type { List, Value } from '../converter'
 import { checkResource } from '../utils/checkResource.js'
 import { setDataType } from '../utils/setDataType.js'
 
@@ -6,7 +6,7 @@ import { setDataType } from '../utils/setDataType.js'
  * Use the schema definition to set new data type to resource
  */
 export const convertResourceUsingSchema = (
-	input: value | list,
+	input: Value | List,
 	id: string,
 	isRequired: boolean,
 	dataType?: string,

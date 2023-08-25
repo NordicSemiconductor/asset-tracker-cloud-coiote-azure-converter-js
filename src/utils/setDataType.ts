@@ -1,14 +1,14 @@
-import type { list, value } from '../converter'
+import type { List, Value } from '../converter'
 
 /**
  * Remove the key 'value' from input and set expected data type
  */
 export const setDataType = (
-	input: value | list,
+	input: Value | List,
 	dataType?: string,
 ): undefined | number | boolean | string | unknown[] => {
 	// if input is a list
-	if ((input as list).attributes !== undefined) {
+	if ((input as List).attributes !== undefined) {
 		return Object.values(input)
 			.filter((element) => {
 				if (element.dim === undefined) {

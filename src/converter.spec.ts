@@ -7,11 +7,11 @@ import {
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from '../schemas/Config_50009.js'
-import { converter, type deviceTwin } from './converter.js'
+import { converter, type DeviceTwin } from './converter.js'
 
 describe('converter', () => {
 	it(`should transform device twin to expected format`, async () => {
-		const coioteAzureLwM2M: deviceTwin = {
+		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
 					$metadata: {
@@ -376,7 +376,7 @@ describe('converter', () => {
 	})
 
 	it(`should transform to expected format even when not all the objects are present in the input`, async () => {
-		const coioteAzureLwM2M: deviceTwin = {
+		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
 					$metadata: {

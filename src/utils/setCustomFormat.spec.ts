@@ -1,4 +1,4 @@
-import type { instance, lwm2mCoiote } from '../converter'
+import type { Instance, LwM2MCoiote } from '../converter'
 import { setCustomFormat } from './setCustomFormat.js'
 
 describe('setCustomFormat', () => {
@@ -83,7 +83,7 @@ describe('setCustomFormat', () => {
 
 	it('should return empty object when instances of object is not found', () => {
 		const input = {
-			'50001': undefined as unknown as instance,
+			'50001': undefined as unknown as Instance,
 		}
 		expect(setCustomFormat(input)).toStrictEqual({})
 	})
@@ -91,7 +91,7 @@ describe('setCustomFormat', () => {
 	it('should return empty object when object is not found', () => {
 		const input = {
 			undefined,
-		} as unknown as lwm2mCoiote
+		} as unknown as LwM2MCoiote
 		expect(setCustomFormat(input)).toStrictEqual({})
 	})
 })

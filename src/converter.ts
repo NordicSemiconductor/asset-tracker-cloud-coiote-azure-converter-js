@@ -20,20 +20,19 @@ import { removeCoioteFormat } from './removeCoioteFormat.js'
 import { checkAssetTrackerV2Objects } from './utils/checkAssetTrackerV2Objects.js'
 import { checkLwM2MFormat } from './utils/checkLwM2MFormat.js'
 
-export type value = { value: string | number | boolean }
-export type list = Record<string, { dim: string } | value>
-export type attribute = { attributes: { dim: string } }
-export type resource = { [key: string]: value | list }
+export type Value = { value: string | number | boolean }
+export type List = Record<string, { dim: string } | Value>
+export type Resource = { [key: string]: Value | List }
 type instanceId = string
-export type instance = Record<instanceId, resource>
+export type Instance = Record<instanceId, Resource>
 type objectId = string
-export type lwm2mCoiote = Record<objectId, instance>
+export type LwM2MCoiote = Record<objectId, Instance>
 
-export type deviceTwin = {
+export type DeviceTwin = {
 	properties: {
 		desired: unknown
 		reported: {
-			lwm2m: lwm2mCoiote
+			lwm2m: LwM2MCoiote
 			$metadata: unknown
 			$version: number
 		}
@@ -57,7 +56,7 @@ export type LwM2MAssetTrackerV2 = {
  * Transform the device twin object coming from Azure to an object with LwM2M objects that are required by Asset Tracker v2
  */
 export const converter = async (
-	deviceTwin: deviceTwin,
+	deviceTwin: DeviceTwin,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const coioteLwM2M = deviceTwin.properties.reported.lwm2m
 	const objects = await getAssetTrackerV2Objects(coioteLwM2M)

@@ -9,7 +9,7 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from '../schemas/Config_50009.js'
 
-import type { lwm2mCoiote, instance } from './converter.js'
+import type { LwM2MCoiote, Instance } from './converter.js'
 
 // list of objects needed to build Asset Tracker object
 export const assetTrackerObjectsList = [
@@ -23,13 +23,13 @@ export const assetTrackerObjectsList = [
 ]
 
 export type assetTrackerObjects = {
-	[ConnectivityMonitoring_4_urn]: instance
-	[Device_3_urn]: instance
-	[Humidity_3304_urn]: instance
-	[Location_6_urn]: instance
-	[Pressure_3323_urn]: instance
-	[Temperature_3303_urn]: instance
-	[Config_50009_urn]: instance
+	[ConnectivityMonitoring_4_urn]: Instance
+	[Device_3_urn]: Instance
+	[Humidity_3304_urn]: Instance
+	[Location_6_urn]: Instance
+	[Pressure_3323_urn]: Instance
+	[Temperature_3303_urn]: Instance
+	[Config_50009_urn]: Instance
 }
 
 /**
@@ -38,7 +38,7 @@ export type assetTrackerObjects = {
  * and return a list of new objects with respective value
  */
 export const getAssetTrackerV2Objects = async (
-	input: lwm2mCoiote,
+	input: LwM2MCoiote,
 ): Promise<assetTrackerObjects> => {
 	const requiredObjects = Object.entries(input).map(
 		async ([objectId, value]) => {
