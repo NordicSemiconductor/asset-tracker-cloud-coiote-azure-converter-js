@@ -27,6 +27,12 @@ npm test
 npm test -- --coverage
 ```
 
+## End-to-end test
+
+```
+npx tsx e2e-tests/index.ts
+```
+
 ## Expected input
 
 Result of the
