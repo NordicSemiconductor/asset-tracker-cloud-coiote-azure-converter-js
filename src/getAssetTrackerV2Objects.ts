@@ -12,14 +12,14 @@ import { Config_50009_urn } from '../schemas/Config_50009.js'
 import type { lwm2mCoiote, instance } from './converter.js'
 
 // list of objects needed to build Asset Tracker object
-export const requiredAssetTrackerObjects = [
+export const assetTrackerObjectsList = [
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
 	Humidity_3304_urn,
 	Location_6_urn,
 	Pressure_3323_urn,
 	Temperature_3303_urn,
-	Config_50009_urn, // Config
+	Config_50009_urn,
 ]
 
 export type assetTrackerObjects = {
@@ -45,10 +45,10 @@ export const getAssetTrackerV2Objects = async (
 			const urn = await getURN(objectId)
 
 			if (urn === undefined) {
-				if (requiredAssetTrackerObjects.includes(objectId) === true)
+				if (assetTrackerObjectsList.includes(objectId) === true)
 					return { [`${objectId}`]: value }
 			} else {
-				if (requiredAssetTrackerObjects.includes(urn) === true)
+				if (assetTrackerObjectsList.includes(urn) === true)
 					return { [`${urn}`]: value }
 			}
 			return undefined

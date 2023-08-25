@@ -9,7 +9,7 @@ import {
 import { Config_50009_urn } from '../schemas/Config_50009.js'
 import {
 	getAssetTrackerV2Objects,
-	requiredAssetTrackerObjects,
+	assetTrackerObjectsList,
 	type assetTrackerObjects,
 } from './getAssetTrackerV2Objects.js'
 
@@ -153,13 +153,9 @@ describe('getAssetTrackerV2Objects', () => {
 		}
 
 		const result = await getAssetTrackerV2Objects(input)
-		expect(Object.entries(result).length).toBe(
-			requiredAssetTrackerObjects.length,
-		)
+		expect(Object.entries(result).length).toBe(assetTrackerObjectsList.length)
 
-		const random = Math.floor(
-			Math.random() * requiredAssetTrackerObjects.length,
-		)
+		const random = Math.floor(Math.random() * assetTrackerObjectsList.length)
 		const requiredAssetTrackerObjectKey = Object.keys(expectedOutput)[
 			random
 		] as keyof assetTrackerObjects

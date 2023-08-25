@@ -40,14 +40,17 @@ export type deviceTwin = {
 	}
 }
 
+/**
+ * Expected output format
+ */
 export type LwM2MAssetTrackerV2 = {
-	[ConnectivityMonitoring_4_urn]: ConnectivityMonitoring_4
-	[Device_3_urn]: Device_3
-	[Humidity_3304_urn]: Humidity_3304
-	[Location_6_urn]: Location_6
-	[Pressure_3323_urn]: Pressure_3323
-	[Temperature_3303_urn]: Temperature_3303
-	[Config_50009_urn]: Config_50009
+	[Device_3_urn]?: Device_3
+	[ConnectivityMonitoring_4_urn]?: ConnectivityMonitoring_4
+	[Location_6_urn]?: Location_6
+	[Temperature_3303_urn]?: Temperature_3303
+	[Humidity_3304_urn]?: Humidity_3304
+	[Pressure_3323_urn]?: Pressure_3323
+	[Config_50009_urn]?: Config_50009
 }
 
 /**
@@ -60,7 +63,7 @@ export const converter = async (
 	const objects = await getAssetTrackerV2Objects(coioteLwM2M)
 
 	const expectedObjects = checkAssetTrackerV2Objects(Object.keys(objects))
-	if ('error' in expectedObjects) console.error(expectedObjects.error)
+	if ('error' in expectedObjects) console.warn(expectedObjects.error)
 
 	const LwM2MAssetTrackerV2 = removeCoioteFormat(objects)
 

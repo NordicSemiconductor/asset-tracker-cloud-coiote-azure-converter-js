@@ -374,4 +374,103 @@ describe('converter', () => {
 
 		expect(await converter(coioteAzureLwM2M)).toMatchObject(result)
 	})
+
+	it(`should transform to expected format even when not all the objects are present in the input`, async () => {
+		const coioteAzureLwM2M: deviceTwin = {
+			properties: {
+				desired: {
+					$metadata: {
+						$lastUpdated: '2023-02-08T14:59:36.5459563Z',
+					},
+					$version: 1,
+				},
+				reported: {
+					lwm2m: {
+						'1': {
+							'0': {
+								'0': {
+									value: 1,
+								},
+								'1': {
+									value: 50,
+								},
+								'6': {
+									value: false,
+								},
+								'7': {
+									value: 'U',
+								},
+								'16': {
+									value: true,
+								},
+								'23': {
+									value: false,
+								},
+							},
+						},
+						'3': {
+							'0': {
+								'0': {
+									value: 'Nordic Semiconductor ASA',
+								},
+								'1': {
+									value: 'Thingy:91',
+								},
+								'2': {
+									value: '351358815340515',
+								},
+								'3': {
+									value: '22.8.1+0',
+								},
+								'7': {
+									'0': {
+										value: 80,
+									},
+									attributes: {
+										dim: '1',
+									},
+								},
+								'11': {
+									'0': {
+										value: 0,
+									},
+									attributes: {
+										dim: '1',
+									},
+								},
+								'13': {
+									value: 1675874731,
+								},
+								'16': {
+									value: 'UQ',
+								},
+								'19': {
+									value: '3.2.1',
+								},
+							},
+						},
+					},
+					$metadata: {
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$version: 31,
+				},
+			},
+		}
+
+		const result = {
+			[Device_3_urn]: {
+				'0': 'Nordic Semiconductor ASA',
+				'1': 'Thingy:91',
+				'2': '351358815340515',
+				'3': '22.8.1+0',
+				'11': [0],
+				'13': 1675874731,
+				'16': 'UQ',
+				'19': '3.2.1',
+			},
+		}
+
+		expect(await converter(coioteAzureLwM2M)).toMatchObject(result)
+	})
 })
