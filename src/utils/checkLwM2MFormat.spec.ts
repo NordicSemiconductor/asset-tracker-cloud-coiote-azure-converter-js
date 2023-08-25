@@ -37,7 +37,6 @@ describe('checkLwM2MFormat', () => {
 		const check = checkLwM2MFormat(
 			input as unknown as Partial<LwM2MDocument>,
 		) as { error: Error }
-		console.log(check)
 		expect(check.error).not.toBe(undefined)
 	})
 })
