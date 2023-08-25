@@ -56,8 +56,8 @@ export type LwM2MAssetTrackerV2 = {
 export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<LwM2MAssetTrackerV2> => {
-	const input = deviceTwin.properties.reported.lwm2m
-	const objects = await getAssetTrackerV2Objects(input)
+	const coioteLwM2M = deviceTwin.properties.reported.lwm2m
+	const objects = await getAssetTrackerV2Objects(coioteLwM2M)
 
 	const expectedObjects = checkAssetTrackerV2Objects(Object.keys(objects))
 	if ('error' in expectedObjects) console.error(expectedObjects.error)
