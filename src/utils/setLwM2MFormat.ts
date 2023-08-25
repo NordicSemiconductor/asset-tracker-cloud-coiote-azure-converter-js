@@ -34,7 +34,8 @@ export const setLwM2MFormat = (object: objectWithUrn): LwM2MDocument => {
 		}
 	}
 
+	const instance = instances // instances should be instance, because it is an object in this case
 	return {
-		[urn]: convertToLwM2MInstance(instances, schema),
-	} // instances should be instance, because it is an object in this case
+		[urn]: convertToLwM2MInstance(instance, schema),
+	}
 }
