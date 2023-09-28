@@ -63,8 +63,8 @@ export const converter = async (
 	onWarning?: (element: Warning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
-	const coioteLwM2M = deviceTwin.properties.reported.lwm2m
-	const objects = await getAssetTrackerV2Objects(coioteLwM2M)
+	const deviceTwinData = deviceTwin.properties.reported.lwm2m
+	const objects = await getAssetTrackerV2Objects(deviceTwinData)
 
 	const expectedObjects = checkAssetTrackerV2Objects(Object.keys(objects))
 	if ('warning' in expectedObjects) onWarning?.(expectedObjects.warning)
