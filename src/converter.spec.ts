@@ -310,6 +310,7 @@ void describe('converter', () => {
 				'1': 'Thingy:91',
 				'2': '351358815340515',
 				'3': '22.8.1+0',
+				'7': [80],
 				'11': [0],
 				'13': 1675874731,
 				'16': 'UQ',
@@ -331,6 +332,7 @@ void describe('converter', () => {
 				'0': -43.5723,
 				'1': 153.2176,
 				'2': 2,
+				'3': 24.798573,
 				'5': 1665149633,
 				'6': 5,
 			},
@@ -376,7 +378,19 @@ void describe('converter', () => {
 
 		const result = await converter(coioteAzureLwM2M)
 
-		assert.strictEqual(result, expected)
+		assert.deepEqual(result[Device_3_urn], expected[Device_3_urn])
+		assert.deepEqual(
+			result[ConnectivityMonitoring_4_urn],
+			expected[ConnectivityMonitoring_4_urn],
+		)
+		assert.deepEqual(result[Location_6_urn], expected[Location_6_urn])
+		assert.deepEqual(
+			result[Temperature_3303_urn],
+			expected[Temperature_3303_urn],
+		)
+		assert.deepEqual(result[Humidity_3304_urn], expected[Humidity_3304_urn])
+		assert.deepEqual(result[Pressure_3323_urn], expected[Pressure_3323_urn])
+		assert.deepEqual(result[Config_50009_urn], expected[Config_50009_urn])
 	})
 
 	void it(`should transform to expected format even when not all the objects are present in the input`, async () => {
@@ -468,6 +482,7 @@ void describe('converter', () => {
 				'1': 'Thingy:91',
 				'2': '351358815340515',
 				'3': '22.8.1+0',
+				'7': [80],
 				'11': [0],
 				'13': 1675874731,
 				'16': 'UQ',
@@ -477,6 +492,6 @@ void describe('converter', () => {
 
 		const result = await converter(coioteAzureLwM2M)
 
-		assert.strictEqual(result, expected)
+		assert.deepEqual(result, expected)
 	})
 })
