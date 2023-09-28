@@ -18,7 +18,7 @@ import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
 import { getAssetTrackerV2Objects } from './getAssetTrackerV2Objects.js'
 import { removeCoioteFormat } from './removeCoioteFormat.js'
 import {
-	checkAssetTrackerV2Objects,
+	getMissedAssetTrackerV2Objects,
 	Warning,
 } from './utils/checkAssetTrackerV2Objects.js'
 import { checkLwM2MFormat, LwM2MFormatError } from './utils/checkLwM2MFormat.js'
@@ -68,11 +68,18 @@ export const converter = async (
 		deviceTwinData,
 	)
 
-	const expectedAssetTrackerV2Objects = checkAssetTrackerV2Objects(
-		Object.keys(assetTrackerV2LwM2M_coioteFormat),
-	) // TODO: rename method checkAssetTrackerV2Objects. Missed Asset Tracker V2 Objects
-	if ('warning' in expectedAssetTrackerV2Objects)
-		onWarning?.(expectedAssetTrackerV2Objects.warning)
+	const presentUrns = Object.keys(assetTrackerV2LwM2M_coioteFormat)
+	const missedAssetTrackerV2Objects =
+		getMissedAssetTrackerV2Objects(presentUrns)
+	if (missedAssetTrackerV2Objects.length > 0) {
+		onWarning?.(
+			new Warning({
+				name: 'warning',
+				message: 'Missing expected objects',
+				missingObjects: missedAssetTrackerV2Objects,
+			}),
+		)
+	}
 
 	const assetTrackerV2LwM2M = removeCoioteFormat(
 		assetTrackerV2LwM2M_coioteFormat,

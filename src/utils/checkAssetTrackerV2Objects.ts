@@ -1,4 +1,4 @@
-import { assetTrackerObjectsList } from '../getAssetTrackerV2Objects.js'
+import { assetTrackerObjectsList as definedAssetTrackerV2Objects } from '../getAssetTrackerV2Objects.js' // TODO: change assetTrackerObjectsList to definedAssetTrackerV2Objects
 
 export class Warning extends Error {
 	missingObjects: string[]
@@ -23,25 +23,12 @@ export class Warning extends Error {
 /**
  * Check if the expected LwM2M objects in Asset Tracker v2 are into the input
  */
-export const checkAssetTrackerV2Objects = (
-	list: string[],
-): { result: true } | { warning: Warning } => {
-	const missingObjects = assetTrackerObjectsList.reduce(
-		(previous: string[], current: string) => {
-			if (list.includes(current) === false) return [...previous, current]
-			return previous
-		},
-		[],
+export const getMissedAssetTrackerV2Objects = (
+	receivedObjects: string[],
+): string[] => {
+	const urns = new Set(receivedObjects)
+	const missedObjectsList = definedAssetTrackerV2Objects.filter(
+		(objectUrn: string) => urns.has(objectUrn) === false,
 	)
-
-	if (missingObjects.length > 0)
-		return {
-			warning: new Warning({
-				name: 'warning',
-				message: 'Missing expected objects',
-				missingObjects,
-			}),
-		}
-
-	return { result: true }
+	return missedObjectsList
 }

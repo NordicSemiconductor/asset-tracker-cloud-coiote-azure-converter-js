@@ -10,13 +10,10 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from '../schemas/Config_50009.js'
 
-import {
-	checkAssetTrackerV2Objects,
-	Warning,
-} from './checkAssetTrackerV2Objects.js'
+import { getMissedAssetTrackerV2Objects } from './checkAssetTrackerV2Objects.js'
 
 void describe('checkAssetTrackerV2Objects', () => {
-	void it('Should return a warning if the list has not the expected LwM2M elements', () => {
+	void it(`Should return a list with the urn of the defined 'Asset Tracker v2 LwM2M' objects that are not present in input`, () => {
 		const input = [
 			ConnectivityMonitoring_4_urn,
 			Device_3_urn,
@@ -26,15 +23,11 @@ void describe('checkAssetTrackerV2Objects', () => {
 			Temperature_3303_urn,
 			Config_50009_urn,
 		]
-		const result = checkAssetTrackerV2Objects(input) as { warning: Warning }
-		assert.deepEqual(result.warning.missingObjects, [
-			Location_6_urn,
-			Pressure_3323_urn,
-		])
-		assert.equal(result.warning.message, 'Missing expected objects')
+		const result = getMissedAssetTrackerV2Objects(input)
+		assert.deepEqual(result, [Location_6_urn, Pressure_3323_urn])
 	})
 
-	void it('Should return true if the list has all the expected LwM2M elements', () => {
+	void it(`Should return empty list if the all the defined 'Asset Tracker v2 LwM2M' objects are present in input`, () => {
 		const input = [
 			ConnectivityMonitoring_4_urn,
 			Device_3_urn,
@@ -44,7 +37,7 @@ void describe('checkAssetTrackerV2Objects', () => {
 			Temperature_3303_urn,
 			Config_50009_urn,
 		]
-		const result = checkAssetTrackerV2Objects(input) as { result: true }
-		assert.equal(result.result, true)
+		const result = getMissedAssetTrackerV2Objects(input)
+		assert.equal(result.length, 0)
 	})
 })
