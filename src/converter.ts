@@ -64,15 +64,22 @@ export const converter = async (
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
-	const objects = await getAssetTrackerV2Objects(deviceTwinData)
+	const assetTrackerV2LwM2M_coioteFormat = await getAssetTrackerV2Objects(
+		deviceTwinData,
+	)
 
-	const expectedObjects = checkAssetTrackerV2Objects(Object.keys(objects))
-	if ('warning' in expectedObjects) onWarning?.(expectedObjects.warning)
+	const expectedAssetTrackerV2Objects = checkAssetTrackerV2Objects(
+		Object.keys(assetTrackerV2LwM2M_coioteFormat),
+	) // TODO: rename method checkAssetTrackerV2Objects. Missed Asset Tracker V2 Objects
+	if ('warning' in expectedAssetTrackerV2Objects)
+		onWarning?.(expectedAssetTrackerV2Objects.warning)
 
-	const LwM2MAssetTrackerV2 = removeCoioteFormat(objects)
+	const assetTrackerV2LwM2M = removeCoioteFormat(
+		assetTrackerV2LwM2M_coioteFormat,
+	)
 
-	const LwM2MFormat = checkLwM2MFormat(LwM2MAssetTrackerV2)
-	if ('error' in LwM2MFormat) onError?.(LwM2MFormat.error)
+	const validatedLwM2MFormat = checkLwM2MFormat(assetTrackerV2LwM2M) // TODO: rename checkLwM2MFormat. ValidateLwM2MFormat could be an option
+	if ('error' in validatedLwM2MFormat) onError?.(validatedLwM2MFormat.error)
 
-	return LwM2MAssetTrackerV2
+	return assetTrackerV2LwM2M
 }
