@@ -18,6 +18,7 @@ import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
 import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import { convertToLwM2M } from './utils/convertToLwM2M.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
+import { getDevice } from './utils/getDevice.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -75,11 +76,16 @@ export const converter = async (
 	const conversionResult = {} as any //as LwM2MAssetTrackerV2 . TODO: solve this
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
+	const device = getDevice(deviceTwinData[coioteIds.Device])
+	if ('result' in device) {
+		conversionResult[Device_3_urn] = device.result
+
+		// TODO: call getTemperature here
+	} else {
+		'warning' in device ? onWarning?.(device.warning) : onError?.(device.error)
+	}
+
 	const AssetTrackerV2LwM2MObjects = {
-		[Device_3_urn]: convertToLwM2M({
-			LwM2MObjectUrn: Device_3_urn as keyof LwM2MAssetTrackerV2,
-			coioteObject: deviceTwinData[coioteIds.Device],
-		}),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
 			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
