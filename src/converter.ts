@@ -77,8 +77,10 @@ export const converter = async (
 	const conversionResult = {} as LwM2MAssetTrackerV2
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
+	const device = getDevice(deviceTwinData[coioteIds.Device])
+
 	const AssetTrackerV2LwM2MObjects = {
-		[Device_3_urn]: getDevice(deviceTwinData[coioteIds.Device]),
+		[Device_3_urn]: device,
 		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
 			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
@@ -106,10 +108,16 @@ export const converter = async (
 
 	Object.entries(AssetTrackerV2LwM2MObjects).forEach(
 		([objectURN, LwM2MObject]) => {
-			if ('result' in LwM2MObject)
-				(conversionResult as any)[objectURN] = LwM2MObject.result
-			// TODO: solve this any
-			else {
+			if ('result' in LwM2MObject) {
+				if (
+					objectURN === Temperature_3303_urn &&
+					(LwM2MObject.result as Temperature_3303)[0]?.[5518] === undefined
+				) {
+					// setTimeStampHierarchy
+					console.log('set timestamp hierarchy for Temperature')
+				}
+				;(conversionResult as any)[objectURN] = LwM2MObject.result // TODO: solve this any
+			} else {
 				'warning' in LwM2MObject
 					? onWarning?.(LwM2MObject.warning)
 					: onError?.(LwM2MObject.error as any)
