@@ -19,6 +19,7 @@ import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import { convertToLwM2M } from './utils/convertToLwM2M.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import { getDevice } from './utils/getDevice.js'
+import { getTemperature } from './utils/getTemperature.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -86,10 +87,9 @@ export const converter = async (
 			LwM2MObjectUrn: Location_6_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.Location],
 		}),
-		[Temperature_3303_urn]: convertToLwM2M({
-			LwM2MObjectUrn: Temperature_3303_urn as keyof LwM2MAssetTrackerV2,
-			coioteObject: deviceTwinData[coioteIds.Temperature],
-		}),
+		[Temperature_3303_urn]: getTemperature(
+			deviceTwinData[coioteIds.Temperature],
+		),
 		[Humidity_3304_urn]: convertToLwM2M({
 			LwM2MObjectUrn: Humidity_3304_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.Humidity],
@@ -107,8 +107,8 @@ export const converter = async (
 	Object.entries(AssetTrackerV2LwM2MObjects).forEach(
 		([objectURN, LwM2MObject]) => {
 			if ('result' in LwM2MObject)
-				(conversionResult as any)[objectURN] =
-					LwM2MObject.result // TODO: solve this
+				(conversionResult as any)[objectURN] = LwM2MObject.result
+			// TODO: solve this
 			else {
 				'warning' in LwM2MObject
 					? onWarning?.(LwM2MObject.warning)

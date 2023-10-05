@@ -4,6 +4,7 @@ import { getDevice } from './getDevice.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning'
 import { Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
 import type { Instance } from 'src/converter.js'
+import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 
 void describe('getDevice', () => {
 	void it(`should create the LwM2M object 'Device' (3) from the object '3' reported by Coiote`, () => {
@@ -114,7 +115,7 @@ void describe('getDevice', () => {
 		}
 
 		const device = getDevice(device_coiote as unknown as Instance) as {
-			error: UndefinedCoioteObjectWarning
+			error: LwM2MFormatError
 		}
 
 		assert.equal(device.error.message, 'format error')
