@@ -73,19 +73,11 @@ export const converter = async (
 	onWarning?: (element: UndefinedCoioteObjectWarning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
-	const conversionResult = {} as any //as LwM2MAssetTrackerV2 . TODO: solve this
+	const conversionResult = {} as LwM2MAssetTrackerV2 //as LwM2MAssetTrackerV2 . TODO: solve this
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
-	const device = getDevice(deviceTwinData[coioteIds.Device])
-	if ('result' in device) {
-		conversionResult[Device_3_urn] = device.result
-
-		// TODO: call getTemperature here
-	} else {
-		'warning' in device ? onWarning?.(device.warning) : onError?.(device.error)
-	}
-
 	const AssetTrackerV2LwM2MObjects = {
+		[Device_3_urn]: getDevice(deviceTwinData[coioteIds.Device]),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
 			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
@@ -115,7 +107,8 @@ export const converter = async (
 	Object.entries(AssetTrackerV2LwM2MObjects).forEach(
 		([objectURN, LwM2MObject]) => {
 			if ('result' in LwM2MObject)
-				conversionResult[objectURN] = LwM2MObject.result
+				(conversionResult as any)[objectURN] =
+					LwM2MObject.result // TODO: solve this
 			else {
 				'warning' in LwM2MObject
 					? onWarning?.(LwM2MObject.warning)
@@ -123,6 +116,8 @@ export const converter = async (
 			}
 		},
 	)
+
+	// TODO: set timestamp for Temperature, Humidity and Pressure
 
 	return conversionResult
 }
