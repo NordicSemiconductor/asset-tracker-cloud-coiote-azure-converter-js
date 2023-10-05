@@ -15,13 +15,9 @@ import type {
 	Pressure_3323,
 } from '@nordicsemiconductor/lwm2m-types'
 import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
-import { getAssetTrackerV2Objects } from './getAssetTrackerV2Objects.js'
-import { removeCoioteFormat } from './removeCoioteFormat.js'
-import {
-	getMissedAssetTrackerV2Objects,
-	Warning,
-} from './utils/checkAssetTrackerV2Objects.js'
-import { checkLwM2MFormat, LwM2MFormatError } from './utils/checkLwM2MFormat.js'
+import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
+import { convertToLwM2M } from './utils/convertToLwM2M.js'
+import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -56,37 +52,71 @@ export type LwM2MAssetTrackerV2 = {
 }
 
 /**
- * Transform the device twin object coming from Azure to an object with LwM2M objects that are required by Asset Tracker v2
+ * The id of the Asset Tracker v2 objects given by Coiote
+ */
+const coioteIds = {
+	Device: 3,
+	ConnectivityMonitoring: 4,
+	Location: 6,
+	Temperature: 3303,
+	Humidity: 3304,
+	Pressure: 3323,
+	Config: 50009,
+}
+
+/**
+ * Convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format
  */
 export const converter = async (
 	deviceTwin: DeviceTwin,
-	onWarning?: (element: Warning) => void,
+	onWarning?: (element: UndefinedCoioteObjectWarning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
+	const conversionResult = {} as any //as LwM2MAssetTrackerV2 . TODO: solve this
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
-	const assetTrackerV2LwM2M_coioteFormat = await getAssetTrackerV2Objects(
-		deviceTwinData,
-	)
 
-	const presentUrns = Object.keys(assetTrackerV2LwM2M_coioteFormat)
-	const missedAssetTrackerV2Objects =
-		getMissedAssetTrackerV2Objects(presentUrns)
-	if (missedAssetTrackerV2Objects.length > 0) {
-		onWarning?.(
-			new Warning({
-				name: 'warning',
-				message: 'Missing expected objects',
-				missingObjects: missedAssetTrackerV2Objects,
-			}),
-		)
+	const AssetTrackerV2LwM2MObjects = {
+		[Device_3_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Device_3_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Device],
+		}),
+		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
+			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
+		}),
+		[Location_6_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Location_6_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Location],
+		}),
+		[Temperature_3303_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Temperature_3303_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Temperature],
+		}),
+		[Humidity_3304_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Humidity_3304_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Humidity],
+		}),
+		[Pressure_3323_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Pressure_3323_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Pressure],
+		}),
+		[Config_50009_urn]: convertToLwM2M({
+			LwM2MObjectUrn: Config_50009_urn as keyof LwM2MAssetTrackerV2,
+			coioteObject: deviceTwinData[coioteIds.Config],
+		}),
 	}
 
-	const assetTrackerV2LwM2M = removeCoioteFormat(
-		assetTrackerV2LwM2M_coioteFormat,
+	Object.entries(AssetTrackerV2LwM2MObjects).forEach(
+		([objectURN, LwM2MObject]) => {
+			if ('result' in LwM2MObject)
+				conversionResult[objectURN] = LwM2MObject.result
+			else {
+				'warning' in LwM2MObject
+					? onWarning?.(LwM2MObject.warning)
+					: onError?.(LwM2MObject.error as any)
+			}
+		},
 	)
 
-	const validatedLwM2MFormat = checkLwM2MFormat(assetTrackerV2LwM2M) // TODO: rename checkLwM2MFormat. ValidateLwM2MFormat could be an option
-	if ('error' in validatedLwM2MFormat) onError?.(validatedLwM2MFormat.error)
-
-	return assetTrackerV2LwM2M
+	return conversionResult
 }
