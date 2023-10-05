@@ -7,6 +7,8 @@ import {
 	Location_6_urn,
 	Pressure_3323_urn,
 	Temperature_3303_urn,
+	type Temperature_3303,
+	type Device_3,
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from './schemas/Config_50009.js'
 import { converter, type DeviceTwin } from './converter.js'
@@ -493,5 +495,155 @@ void describe('converter', () => {
 		const result = await converter(coioteAzureLwM2M)
 
 		assert.deepEqual(result, expected)
+	})
+
+	void describe('timestamp hierarchy', () => {
+		void it(`should use the timestamp reported in Temperature if is reported by Coiote`, async () => {
+			// the resource to describe timestamp in Temperature object is 5518
+			const timestamp_5518 = 1675874731
+			const input: DeviceTwin = {
+				properties: {
+					desired: {
+						$metadata: {
+							$lastUpdated: '2023-02-08T14:59:36.5459563Z',
+						},
+						$version: 1,
+					},
+					reported: {
+						lwm2m: {
+							'3303': {
+								'0': {
+									'5601': {
+										value: 27.18,
+									},
+									'5602': {
+										value: 27.71,
+									},
+									'5700': {
+										value: 27.18,
+									},
+									'5701': {
+										value: 'Cel',
+									},
+									'5518': {
+										value: timestamp_5518,
+									},
+								},
+							},
+						},
+						$metadata: {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							lwm2m: {},
+						},
+						$version: 31,
+					},
+				},
+			}
+
+			const result = await converter(input)
+			assert.equal(
+				(result[Temperature_3303_urn] as Temperature_3303)[0]?.[5518],
+				timestamp_5518,
+			)
+		})
+
+		void it(`should use Device timestamp in case Timestamp resource for Temperature is missing`, async () => {
+			// the resource to describe timestamp in Device object is 13
+			const timestamp_5518 = 1675874731
+			const input: DeviceTwin = {
+				properties: {
+					desired: {
+						$metadata: {
+							$lastUpdated: '2023-02-08T14:59:36.5459563Z',
+						},
+						$version: 1,
+					},
+					reported: {
+						lwm2m: {
+							'3': {
+								'0': {
+									'0': {
+										value: 'Nordic Semiconductor ASA',
+									},
+									'1': {
+										value: 'Thingy:91',
+									},
+									'2': {
+										value: '351358815340515',
+									},
+									'3': {
+										value: '22.8.1+0',
+									},
+									'7': {
+										'0': {
+											value: 80,
+										},
+										attributes: {
+											dim: '1',
+										},
+									},
+									'11': {
+										'0': {
+											value: 0,
+										},
+										attributes: {
+											dim: '1',
+										},
+									},
+									'13': {
+										value: timestamp_5518,
+									},
+									'16': {
+										value: 'UQ',
+									},
+									'19': {
+										value: '3.2.1',
+									},
+								},
+							},
+							// timestamp in Temperature object is not provided
+							'3303': {
+								'0': {
+									'5601': {
+										value: 27.18,
+									},
+									'5602': {
+										value: 27.71,
+									},
+									'5700': {
+										value: 27.18,
+									},
+									'5701': {
+										value: 'Cel',
+									},
+								},
+							},
+						},
+						$metadata: {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							lwm2m: {},
+						},
+						$version: 31,
+					},
+				},
+			}
+
+			const result = await converter(input)
+			assert.equal(
+				(result[Temperature_3303_urn] as Temperature_3303)[0]?.[5518],
+				(result[Device_3_urn] as Device_3)[13],
+			)
+			assert.equal(
+				(result[Temperature_3303_urn] as Temperature_3303)[0]?.[5518],
+				timestamp_5518,
+			)
+		})
+
+		/* TODO: implement this
+		void it(`should use metadata timestamp in case Timestamp resource for Temperature is missing and Device object undefined`, () => {
+			// the resource to describe timestamp in Device object is 13
+			// the resource to describe timestamp in Temperature object is 5518
+		})
+		*/
 	})
 })
