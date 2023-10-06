@@ -20,6 +20,7 @@ import { convertToLwM2M } from './utils/convertToLwM2M.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import { getDevice } from './utils/getDevice.js'
 import { getTemperature } from './utils/getTemperature.js'
+import { setTimestampHierarchy } from './setTimestampHierarchy.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -113,10 +114,14 @@ export const converter = async (
 					objectURN === Temperature_3303_urn &&
 					(LwM2MObject.result as Temperature_3303)[0]?.[5518] === undefined
 				) {
-					// setTimeStampHierarchy
-					console.log('set timestamp hierarchy for Temperature')
+					const temperature = setTimestampHierarchy(
+						LwM2MObject.result as Temperature_3303,
+						device.result as Device_3,
+					)
+					conversionResult[objectURN] = temperature
+				} else {
+					;(conversionResult as any)[objectURN] = LwM2MObject.result // TODO: solve this any
 				}
-				;(conversionResult as any)[objectURN] = LwM2MObject.result // TODO: solve this any
 			} else {
 				'warning' in LwM2MObject
 					? onWarning?.(LwM2MObject.warning)
