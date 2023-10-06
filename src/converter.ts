@@ -18,7 +18,7 @@ import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
 import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import { convertToLwM2M } from './utils/convertToLwM2M.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
-import { getDevice } from './utils/getDevice.js'
+import { convertToLwM2MDevice } from './utils/convertToLwM2MDevice.js'
 import { getTemperature } from './utils/getTemperature.js'
 import { setTimestampHierarchy } from './setTimestampHierarchy.js'
 
@@ -78,10 +78,10 @@ export const converter = async (
 	const output = {} as LwM2MAssetTrackerV2
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
-	const device = getDevice(deviceTwinData[coioteIds.Device])
+	const lwm2mDevice = convertToLwM2MDevice(deviceTwinData[coioteIds.Device])
 
 	const conversionResult = {
-		[Device_3_urn]: device,
+		[Device_3_urn]: lwm2mDevice,
 		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
 			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
@@ -124,7 +124,7 @@ export const converter = async (
 						| Temperature_3303
 						| Humidity_3304
 						| Pressure_3323,
-					'result' in device ? device.result : undefined,
+					'result' in lwm2mDevice ? lwm2mDevice.result : undefined,
 				)
 				;(output as any)[objectURN] = object
 			} else {

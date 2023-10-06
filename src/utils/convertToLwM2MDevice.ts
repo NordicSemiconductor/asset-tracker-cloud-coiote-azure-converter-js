@@ -4,15 +4,17 @@ import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'
 
-type getDeviceResult =
+type convertToLwM2MDeviceResult =
 	| { result: Device_3 }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: LwM2MFormatError }
 
 /**
- * Build the Device object from LwM2M using the object 3 reported by Coiote
+ * Convert to LwM2M Device object (id 3) from the object 3 reported by Coiote
  */
-export const getDevice = (device_coiote?: Instance): getDeviceResult => {
+export const convertToLwM2MDevice = (
+	device_coiote?: Instance,
+): convertToLwM2MDeviceResult => {
 	if (device_coiote === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Device_3_urn) }
 
