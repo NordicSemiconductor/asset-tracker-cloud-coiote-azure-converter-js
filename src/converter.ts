@@ -75,12 +75,12 @@ export const converter = async (
 	onWarning?: (element: UndefinedCoioteObjectWarning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
-	const conversionResult = {} as LwM2MAssetTrackerV2
+	const output = {} as LwM2MAssetTrackerV2
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
 	const device = getDevice(deviceTwinData[coioteIds.Device])
 
-	const AssetTrackerV2LwM2MObjects = {
+	const conversionResult = {
 		[Device_3_urn]: device,
 		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
 			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
@@ -107,41 +107,39 @@ export const converter = async (
 		}),
 	}
 
-	Object.entries(AssetTrackerV2LwM2MObjects).forEach(
-		([objectURN, LwM2MObject]) => {
-			if ('result' in LwM2MObject) {
-				// TODO: refactor this
-				if (
-					checkTimestampObjects.includes(objectURN) &&
-					objectHasTimestampUndefined(
-						LwM2MObject.result as
-							| Temperature_3303
-							| Humidity_3304
-							| Pressure_3323,
-					) === true
-				) {
-					const object = setTimestampHierarchy(
-						LwM2MObject.result as
-							| Temperature_3303
-							| Humidity_3304
-							| Pressure_3323,
-						'result' in device ? device.result : undefined,
-					)
-					;(conversionResult as any)[objectURN] = object
-				} else {
-					;(conversionResult as any)[objectURN] = LwM2MObject.result // TODO: solve this any
-				}
+	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
+		if ('result' in LwM2MObject) {
+			// TODO: refactor this
+			if (
+				checkTimestampObjects.includes(objectURN) &&
+				objectHasTimestampUndefined(
+					LwM2MObject.result as
+						| Temperature_3303
+						| Humidity_3304
+						| Pressure_3323,
+				) === true
+			) {
+				const object = setTimestampHierarchy(
+					LwM2MObject.result as
+						| Temperature_3303
+						| Humidity_3304
+						| Pressure_3323,
+					'result' in device ? device.result : undefined,
+				)
+				;(output as any)[objectURN] = object
 			} else {
-				'warning' in LwM2MObject
-					? onWarning?.(LwM2MObject.warning)
-					: onError?.(LwM2MObject.error as any)
+				;(output as any)[objectURN] = LwM2MObject.result // TODO: solve this any
 			}
-		},
-	)
+		} else {
+			'warning' in LwM2MObject
+				? onWarning?.(LwM2MObject.warning)
+				: onError?.(LwM2MObject.error as any)
+		}
+	})
 
 	// TODO: set timestamp for Temperature, Humidity and Pressure
 
-	return conversionResult
+	return output
 }
 
 /**
