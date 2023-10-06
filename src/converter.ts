@@ -90,6 +90,7 @@ export const converter = async (
 			LwM2MObjectUrn: Location_6_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.Location],
 		}),
+		// TODO: rename getTemperature to convertToLwM2MTemperature
 		[Temperature_3303_urn]: getTemperature(
 			deviceTwinData[coioteIds.Temperature],
 		),
