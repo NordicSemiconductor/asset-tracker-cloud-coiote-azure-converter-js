@@ -9,8 +9,8 @@ import type {
  * Set the timestamp hierarchy
  *
  * 1- Device timestamp
- * 2- Timestamp from object in Device Twin
- * 3- Timestamp from LwM2M in Device Twin
+ * 2- Timestamp from object in Device Twin // TODO
+ * 3- Timestamp from LwM2M in Device Twin // TODO
  */
 export const setTimestampHierarchy = (
 	object: Temperature_3303 | Humidity_3304 | Pressure_3323,

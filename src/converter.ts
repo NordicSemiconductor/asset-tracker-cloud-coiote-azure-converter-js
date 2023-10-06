@@ -110,6 +110,7 @@ export const converter = async (
 	Object.entries(AssetTrackerV2LwM2MObjects).forEach(
 		([objectURN, LwM2MObject]) => {
 			if ('result' in LwM2MObject) {
+				// TODO: refactor this
 				if (
 					checkTimestampObjects.includes(objectURN) &&
 					objectHasTimestampUndefined(
@@ -145,6 +146,7 @@ export const converter = async (
 
 /**
  * List of object that need to check if timestamp value is undefined
+ * TODO: move this to another file
  */
 const checkTimestampObjects = [
 	Temperature_3303_urn,
@@ -157,6 +159,8 @@ const checkTimestampObjects = [
  *
  * First instance of object is the default option to be selected
  * 5518 is the resource selected as timestamp
+ *
+ * TODO: move this to another file
  */
 const objectHasTimestampUndefined = (
 	object: Temperature_3303 | Humidity_3304 | Pressure_3323,
