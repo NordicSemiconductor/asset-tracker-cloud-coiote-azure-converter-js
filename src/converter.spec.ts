@@ -355,6 +355,7 @@ void describe('converter', () => {
 					'5602': 24.161,
 					'5700': 24.057,
 					'5701': '%RH',
+					'5518': 1675874731,
 				},
 			],
 
@@ -364,6 +365,7 @@ void describe('converter', () => {
 					'5602': 101705,
 					'5700': 10,
 					'5701': 'Pa',
+					'5518': 1675874731,
 				},
 			],
 
@@ -499,6 +501,9 @@ void describe('converter', () => {
 	})
 
 	void describe('timestamp hierarchy', () => {
+		/**
+		 * Same rules applies for Humidity and Pressure as well.
+		 */
 		void it(`should use the timestamp reported in Temperature if is reported by Coiote`, async () => {
 			// the resource to describe timestamp in Temperature object is 5518
 			const timestamp_5518 = 1675874731
