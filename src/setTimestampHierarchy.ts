@@ -1,5 +1,7 @@
 import type {
 	Device_3,
+	Humidity_3304,
+	Pressure_3323,
 	Temperature_3303,
 } from '@nordicsemiconductor/lwm2m-types'
 
@@ -11,13 +13,16 @@ import type {
  * 3- Timestamp from LwM2M in Device Twin
  */
 export const setTimestampHierarchy = (
-	temperature: Temperature_3303,
-	device: Device_3,
-): Temperature_3303 => {
-	const newTemp = temperature
+	object: Temperature_3303 | Humidity_3304 | Pressure_3323,
+	device?: Device_3,
+): Temperature_3303 | Humidity_3304 | Pressure_3323 => {
+	const newObject = object
 
-	if (newTemp[0] !== undefined && device[13] !== undefined) {
-		newTemp[0][5518] = device[13]
+	if (device !== undefined) {
+		if (newObject[0] !== undefined && device[13] !== undefined) {
+			newObject[0][5518] = device[13]
+		}
 	}
-	return newTemp
+
+	return newObject
 }

@@ -111,14 +111,22 @@ export const converter = async (
 		([objectURN, LwM2MObject]) => {
 			if ('result' in LwM2MObject) {
 				if (
-					objectURN === Temperature_3303_urn &&
-					(LwM2MObject.result as Temperature_3303)[0]?.[5518] === undefined
+					checkTimestampObjects.includes(objectURN) &&
+					objectHasTimestampUndefined(
+						LwM2MObject.result as
+							| Temperature_3303
+							| Humidity_3304
+							| Pressure_3323,
+					) === true
 				) {
-					const temperature = setTimestampHierarchy(
-						LwM2MObject.result as Temperature_3303,
-						device.result as Device_3,
+					const object = setTimestampHierarchy(
+						LwM2MObject.result as
+							| Temperature_3303
+							| Humidity_3304
+							| Pressure_3323,
+						'result' in device ? device.result : undefined,
 					)
-					conversionResult[objectURN] = temperature
+					;(conversionResult as any)[objectURN] = object
 				} else {
 					;(conversionResult as any)[objectURN] = LwM2MObject.result // TODO: solve this any
 				}
@@ -134,3 +142,22 @@ export const converter = async (
 
 	return conversionResult
 }
+
+/**
+ * List of object that need to check if timestamp value is undefined
+ */
+const checkTimestampObjects = [
+	Temperature_3303_urn,
+	Humidity_3304_urn,
+	Pressure_3323_urn,
+]
+
+/**
+ * Check if timestamp is undefined in object
+ *
+ * First instance of object is the default option to be selected
+ * 5518 is the resource selected as timestamp
+ */
+const objectHasTimestampUndefined = (
+	object: Temperature_3303 | Humidity_3304 | Pressure_3323,
+) => object[0]?.[5518] === undefined
