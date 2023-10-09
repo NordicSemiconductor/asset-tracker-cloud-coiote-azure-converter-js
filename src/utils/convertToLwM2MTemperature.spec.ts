@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { getTemperature } from './getTemperature.js'
+import { convertToLwM2MTemperature } from './convertToLwM2MTemperature.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 import { Temperature_3303_urn } from '@nordicsemiconductor/lwm2m-types'
 
-void describe('getTemperature', () => {
+void describe('convertToLwM2MTemperature', () => {
 	void it(`should create the LwM2M object 'Temperature' (3303) from the object '3303' reported by Coiote`, () => {
 		const temperature_coiote = {
 			'0': {
@@ -33,7 +33,7 @@ void describe('getTemperature', () => {
 			},
 		]
 
-		const temperature = getTemperature(temperature_coiote) as {
+		const temperature = convertToLwM2MTemperature(temperature_coiote) as {
 			result: unknown
 		}
 		assert.deepEqual(temperature.result, expected)
@@ -42,7 +42,7 @@ void describe('getTemperature', () => {
 	void it(`should return a warning if the object '3303' reported by Coiote is not defined`, () => {
 		const temperature_coiote = undefined
 
-		const temperature = getTemperature(temperature_coiote) as {
+		const temperature = convertToLwM2MTemperature(temperature_coiote) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
@@ -72,7 +72,7 @@ void describe('getTemperature', () => {
 			},
 		}
 
-		const temperature = getTemperature(
+		const temperature = convertToLwM2MTemperature(
 			temperature_coiote as unknown as Instance,
 		) as {
 			error: LwM2MFormatError

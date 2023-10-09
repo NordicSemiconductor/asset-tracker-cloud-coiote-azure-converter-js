@@ -7,7 +7,7 @@ import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'
 import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
 
-type getTemperatureResult =
+type convertToLwM2MTemperatureResult =
 	| { result: Temperature_3303 }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: LwM2MFormatError }
@@ -15,9 +15,9 @@ type getTemperatureResult =
 /**
  * Build the Temperature object from LwM2M using the object 3303 reported by Coiote
  */
-export const getTemperature = (
+export const convertToLwM2MTemperature = (
 	temperature_coiote?: Instance,
-): getTemperatureResult => {
+): convertToLwM2MTemperatureResult => {
 	if (temperature_coiote === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Temperature_3303_urn) }
 

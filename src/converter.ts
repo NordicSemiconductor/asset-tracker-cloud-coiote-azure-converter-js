@@ -19,7 +19,7 @@ import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import { convertToLwM2M } from './utils/convertToLwM2M.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import { convertToLwM2MDevice } from './utils/convertToLwM2MDevice.js'
-import { getTemperature } from './utils/getTemperature.js'
+import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
 import { setTimestampHierarchy } from './setTimestampHierarchy.js'
 
 export type Value = { value: string | number | boolean }
@@ -90,8 +90,7 @@ export const converter = async (
 			LwM2MObjectUrn: Location_6_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.Location],
 		}),
-		// TODO: rename getTemperature to convertToLwM2MTemperature
-		[Temperature_3303_urn]: getTemperature(
+		[Temperature_3303_urn]: convertToLwM2MTemperature(
 			deviceTwinData[coioteIds.Temperature],
 		),
 		[Humidity_3304_urn]: convertToLwM2M({
