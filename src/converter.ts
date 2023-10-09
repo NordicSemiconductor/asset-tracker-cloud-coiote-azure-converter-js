@@ -110,6 +110,11 @@ export const converter = async (
 	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
 		if ('result' in LwM2MObject) {
 			if (objectsAffectedByTimestapHierarchy.includes(objectURN)) {
+				/**
+				 * TODO: Remove the "as ... "
+				 * I dont like it. It add unnecesary noise.
+				 * Also, I am already filtering the objects that are required in the previous if
+				 */
 				const objectToCheckTimestamp = LwM2MObject.result as
 					| Temperature_3303
 					| Humidity_3304
