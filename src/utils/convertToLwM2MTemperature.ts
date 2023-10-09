@@ -25,6 +25,9 @@ export const convertToLwM2MTemperature = (
 		[`${Temperature_3303_urn}`]: temperature_coiote,
 	})
 
+	// here I can check if timestamp is undefined
+	// TODO: evaluate this option
+
 	const validatedLwM2MDevice = checkLwM2MFormat(temperature)
 
 	if ('error' in validatedLwM2MDevice)
