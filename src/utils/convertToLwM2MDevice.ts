@@ -4,7 +4,7 @@ import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'
 
-type convertToLwM2MDeviceResult =
+export type convertToLwM2MDeviceResult =
 	| { result: Device_3 }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: LwM2MFormatError }

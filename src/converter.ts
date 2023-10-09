@@ -109,22 +109,14 @@ export const converter = async (
 
 	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
 		if ('result' in LwM2MObject) {
-			// TODO: refactor this
-			if (
-				checkTimestampObjects.includes(objectURN) &&
-				objectHasTimestampUndefined(
-					LwM2MObject.result as
-						| Temperature_3303
-						| Humidity_3304
-						| Pressure_3323,
-				) === true
-			) {
+			if (objectsAffectedByTimestapHierarchy.includes(objectURN)) {
+				const objectToCheckTimestamp = LwM2MObject.result as
+					| Temperature_3303
+					| Humidity_3304
+					| Pressure_3323
 				const object = setTimestampHierarchy(
-					LwM2MObject.result as
-						| Temperature_3303
-						| Humidity_3304
-						| Pressure_3323,
-					'result' in lwm2mDevice ? lwm2mDevice.result : undefined,
+					objectToCheckTimestamp,
+					lwm2mDevice,
 				)
 				;(output as any)[objectURN] = object
 			} else {
@@ -144,22 +136,12 @@ export const converter = async (
 
 /**
  * List of object that need to check if timestamp value is undefined
- * TODO: move this to another file
+ * because Coiote does not support version 1.1 of those LwM2M objects.
+ *
+ * @see {@link ../adr/004-timestamp-hierarchy.md}
  */
-const checkTimestampObjects = [
+const objectsAffectedByTimestapHierarchy = [
 	Temperature_3303_urn,
 	Humidity_3304_urn,
 	Pressure_3323_urn,
 ]
-
-/**
- * Check if timestamp is undefined in object
- *
- * First instance of object is the default option to be selected
- * 5518 is the resource selected as timestamp
- *
- * TODO: move this to another file
- */
-const objectHasTimestampUndefined = (
-	object: Temperature_3303 | Humidity_3304 | Pressure_3323,
-) => object[0]?.[5518] === undefined
