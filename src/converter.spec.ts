@@ -7,8 +7,7 @@ import {
 	Location_6_urn,
 	Pressure_3323_urn,
 	Temperature_3303_urn,
-	type Temperature_3303,
-	type Device_3,
+	type Temperature_3303
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from './schemas/Config_50009.js'
 import { converter, type DeviceTwin } from './converter.js'
@@ -553,10 +552,9 @@ void describe('converter', () => {
 			)
 		})
 
-		void it(`should use Device timestamp in case Timestamp resource for Temperature is missing`, async () => {
-			// the resource to describe timestamp in Device object is 13
+		void it(`should use the value of resource "5700" of Temperature in the metadata object as value of resource 5518 in LwM2M Temperature object`, async () => {
 			const timestamp_5518 = 1675874731
-			const input: DeviceTwin = {
+			const deviceTwin: DeviceTwin = {
 				properties: {
 					desired: {
 						$metadata: {
@@ -566,47 +564,6 @@ void describe('converter', () => {
 					},
 					reported: {
 						lwm2m: {
-							'3': {
-								'0': {
-									'0': {
-										value: 'Nordic Semiconductor ASA',
-									},
-									'1': {
-										value: 'Thingy:91',
-									},
-									'2': {
-										value: '351358815340515',
-									},
-									'3': {
-										value: '22.8.1+0',
-									},
-									'7': {
-										'0': {
-											value: 80,
-										},
-										attributes: {
-											dim: '1',
-										},
-									},
-									'11': {
-										'0': {
-											value: 0,
-										},
-										attributes: {
-											dim: '1',
-										},
-									},
-									'13': {
-										value: timestamp_5518,
-									},
-									'16': {
-										value: 'UQ',
-									},
-									'19': {
-										value: '3.2.1',
-									},
-								},
-							},
 							// timestamp in Temperature object is not provided
 							'3303': {
 								'0': {
@@ -633,23 +590,12 @@ void describe('converter', () => {
 					},
 				},
 			}
-
-			const result = await converter(input)
-			assert.equal(
-				(result[Temperature_3303_urn] as Temperature_3303)[0]?.[5518],
-				(result[Device_3_urn] as Device_3)[13],
-			)
+			const result = await converter(deviceTwin)
 			assert.equal(
 				(result[Temperature_3303_urn] as Temperature_3303)[0]?.[5518],
 				timestamp_5518,
 			)
 		})
 
-		/* TODO: implement this
-		void it(`should use metadata timestamp in case Timestamp resource for Temperature is missing and Device object undefined`, () => {
-			// the resource to describe timestamp in Device object is 13
-			// the resource to describe timestamp in Temperature object is 5518
-		})
-		*/
 	})
 })
