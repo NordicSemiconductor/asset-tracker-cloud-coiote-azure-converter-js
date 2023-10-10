@@ -6,7 +6,7 @@ import {
 import type { convertToLwM2MDeviceResult } from './utils/convertToLwM2MDevice'
 
 /**
- * Check if timestamp is undefined in object.
+ * Returns true if resource 5518 is defined, false if is undefined.
  *
  * First instance of object is the default option to be selected.
  *
