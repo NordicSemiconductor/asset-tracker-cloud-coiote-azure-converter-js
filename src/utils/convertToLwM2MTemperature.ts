@@ -28,10 +28,10 @@ export const convertToLwM2MTemperature = (
 	// here I can check if timestamp is undefined
 	// TODO: evaluate this option
 
-	const validatedLwM2MDevice = checkLwM2MFormat(temperature)
+	const validatedLwM2MTemperature = checkLwM2MFormat(temperature)
 
-	if ('error' in validatedLwM2MDevice)
-		return { error: validatedLwM2MDevice.error }
+	if ('error' in validatedLwM2MTemperature)
+		return { error: validatedLwM2MTemperature.error }
 
 	return {
 		result: temperature[Temperature_3303_urn] as unknown as Temperature_3303,
