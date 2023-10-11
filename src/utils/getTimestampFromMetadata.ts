@@ -33,9 +33,10 @@ type Resource = {
 }
 
 /**
- *
+ * TODO: ADD description. Explain why /1000
  */
-export const parseTime = (time: string) => new Date(time).getTime()
+export const parseTime = (time: string): number =>
+	Math.trunc(new Date(time).getTime() / 1000)
 
 /**
  * metadata example
@@ -52,14 +53,12 @@ export const getTimestampFromMetadata = (
 		| typeof Humidity_3304_urn
 		| typeof Pressure_3323_urn,
 	metadata: Metadata,
-): number | void => {
-	const { ObjectID } = parseURN(objectUrn) 
+): number => {
+	const { ObjectID } = parseURN(objectUrn)
 	const object = metadata.lwm2m[`${ObjectID as unknown as number}`]
-	
+
 	if (object !== undefined) {
-
 		if (object['0'] !== undefined) {
-
 			// value from the resource 5700 of the given object
 			// default instance is the first one
 			const level2 = object['0']['5700']?.value.$lastUpdated
@@ -79,4 +78,7 @@ export const getTimestampFromMetadata = (
 	// value of the lwm2m property in the device twin
 	const level5 = metadata.lwm2m.$lastUpdated
 	if (level5 !== undefined) return parseTime(level5)
+
+	// TODO: check this
+	return 0
 }

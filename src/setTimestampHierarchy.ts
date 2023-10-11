@@ -12,7 +12,7 @@ import type { convertToLwM2MDeviceResult } from './utils/convertToLwM2MDevice'
  *
  * 5518 is the resource selected to report timestamp value.
  */
-const hasTimestampDefined = (
+export const hasTimestampDefined = (
 	object: Temperature_3303 | Humidity_3304 | Pressure_3323,
 ) => object[0]?.[5518] !== undefined
 

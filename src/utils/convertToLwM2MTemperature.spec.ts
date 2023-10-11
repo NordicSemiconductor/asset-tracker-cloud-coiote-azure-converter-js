@@ -4,10 +4,38 @@ import { convertToLwM2MTemperature } from './convertToLwM2MTemperature.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
-import { Temperature_3303_urn } from '@nordicsemiconductor/lwm2m-types'
+import {
+	Temperature_3303_urn,
+	type Temperature_3303,
+} from '@nordicsemiconductor/lwm2m-types'
+import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
 void describe('convertToLwM2MTemperature', () => {
 	void it(`should create the LwM2M object 'Temperature' (3303) from the object '3303' reported by Coiote`, () => {
+		const metadata: Metadata = {
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5700': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						'5701': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+		}
 		const temperature_coiote = {
 			'0': {
 				'5601': {
@@ -22,6 +50,9 @@ void describe('convertToLwM2MTemperature', () => {
 				'5701': {
 					value: 'Cel',
 				},
+				'5518': {
+					value: 1675874731,
+				},
 			},
 		}
 		const expected = [
@@ -30,10 +61,14 @@ void describe('convertToLwM2MTemperature', () => {
 				'5602': 27.71,
 				'5700': 27.18,
 				'5701': 'Cel',
+				'5518': 1675874731,
 			},
 		]
 
-		const temperature = convertToLwM2MTemperature(temperature_coiote) as {
+		const temperature = convertToLwM2MTemperature(
+			metadata,
+			temperature_coiote,
+		) as {
 			result: unknown
 		}
 		assert.deepEqual(temperature.result, expected)
@@ -41,8 +76,35 @@ void describe('convertToLwM2MTemperature', () => {
 
 	void it(`should return a warning if the object '3303' reported by Coiote is not defined`, () => {
 		const temperature_coiote = undefined
+		const metadata: Metadata = {
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5700': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						'5701': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+		}
 
-		const temperature = convertToLwM2MTemperature(temperature_coiote) as {
+		const temperature = convertToLwM2MTemperature(
+			metadata,
+			temperature_coiote,
+		) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
@@ -62,21 +124,100 @@ void describe('convertToLwM2MTemperature', () => {
 					value: 27.71,
 				},
 				/*
-				'5700': {
-					value: 27.18, // required value is missing
-				},
-				*/
+			'5700': {
+				value: 27.18, // required value is missing
+			},
+			*/
 				'5701': {
 					value: 'Cel',
 				},
 			},
 		}
+		const metadata: Metadata = {
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5700': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						'5701': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+		}
 
 		const temperature = convertToLwM2MTemperature(
+			metadata,
 			temperature_coiote as unknown as Instance,
 		) as {
 			error: LwM2MFormatError
 		}
 		assert.equal(temperature.error.message, 'format error')
+	})
+
+	void it(`should use metadata object to report timestamp when it is not present in object`, () => {
+		const temperature_coiote = {
+			'0': {
+				'5601': {
+					value: 27.18,
+				},
+				'5602': {
+					value: 27.71,
+				},
+				'5700': {
+					value: 27.18,
+				},
+				'5701': {
+					value: 'Cel',
+				},
+				// 5518, resource to report timestamp, is not defined in input object
+			},
+		}
+		const timeToReport = '2023-10-18T14:39:11.9414162Z'
+		const timeToReportParsed = parseTime(timeToReport)
+		const metadata: Metadata = {
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5700': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: timeToReport,
+							},
+						},
+						'5701': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+		}
+
+		const temperature = convertToLwM2MTemperature(
+			metadata,
+			temperature_coiote,
+		) as {
+			result: Temperature_3303
+		}
+		assert.deepEqual(temperature.result[0]?.[5518], timeToReportParsed)
 	})
 })
