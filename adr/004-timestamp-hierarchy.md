@@ -16,12 +16,14 @@ what is called "timestamp hierarchy", which is a mechanism to describe which
 value should be used in the resource 5518 in case its original value is
 undefined.
 
-## Timestamp hierarchy
+## Timestamp hierarchy levels
 
-1- The value from resource 5518 of the Temperature, Pressure or Humidity object,
-depending on the case. 2- The value of the key
-"$lastUpdate" of the resource "5700" of the Temperature, Pressure or Humidity object, depending on the case, in the metadata object
-3- The value of the key "$lastUpdate"
-of the Temperature, Pressure or Humidity object, depending on the case, in the
-metadata object 4- The value from key "$lastUpdate" of LwM2M object, in the
-metadata object
+1. The value from resource 5518 of the Temperature, Pressure or Humidity object,
+   depending on the case.
+2. The value of the key "$lastUpdate" of the resource "5700" of the Temperature,
+   Pressure or Humidity object, depending on the case, in the metadata object
+3. The value of the key "$lastUpdate" of the Temperature, Pressure or Humidity
+   object, depending on the case, in the metadata object
+4. The value from key "$lastUpdate" of LwM2M object, in the metadata object
+
+// TODO: improve the way the `Timestamp hierarchy levels` is described
