@@ -18,12 +18,10 @@ undefined.
 
 ## Timestamp hierarchy levels
 
-1. The value from resource 5518 of the Temperature, Pressure or Humidity object,
-   depending on the case.
-2. The value of the key "$lastUpdate" of the resource "5700" of the Temperature,
-   Pressure or Humidity object, depending on the case, in the metadata object
-3. The value of the key "$lastUpdate" of the Temperature, Pressure or Humidity
-   object, depending on the case, in the metadata object
-4. The value from key "$lastUpdate" of LwM2M object, in the metadata object
+1. The value from resource `5518` of the object
+2. `$lastUpdated` value from the **resource** `5700` of the object in device twin metadata
+3. `$lastUpdated` value from the **instance** in device twin metadata
+4. `$lastUpdated` value from the **object** in device twin metadata
+5. `$lastUpdated` value from the **LwM2M** reported in device twin metadata
 
 // TODO: improve the way the `Timestamp hierarchy levels` is described
