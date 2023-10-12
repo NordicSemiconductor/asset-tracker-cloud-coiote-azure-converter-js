@@ -39,7 +39,9 @@ export const convertToLwM2MTemperature = (
 			t[0][5518] = getTimestampFromMetadata(Temperature_3303_urn, metadata)
 	}
 
-	const validatedLwM2MTemperature = checkLwM2MFormat(temperature)
+	const validatedLwM2MTemperature = checkLwM2MFormat({
+		[Temperature_3303_urn]: t,
+	})
 
 	if ('error' in validatedLwM2MTemperature) {
 		return { error: validatedLwM2MTemperature.error }
