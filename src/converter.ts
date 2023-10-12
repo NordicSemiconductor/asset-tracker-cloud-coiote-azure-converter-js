@@ -16,7 +16,6 @@ import type {
 } from '@nordicsemiconductor/lwm2m-types'
 import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
 import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
-import { convertToLwM2M } from './utils/convertToLwM2M.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import { convertToLwM2MDevice } from './utils/convertToLwM2MDevice.js'
 import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
@@ -25,6 +24,7 @@ import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
 import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'
 import { convertToLwM2MLocation } from './utils/convertToLwM2MLocation.js'
+import { convertToLwM2MConnectivityMonitoring } from './utils/convertToLwM2MConnectivityMonitoring.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -85,10 +85,9 @@ export const converter = async (
 
 	const conversionResult = {
 		[Device_3_urn]: convertToLwM2MDevice(deviceTwinData[coioteIds.Device]),
-		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
-			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
-			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
-		}),
+		[ConnectivityMonitoring_4_urn]: convertToLwM2MConnectivityMonitoring(
+			deviceTwinData[coioteIds.ConnectivityMonitoring],
+		),
 		[Location_6_urn]: convertToLwM2MLocation(
 			deviceTwinData[coioteIds.Location],
 		),
