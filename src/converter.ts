@@ -5,6 +5,7 @@ import {
 	Temperature_3303_urn,
 	Humidity_3304_urn,
 	Pressure_3323_urn,
+	parseURN,
 } from '@nordicsemiconductor/lwm2m-types'
 import type {
 	Device_3,
@@ -59,19 +60,6 @@ export type LwM2MAssetTrackerV2 = {
 }
 
 /**
- * The id of the Asset Tracker v2 objects given by Coiote
- */
-const coioteIds = {
-	Device: 3,
-	ConnectivityMonitoring: 4,
-	Location: 6,
-	Temperature: 3303,
-	Humidity: 3304,
-	Pressure: 3323,
-	Config: 50009,
-}
-
-/**
  * Convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format
  */
 export const converter = async (
@@ -81,29 +69,33 @@ export const converter = async (
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const output = {} as LwM2MAssetTrackerV2
-	const deviceTwinData = deviceTwin.properties.reported.lwm2m
+	const coioteObjects = deviceTwin.properties.reported.lwm2m
 
 	const conversionResult = {
-		[Device_3_urn]: convertToLwM2MDevice(deviceTwinData[coioteIds.Device]),
+		[Device_3_urn]: convertToLwM2MDevice(
+			coioteObjects[parseURN(Device_3_urn).ObjectID],
+		),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2MConnectivityMonitoring(
-			deviceTwinData[coioteIds.ConnectivityMonitoring],
+			coioteObjects[parseURN(ConnectivityMonitoring_4_urn).ObjectID],
 		),
 		[Location_6_urn]: convertToLwM2MLocation(
-			deviceTwinData[coioteIds.Location],
+			coioteObjects[parseURN(Location_6_urn).ObjectID],
 		),
 		[Temperature_3303_urn]: convertToLwM2MTemperature(
 			metadata,
-			deviceTwinData[coioteIds.Temperature],
+			coioteObjects[parseURN(Temperature_3303_urn).ObjectID],
 		),
 		[Humidity_3304_urn]: convertToLwM2MHumidity(
 			metadata,
-			deviceTwinData[coioteIds.Humidity],
+			coioteObjects[parseURN(Humidity_3304_urn).ObjectID],
 		),
 		[Pressure_3323_urn]: convertToLwM2MPressure(
 			metadata,
-			deviceTwinData[coioteIds.Pressure],
+			coioteObjects[parseURN(Pressure_3323_urn).ObjectID],
 		),
-		[Config_50009_urn]: convertToLwM2MConfig(deviceTwinData[coioteIds.Config]),
+		[Config_50009_urn]: convertToLwM2MConfig(
+			coioteObjects[parseURN(Config_50009_urn).ObjectID],
+		),
 	}
 
 	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
