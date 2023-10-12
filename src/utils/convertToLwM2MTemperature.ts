@@ -32,15 +32,20 @@ export const convertToLwM2MTemperature = (
 		[`${Temperature_3303_urn}`]: temperature_coiote,
 	})
 	// TODO: improve this
-	const t = temperature[Temperature_3303_urn] as Temperature_3303
+	const temperature_LwM2M = temperature[
+		Temperature_3303_urn
+	] as Temperature_3303
 
-	if (hasTimestampUndefined(t) === true) {
-		if (t[0] !== undefined)
-			t[0][5518] = getTimestampFromMetadata(Temperature_3303_urn, metadata)
+	if (hasTimestampUndefined(temperature_LwM2M) === true) {
+		if (temperature_LwM2M[0] !== undefined)
+			temperature_LwM2M[0][5518] = getTimestampFromMetadata(
+				Temperature_3303_urn,
+				metadata,
+			)
 	}
 
 	const validatedLwM2MTemperature = checkLwM2MFormat({
-		[Temperature_3303_urn]: t,
+		[Temperature_3303_urn]: temperature_LwM2M,
 	})
 
 	if ('error' in validatedLwM2MTemperature) {
@@ -48,6 +53,6 @@ export const convertToLwM2MTemperature = (
 	}
 
 	return {
-		result: t,
+		result: temperature_LwM2M,
 	}
 }
