@@ -1,7 +1,6 @@
 import {
-	Temperature_3303_urn,
-	type Temperature_3303,
-    type Pressure_3323,
+	type Pressure_3323,
+	Pressure_3323_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
@@ -23,10 +22,35 @@ type convertToLwM2MPressureResult =
  */
 export const convertToLwM2MPressure = (
 	metadata: Metadata,
-	temperature_coiote?: Instance,
+	pressure_coiote?: Instance,
 ): convertToLwM2MPressureResult => {
+	if (pressure_coiote === undefined)
+		return { warning: new UndefinedCoioteObjectWarning(Pressure_3323_urn) }
+
+	// TODO: update return type
+	const pressure = setLwM2MFormat({
+		[`${Pressure_3323_urn}`]: pressure_coiote,
+	})
+	// TODO: improve this
+	const pressure_LwM2M = pressure[Pressure_3323_urn] as Pressure_3323
+
+	if (isTimestampUndefinedIn(pressure_LwM2M) === true) {
+		if (pressure_LwM2M[0] !== undefined)
+			pressure_LwM2M[0][5518] = getTimestampFromMetadata(
+				Pressure_3323_urn,
+				metadata,
+			)
+	}
+
+	const validatedLwM2MPressure = checkLwM2MFormat({
+		[Pressure_3323_urn]: pressure_LwM2M,
+	})
+
+	if ('error' in validatedLwM2MPressure) {
+		return { error: validatedLwM2MPressure.error }
+	}
 
 	return {
-		result: temperature_coiote,
+		result: pressure_LwM2M,
 	}
 }

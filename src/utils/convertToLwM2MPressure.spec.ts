@@ -5,8 +5,8 @@ import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarnin
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 import {
-    Pressure_3323_urn,
-    type Pressure_3323,
+	Pressure_3323_urn,
+	type Pressure_3323,
 } from '@nordicsemiconductor/lwm2m-types'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
@@ -49,6 +49,9 @@ void describe('convertToLwM2MPressure', () => {
 				},
 				'5701': {
 					value: 'Pa',
+				},
+				'5518': {
+					value: 1675874731,
 				},
 			},
 		}
@@ -95,10 +98,7 @@ void describe('convertToLwM2MPressure', () => {
 			},
 		}
 
-		const pressure = convertToLwM2MPressure(
-			metadata,
-			pressure_coiote,
-		) as {
+		const pressure = convertToLwM2MPressure(metadata, pressure_coiote) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
@@ -108,7 +108,7 @@ void describe('convertToLwM2MPressure', () => {
 	})
 
 	void it(`should return an error if the result of the conversion does not meet the LwM2M schema definition`, () => {
-        const pressure_coiote = {
+		const pressure_coiote = {
 			'0': {
 				'5601': {
 					value: 101697,
@@ -116,7 +116,7 @@ void describe('convertToLwM2MPressure', () => {
 				'5602': {
 					value: 101705,
 				},
-                /*
+				/*
                 // required value is missing
 				'5700': {
 					value: 10,
@@ -162,7 +162,7 @@ void describe('convertToLwM2MPressure', () => {
 	})
 
 	void it(`should use metadata object to report timestamp when it is not present in object`, () => {
-        const pressure_coiote = {
+		const pressure_coiote = {
 			'0': {
 				'5601': {
 					value: 101697,
@@ -176,12 +176,12 @@ void describe('convertToLwM2MPressure', () => {
 				'5701': {
 					value: 'Pa',
 				},
-                // 5518, resource to report timestamp, is not defined in input object
+				// 5518, resource to report timestamp, is not defined in input object
 			},
 		}
 		const timeToReport = '2023-10-18T14:39:11.9414162Z'
 		const timeToReportParsed = parseTime(timeToReport)
-        const metadata: Metadata = {
+		const metadata: Metadata = {
 			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 			lwm2m: {
 				'3323': {
@@ -206,10 +206,7 @@ void describe('convertToLwM2MPressure', () => {
 			},
 		}
 
-		const pressure = convertToLwM2MPressure(
-			metadata,
-			pressure_coiote,
-		) as {
+		const pressure = convertToLwM2MPressure(metadata, pressure_coiote) as {
 			result: Pressure_3323
 		}
 		assert.deepEqual(pressure.result[0]?.[5518], timeToReportParsed)
