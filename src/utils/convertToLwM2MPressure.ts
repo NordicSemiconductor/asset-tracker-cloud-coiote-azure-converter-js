@@ -31,12 +31,14 @@ export const convertToLwM2MPressure = (
 	// TODO: improve this
 	const pressure_LwM2M = pressure[Pressure_3323_urn] as Pressure_3323
 
-	if (isTimestampUndefinedIn(pressure_LwM2M) === true) {
-		if (pressure_LwM2M[0] !== undefined)
-			pressure_LwM2M[0][5518] = getTimestampFromMetadata(
-				Pressure_3323_urn,
-				metadata,
-			)
+	if (
+		pressure_LwM2M[0] !== undefined &&
+		isTimestampUndefinedIn(pressure_LwM2M) === true
+	) {
+		pressure_LwM2M[0][5518] = getTimestampFromMetadata(
+			Pressure_3323_urn,
+			metadata,
+		)
 	}
 
 	const validatedLwM2MPressure = checkLwM2MFormat({

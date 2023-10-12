@@ -36,12 +36,14 @@ export const convertToLwM2MTemperature = (
 		Temperature_3303_urn
 	] as Temperature_3303
 
-	if (isTimestampUndefinedIn(temperature_LwM2M) === true) {
-		if (temperature_LwM2M[0] !== undefined)
-			temperature_LwM2M[0][5518] = getTimestampFromMetadata(
-				Temperature_3303_urn,
-				metadata,
-			)
+	if (
+		temperature_LwM2M[0] !== undefined &&
+		isTimestampUndefinedIn(temperature_LwM2M) === true
+	) {
+		temperature_LwM2M[0][5518] = getTimestampFromMetadata(
+			Temperature_3303_urn,
+			metadata,
+		)
 	}
 
 	const validatedLwM2MTemperature = checkLwM2MFormat({

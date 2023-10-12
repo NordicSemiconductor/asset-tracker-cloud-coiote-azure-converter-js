@@ -31,12 +31,14 @@ export const convertToLwM2MHumidity = (
 	// TODO: improve this
 	const humidity_LwM2M = humidity[Humidity_3304_urn] as Humidity_3304
 
-	if (isTimestampUndefinedIn(humidity_LwM2M) === true) {
-		if (humidity_LwM2M[0] !== undefined)
-			humidity_LwM2M[0][5518] = getTimestampFromMetadata(
-				Humidity_3304_urn,
-				metadata,
-			)
+	if (
+		humidity_LwM2M[0] !== undefined &&
+		isTimestampUndefinedIn(humidity_LwM2M) === true
+	) {
+		humidity_LwM2M[0][5518] = getTimestampFromMetadata(
+			Humidity_3304_urn,
+			metadata,
+		)
 	}
 
 	const validatedLwM2MHumidity = checkLwM2MFormat({
