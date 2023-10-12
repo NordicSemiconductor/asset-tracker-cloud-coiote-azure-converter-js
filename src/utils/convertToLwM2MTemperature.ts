@@ -10,7 +10,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from './getTimestampFromMetadata.js'
-import { hasTimestampDefined } from 'src/setTimestampHierarchy.js'
+import { hasTimestampUndefined } from 'src/setTimestampHierarchy.js'
 
 type convertToLwM2MTemperatureResult =
 	| { result: Temperature_3303 }
@@ -34,14 +34,7 @@ export const convertToLwM2MTemperature = (
 	// TODO: improve this
 	const t = temperature[Temperature_3303_urn] as Temperature_3303
 
-	/**
-	 * TODO: change to hasTimestampUndefined
-	 */
-	if (
-		hasTimestampDefined(
-			temperature[Temperature_3303_urn] as unknown as Temperature_3303,
-		) === false
-	) {
+	if (hasTimestampUndefined(t) === true) {
 		if (t[0] !== undefined)
 			t[0][5518] = getTimestampFromMetadata(Temperature_3303_urn, metadata)
 	}
