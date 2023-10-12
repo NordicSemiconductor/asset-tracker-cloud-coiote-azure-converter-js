@@ -6,10 +6,11 @@ import {
 	Humidity_3304_urn,
 	Location_6_urn,
 	Pressure_3323_urn,
-	Temperature_3303_urn
+	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { Config_50009_urn } from './schemas/Config_50009.js'
 import { converter, type DeviceTwin } from './converter.js'
+import type { Metadata } from './utils/getTimestampFromMetadata.js'
 
 void describe('converter', () => {
 	void it(`should convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format`, async () => {
@@ -304,6 +305,31 @@ void describe('converter', () => {
 			},
 		}
 
+		const metadata: Metadata = {
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5700': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						'5701': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+		}
+
 		const expected = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
@@ -343,7 +369,7 @@ void describe('converter', () => {
 					'5602': 27.71,
 					'5700': 27.18,
 					'5701': 'Cel',
-					'5518': 1675874731,
+					'5518': 1692369551,
 				},
 			],
 
@@ -379,7 +405,7 @@ void describe('converter', () => {
 			},
 		}
 
-		const result = await converter(coioteAzureLwM2M)
+		const result = await converter(coioteAzureLwM2M, metadata)
 
 		assert.deepEqual(result[Device_3_urn], expected[Device_3_urn])
 		assert.deepEqual(
@@ -479,6 +505,31 @@ void describe('converter', () => {
 			},
 		}
 
+		const metadata: Metadata = {
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5700': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						'5701': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+		}
+
 		const expected = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
@@ -493,7 +544,7 @@ void describe('converter', () => {
 			},
 		}
 
-		const result = await converter(coioteAzureLwM2M)
+		const result = await converter(coioteAzureLwM2M, metadata)
 
 		assert.deepEqual(result, expected)
 	})

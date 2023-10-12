@@ -1,5 +1,6 @@
 import type { DeviceTwin } from './converter.js'
 import { converter } from './converter.js'
+import type { Metadata } from './utils/getTimestampFromMetadata.js'
 
 const deviceTwin: DeviceTwin = {
 	properties: {
@@ -274,7 +275,32 @@ const deviceTwin: DeviceTwin = {
 	},
 }
 
-const result = await converter(deviceTwin)
+const metadata: Metadata = {
+	$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+	lwm2m: {
+		'3303': {
+			'0': {
+				'5700': {
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					value: {
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+				},
+				'5701': {
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					value: {
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+		},
+		$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+	},
+}
+
+const result = await converter(deviceTwin, metadata)
 console.log(result)
 
 /**

@@ -7,9 +7,34 @@ import {
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { validate } from '@nordicsemiconductor/lwm2m-types'
+import type { Metadata } from 'src/utils/getTimestampFromMetadata.js'
 
 const coioteFormat = deviceTwin.properties.reported.lwm2m
-const output = await converter(deviceTwin)
+const metadata: Metadata = {
+	$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+	lwm2m: {
+		'3303': {
+			'0': {
+				'5700': {
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					value: {
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+				},
+				'5701': {
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					value: {
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+		},
+		$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+	},
+}
+const output = await converter(deviceTwin, metadata)
 
 /**
  * check if Location object is in the device twin

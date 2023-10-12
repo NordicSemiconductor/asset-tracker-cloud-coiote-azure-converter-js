@@ -21,6 +21,7 @@ import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObject
 import { convertToLwM2MDevice } from './utils/convertToLwM2MDevice.js'
 import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
 import { setTimestampHierarchy } from './setTimestampHierarchy.js'
+import type { Metadata } from './utils/getTimestampFromMetadata.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -72,6 +73,7 @@ const coioteIds = {
  */
 export const converter = async (
 	deviceTwin: DeviceTwin,
+	metadata: Metadata,
 	onWarning?: (element: UndefinedCoioteObjectWarning) => void,
 	onError?: (element: LwM2MFormatError) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
@@ -91,6 +93,7 @@ export const converter = async (
 			coioteObject: deviceTwinData[coioteIds.Location],
 		}),
 		[Temperature_3303_urn]: convertToLwM2MTemperature(
+			metadata,
 			deviceTwinData[coioteIds.Temperature],
 		),
 		[Humidity_3304_urn]: convertToLwM2M({
