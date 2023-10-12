@@ -12,7 +12,7 @@ import type { convertToLwM2MDeviceResult } from './utils/convertToLwM2MDevice'
  *
  * 5518 is the resource selected to report timestamp value.
  */
-export const hasTimestampUndefined = (
+export const isTimestampUndefinedIn = (
 	object: Temperature_3303 | Humidity_3304 | Pressure_3323,
 ): boolean => object[0]?.[5518] === undefined
 
@@ -32,7 +32,7 @@ export const setTimestampHierarchy = (
 	/**
 	 * If timestamp resource is defined, nothing needs to be changed.
 	 */
-	if (hasTimestampUndefined(object) === false) return object
+	if (isTimestampUndefinedIn(object) === false) return object
 
 	const device_LwM2M =
 		'result' in convertedDevice ? convertedDevice.result : undefined
