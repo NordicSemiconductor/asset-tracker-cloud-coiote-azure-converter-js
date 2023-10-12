@@ -20,7 +20,6 @@ import { convertToLwM2M } from './utils/convertToLwM2M.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import { convertToLwM2MDevice } from './utils/convertToLwM2MDevice.js'
 import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
-import { setTimestampHierarchy } from './setTimestampHierarchy.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
@@ -82,10 +81,8 @@ export const converter = async (
 	const output = {} as LwM2MAssetTrackerV2
 	const deviceTwinData = deviceTwin.properties.reported.lwm2m
 
-	const lwm2mDevice = convertToLwM2MDevice(deviceTwinData[coioteIds.Device])
-
 	const conversionResult = {
-		[Device_3_urn]: lwm2mDevice,
+		[Device_3_urn]: convertToLwM2MDevice(deviceTwinData[coioteIds.Device]),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2M({
 			LwM2MObjectUrn: ConnectivityMonitoring_4_urn as keyof LwM2MAssetTrackerV2,
 			coioteObject: deviceTwinData[coioteIds.ConnectivityMonitoring],
@@ -113,45 +110,14 @@ export const converter = async (
 	}
 
 	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
-		if ('result' in LwM2MObject) {
-			if (objectsAffectedByTimestapHierarchy.includes(objectURN)) {
-				/**
-				 * TODO: Remove the "as ... "
-				 * I dont like it. It add unnecesary noise.
-				 * Also, I am already filtering the objects that are required in the previous if
-				 */
-				const objectToCheckTimestamp = LwM2MObject.result as
-					| Temperature_3303
-					| Humidity_3304
-					| Pressure_3323
-				const object = setTimestampHierarchy(
-					objectToCheckTimestamp,
-					lwm2mDevice,
-				)
-				;(output as any)[objectURN] = object
-			} else {
-				;(output as any)[objectURN] = LwM2MObject.result // TODO: solve this any
-			}
-		} else {
+		if ('result' in LwM2MObject)
+			(output as any)[objectURN] = LwM2MObject.result // TODO: solve this any
+		else {
 			'warning' in LwM2MObject
 				? onWarning?.(LwM2MObject.warning)
 				: onError?.(LwM2MObject.error as any)
 		}
 	})
 
-	// TODO: set timestamp for Temperature, Humidity and Pressure
-
 	return output
 }
-
-/**
- * List of object that need to check if timestamp value is undefined
- * because Coiote does not support version 1.1 of those LwM2M objects.
- *
- * @see {@link ../adr/004-timestamp-hierarchy.md}
- */
-const objectsAffectedByTimestapHierarchy = [
-	Temperature_3303_urn,
-	Humidity_3304_urn,
-	Pressure_3323_urn,
-]
