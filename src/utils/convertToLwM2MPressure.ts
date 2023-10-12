@@ -1,7 +1,4 @@
-import {
-	type Pressure_3323,
-	Pressure_3323_urn,
-} from '@nordicsemiconductor/lwm2m-types'
+import { type Pressure_3323, Pressure_3323_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'

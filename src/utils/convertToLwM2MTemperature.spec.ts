@@ -7,7 +7,7 @@ import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 import {
 	Temperature_3303_urn,
 	type Temperature_3303,
-} from '@nordicsemiconductor/lwm2m-types'
+} from '../schemas/index.js'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
 void describe('convertToLwM2MTemperature', () => {

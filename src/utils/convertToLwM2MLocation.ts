@@ -1,7 +1,4 @@
-import {
-	Location_6_urn,
-	type Location_6,
-} from '@nordicsemiconductor/lwm2m-types'
+import { Location_6_urn, type Location_6 } from '../schemas/index.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'

@@ -4,10 +4,7 @@ import { convertToLwM2MPressure } from './convertToLwM2MPressure.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
-import {
-	Pressure_3323_urn,
-	type Pressure_3323,
-} from '@nordicsemiconductor/lwm2m-types'
+import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/index.js'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
 void describe('convertToLwM2MPressure', () => {

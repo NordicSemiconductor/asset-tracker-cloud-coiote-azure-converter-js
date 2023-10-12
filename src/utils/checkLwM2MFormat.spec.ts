@@ -1,10 +1,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import {
-	Device_3_urn,
-	Location_6_urn,
-	type LwM2MDocument,
-} from '@nordicsemiconductor/lwm2m-types'
+import { type LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
+import { Device_3_urn, Location_6_urn } from '../schemas/index.js'
 import { checkLwM2MFormat, LwM2MFormatError } from './checkLwM2MFormat.js'
 
 void describe('checkLwM2MFormat', () => {

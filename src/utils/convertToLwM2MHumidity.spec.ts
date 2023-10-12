@@ -4,10 +4,7 @@ import { convertToLwM2MHumidity } from './convertToLwM2MHumidity.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
-import {
-	Humidity_3304_urn,
-	type Humidity_3304,
-} from '@nordicsemiconductor/lwm2m-types'
+import { Humidity_3304_urn, type Humidity_3304 } from '../schemas/index.js'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
 void describe('convertToLwM2MHumidity', () => {

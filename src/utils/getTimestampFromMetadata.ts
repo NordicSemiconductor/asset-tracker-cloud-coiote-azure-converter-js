@@ -1,9 +1,9 @@
+import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 import {
-	parseURN,
 	type Humidity_3304_urn,
 	type Pressure_3323_urn,
 	type Temperature_3303_urn,
-} from '@nordicsemiconductor/lwm2m-types'
+} from '../schemas/index.js'
 
 export type Metadata = {
 	$lastUpdated: string

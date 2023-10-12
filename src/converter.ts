@@ -1,3 +1,4 @@
+import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 import {
 	Device_3_urn,
 	ConnectivityMonitoring_4_urn,
@@ -5,8 +6,8 @@ import {
 	Temperature_3303_urn,
 	Humidity_3304_urn,
 	Pressure_3323_urn,
-	parseURN,
-} from '@nordicsemiconductor/lwm2m-types'
+	Config_50009_urn,
+} from './schemas/index.js'
 import type {
 	Device_3,
 	ConnectivityMonitoring_4,
@@ -14,13 +15,13 @@ import type {
 	Temperature_3303,
 	Humidity_3304,
 	Pressure_3323,
-} from '@nordicsemiconductor/lwm2m-types'
-import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
+	Config_50009,
+} from './schemas/index.js'
 import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
+import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import { convertToLwM2MDevice } from './utils/convertToLwM2MDevice.js'
 import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
-import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
 import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'

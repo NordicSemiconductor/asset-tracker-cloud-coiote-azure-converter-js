@@ -1,11 +1,8 @@
 import { describe, test as it } from 'node:test'
 import assert from 'node:assert'
-import {
-	Device_3_urn,
-	Location_6_urn,
-	LwM2MServer_1_urn,
-} from '@nordicsemiconductor/lwm2m-types'
+import { Device_3_urn, Location_6_urn } from '../schemas/index.js'
 import { type ObjectWithUrn, setLwM2MFormat } from './setLwM2MFormat.js'
+import { LwM2MServer_1_urn } from '@nordicsemiconductor/lwm2m-types'
 
 void describe('setLwM2MFormat', () => {
 	for (const [objectName, input, expected] of [

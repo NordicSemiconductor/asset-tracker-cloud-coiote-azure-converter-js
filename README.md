@@ -33,6 +33,25 @@ npm test -- --coverage
 npx tsx e2e-tests/index.ts
 ```
 
+## `AssetTrackerv2` firmware to `LwM2M Asset Tracker v2` through `Coiote` objects version mapping
+
+| AssetTrackerv2 Firmware                                                                                                                           | Coiote                                                                                                | LwM2M Asset Tracker v2 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------- |
+| ['3:1.2@1.1'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3-1_2.xml)                                           | '3:1.2@1.1'                                                                                           | '3:1.2@1.1'            |
+| ['4:1.3@1.1'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/4-1_3.xml)                                           | '4:1.3@1.1'                                                                                           | '4:1.3@1.1'            |
+| ['6'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/6-1_0.xml)                                                   | '6'                                                                                                   | '6'                    |
+| ['3303:1.1'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3303-1_1.xml)                                         | ['3303'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3303-1_0.xml) | '3303:1.1'             |
+| ['3304:1.1'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3304-1_1.xml)                                         | ['3304'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3304-1_0.xml) | '3304:1.1'             |
+| ['3323:1.1'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3323-1_1.xml)                                         | ['3323'](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3323-1_0.xml) | '3323:1.1'             |
+| ['50009'](https://github.com/nrfconnect/sdk-nrf/blob/v2.4.0/applications/asset_tracker_v2/src/cloud/lwm2m_integration/config_object_descript.xml) | '50009'                                                                                               | '50009'                |
+
+Where "`:`" indicates the **object** version and "`@`" indicates the **LwM2M**
+version.
+
+if not present, values will be the default option.
+
+Default **LwM2M** version is `1.0`. Default **object** version is `1.0`.
+
 ## Expected input
 
 Result of the

@@ -1,7 +1,4 @@
-import {
-	type Humidity_3304,
-	Humidity_3304_urn,
-} from '@nordicsemiconductor/lwm2m-types'
+import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'

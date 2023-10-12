@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { convertToLwM2MConnectivityMonitoring } from './convertToLwM2MConnectivityMonitoring.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { ConnectivityMonitoring_4_urn } from '@nordicsemiconductor/lwm2m-types'
+import { ConnectivityMonitoring_4_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 

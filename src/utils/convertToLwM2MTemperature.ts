@@ -1,7 +1,7 @@
 import {
 	Temperature_3303_urn,
 	type Temperature_3303,
-} from '@nordicsemiconductor/lwm2m-types'
+} from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { setLwM2MFormat } from './setLwM2MFormat.js'

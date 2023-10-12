@@ -4,11 +4,10 @@ import {
 	getTimestampFromMetadata,
 	parseTime,
 	type Metadata,
-    type Instance,
-    type Obj,
-} from './getTimestampFromMetadata'
-import { Temperature_3303_urn } from '@nordicsemiconductor/lwm2m-types'
-
+	type Instance,
+	type Obj,
+} from './getTimestampFromMetadata.js'
+import { Temperature_3303_urn } from '../schemas/index.js'
 
 void describe('getTimestampFromMetadata', () => {
 	void it(`should get timestamp from the resource value reported in device twin`, () => {
@@ -53,7 +52,7 @@ void describe('getTimestampFromMetadata', () => {
 		 * This applies when the reported value for resource 5570 is not defined in device twin.
 		 * @see {@link ../../adr/004-timestamp-hierarchy.md}
 		 */
-        const timeToReport = '2023-10-18T14:39:11.9414162Z'
+		const timeToReport = '2023-10-18T14:39:11.9414162Z'
 		const timeToReportParsed = parseTime(timeToReport)
 		const metadata: Metadata = {
 			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
@@ -85,7 +84,7 @@ void describe('getTimestampFromMetadata', () => {
 		 * This applies when the reported value for instance is not defined in device twin.
 		 * @see {@link ../../adr/004-timestamp-hierarchy.md}
 		 */
-        const timeToReport = '2023-10-18T14:39:11.9414162Z'
+		const timeToReport = '2023-10-18T14:39:11.9414162Z'
 		const timeToReportParsed = parseTime(timeToReport)
 		const metadata: Metadata = {
 			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
@@ -94,7 +93,7 @@ void describe('getTimestampFromMetadata', () => {
 					'0': {} as Instance,
 					$lastUpdated: timeToReport,
 				},
-                $lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 			},
 		}
 		assert.equal(
@@ -109,7 +108,7 @@ void describe('getTimestampFromMetadata', () => {
 		 * This applies when the reported value for object is not defined in device twin.
 		 * @see {@link ../../adr/004-timestamp-hierarchy.md}
 		 */
-        const timeToReport = '2023-10-18T14:39:11.9414162Z'
+		const timeToReport = '2023-10-18T14:39:11.9414162Z'
 		const timeToReportParsed = parseTime(timeToReport)
 		const metadata: Metadata = {
 			$lastUpdated: timeToReport,

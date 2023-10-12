@@ -1,18 +1,22 @@
+import {
+	ConnectivityMonitoring_4_urn,
+	Device_3_urn,
+	Humidity_3304_urn,
+	Location_6_urn,
+	Pressure_3323_urn,
+	Temperature_3303_urn,
+	Config_50009_urn,
+} from './schemas/index.js'
+
 import type {
 	ConnectivityMonitoring_4,
-	ConnectivityMonitoring_4_urn,
 	Device_3,
-	Device_3_urn,
 	Humidity_3304,
-	Humidity_3304_urn,
 	Location_6,
-	Location_6_urn,
 	Pressure_3323,
-	Pressure_3323_urn,
 	Temperature_3303,
-	Temperature_3303_urn,
-} from '@nordicsemiconductor/lwm2m-types'
-import { type Config_50009, Config_50009_urn } from './schemas/Config_50009.js'
+	Config_50009,
+} from './schemas/index.js'
 
 import { type assetTrackerObjects } from './getAssetTrackerV2Objects.js'
 import { setCustomFormat } from './utils/setCustomFormat.js'

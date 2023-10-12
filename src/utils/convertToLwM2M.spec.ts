@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { convertToLwM2M } from './convertToLwM2M.js'
-import { Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
+import { Device_3_urn } from '../schemas/index.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 
