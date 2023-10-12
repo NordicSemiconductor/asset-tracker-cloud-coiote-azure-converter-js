@@ -10,7 +10,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from './getTimestampFromMetadata.js'
-import { isTimestampUndefinedIn } from 'src/setTimestampHierarchy.js'
+import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
 
 type convertToLwM2MTemperatureResult =
 	| { result: Temperature_3303 }

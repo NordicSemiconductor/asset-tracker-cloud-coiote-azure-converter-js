@@ -7,7 +7,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from './getTimestampFromMetadata.js'
-import { isTimestampUndefinedIn } from 'src/setTimestampHierarchy.js'
+import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
 
 type convertToLwM2MPressureResult =
 	| { result: Pressure_3323 }
