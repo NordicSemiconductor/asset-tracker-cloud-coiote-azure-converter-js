@@ -23,6 +23,7 @@ import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
+import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -103,10 +104,7 @@ export const converter = async (
 			metadata,
 			deviceTwinData[coioteIds.Pressure],
 		),
-		[Config_50009_urn]: convertToLwM2M({
-			LwM2MObjectUrn: Config_50009_urn as keyof LwM2MAssetTrackerV2,
-			coioteObject: deviceTwinData[coioteIds.Config],
-		}),
+		[Config_50009_urn]: convertToLwM2MConfig(deviceTwinData[coioteIds.Config]),
 	}
 
 	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
