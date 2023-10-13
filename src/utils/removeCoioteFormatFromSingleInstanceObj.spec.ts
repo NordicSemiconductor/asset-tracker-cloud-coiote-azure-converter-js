@@ -150,7 +150,7 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 		)
 	})
 
-	void it('should omit resource when it does not follow data type of the schema definition', () => {
+	void it('value should be undefined when resource does not follow data type of the schema definition', () => {
 		const schema = {
 			type: 'object',
 			$id: 'https://github.com/OpenMobileAlliance/lwm2m-registry/raw/prod/3.xml',
@@ -204,8 +204,8 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 		}
 		const expected = {
 			'0': 'Nordic Semiconductor ASA',
-			//'1': 'Thingy:91',
-			//'11': [0],
+			'1': undefined,
+			'11': undefined,
 			'16': 'UQ',
 		}
 

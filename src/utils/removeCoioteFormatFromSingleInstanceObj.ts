@@ -5,6 +5,8 @@ type LwM2Instance = Record<string, unknown> | undefined
 
 /**
  *  Remove coiote format from single instance object following schema definition
+ *
+ *	Return undefined as value if result of removing the format does not follow the schema definition
  */
 export const removeCoioteFormatFromSingleInstanceObj = (
 	input: coioteInstance,
@@ -13,28 +15,35 @@ export const removeCoioteFormatFromSingleInstanceObj = (
 	const resources = input['0'] ?? []
 	const instance = Object.entries(resources)
 		.map(([resourceId, value]) => {
-			const dataType = schema.properties[`${resourceId}`].type
-			const newValueFormat = setDataType(value, dataType)
-			if (newValueFormat === undefined) return undefined
+			const expectedDataType = schema.properties[`${resourceId}`].type
+			const newFormat = removeKeyFromResource(value)
+
+			if (typeof newFormat !== expectedDataType) {
+				if (
+					(typeof newFormat === 'object' && expectedDataType === 'array') ||
+					(typeof newFormat === 'number' && expectedDataType === 'integer')
+				) {
+					console.log('omit') // TODO: improve this
+				} else {
+					return { [`${resourceId}`]: undefined }
+				}
+			}
+
 			return {
-				[`${resourceId}`]: newValueFormat,
+				[`${resourceId}`]: newFormat,
 			}
 		})
-		.filter((result) => result !== undefined) // remove empty values
-		.reduce((previous, current) => ({ ...current, ...previous }), {})
+		//.filter((result) => result !== undefined) // remove empty values
+		.reduce((previous: any, current) => ({ ...current, ...previous }), {}) // TODO: remove any
 	return instance as LwM2Instance
 }
 
 /**
- * Remove the key 'value' from input and set expected data type
+ * Remove the key 'value' from input
  */
-export const setDataType = (
-	input: Value | List,
-	dataType?: string,
-): undefined | number | boolean | string | unknown[] => {
-	// if input is a list
-	if ((input as List).attributes !== undefined) {
-		return Object.values(input)
+const removeKeyFromResource = (resource: Value | List) => {
+	if ((resource as List).attributes !== undefined) {
+		return Object.values(resource)
 			.filter((element) => {
 				if (element.dim === undefined) {
 					return element
@@ -43,19 +52,5 @@ export const setDataType = (
 			.map((element) => element.value)
 	}
 
-	const value = input.value
-
-	if (value === undefined) return undefined
-
-	if (typeof value !== dataType) return undefined
-
-	switch (dataType) {
-		case 'number':
-			//case 'integer':
-			return Number(value)
-		case 'boolean':
-			return Boolean(value)
-		default:
-			return String(value)
-	}
+	return resource.value
 }

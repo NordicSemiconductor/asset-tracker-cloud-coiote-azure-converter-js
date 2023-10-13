@@ -2,8 +2,8 @@ import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { checkLwM2MFormat, type LwM2MFormatError } from './checkLwM2MFormat.js'
 import type { Instance } from 'src/converter.js'
-import { convertToLwM2MInstance } from './convertToLwM2MInstance.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
+import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'
 
 export type convertToLwM2MDeviceResult =
 	| { result: Device_3 }
@@ -20,7 +20,7 @@ export const convertToLwM2MDevice = (
 		return { warning: new UndefinedCoioteObjectWarning(Device_3_urn) }
 
 	const schema = getLwM2MSchemaDefinition(Device_3_urn)
-	const device = convertToLwM2MInstance(
+	const device = removeCoioteFormatFromSingleInstanceObj(
 		objectWithCoioteFormat,
 		schema,
 	) as Device_3 // TODO: return the type in the function

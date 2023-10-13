@@ -1,14 +1,16 @@
 import type { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
-import type { Instance } from '../converter'
+import type { Instance as coioteInstance } from '../converter'
 import { convertResourceUsingSchema } from './convertResourceUsingSchema.js'
 
 type LwM2Instance = Record<string, unknown> | undefined
 
 /**
  *  Remove coiote format from instance of a LwM2M object and convert using the given schema
+ *
+ * // here what I am really doing is removinb the Coiote format
  */
 export const convertToLwM2MInstance = (
-	input: Instance,
+	input: coioteInstance,
 	schema: (typeof LwM2MDocumentSchema.properties)[keyof (typeof LwM2MDocumentSchema)['properties']],
 ): LwM2Instance => {
 	const resources = input['0'] ?? []
