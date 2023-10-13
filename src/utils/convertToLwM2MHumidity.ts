@@ -1,13 +1,14 @@
 import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { setLwM2MFormat } from './setLwM2MFormat.js'
 import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from './getTimestampFromMetadata.js'
 import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
+import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
+import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
 
 type convertToLwM2MHumidityResult =
 	| { result: Humidity_3304 }
@@ -19,30 +20,23 @@ type convertToLwM2MHumidityResult =
  */
 export const convertToLwM2MHumidity = (
 	metadata: Metadata,
-	humidity_coiote?: Instance,
+	objectWithCoioteFormat?: Instance,
 ): convertToLwM2MHumidityResult => {
-	if (humidity_coiote === undefined)
+	if (objectWithCoioteFormat === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Humidity_3304_urn) }
 
-	// TODO: update return type
-	const humidity = setLwM2MFormat({
-		[`${Humidity_3304_urn}`]: humidity_coiote,
-	})
-	// TODO: improve this
-	const humidity_LwM2M = humidity[Humidity_3304_urn] as Humidity_3304
+	const schema = getLwM2MSchemaDefinition(Humidity_3304_urn)
+	const humidity = convertToLwM2MArrayInstance(
+		objectWithCoioteFormat,
+		schema,
+	) as unknown as Humidity_3304 // TODO: return the type in the function
 
-	if (
-		humidity_LwM2M[0] !== undefined &&
-		isTimestampUndefinedIn(humidity_LwM2M) === true
-	) {
-		humidity_LwM2M[0][5518] = getTimestampFromMetadata(
-			Humidity_3304_urn,
-			metadata,
-		)
+	if (humidity[0] !== undefined && isTimestampUndefinedIn(humidity) === true) {
+		humidity[0][5518] = getTimestampFromMetadata(Humidity_3304_urn, metadata)
 	}
 
 	const validatedLwM2MHumidity = checkLwM2MFormat({
-		[Humidity_3304_urn]: humidity_LwM2M,
+		[Humidity_3304_urn]: humidity,
 	})
 
 	if ('error' in validatedLwM2MHumidity) {
@@ -50,6 +44,6 @@ export const convertToLwM2MHumidity = (
 	}
 
 	return {
-		result: humidity_LwM2M,
+		result: humidity,
 	}
 }

@@ -4,13 +4,14 @@ import {
 } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { setLwM2MFormat } from './setLwM2MFormat.js'
 import { LwM2MFormatError, checkLwM2MFormat } from './checkLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from './getTimestampFromMetadata.js'
 import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
+import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
+import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
 
 type convertToLwM2MTemperatureResult =
 	| { result: Temperature_3303 }
@@ -22,32 +23,29 @@ type convertToLwM2MTemperatureResult =
  */
 export const convertToLwM2MTemperature = (
 	metadata: Metadata,
-	temperature_coiote?: Instance,
+	objectWithCoioteFormat?: Instance,
 ): convertToLwM2MTemperatureResult => {
-	if (temperature_coiote === undefined)
+	if (objectWithCoioteFormat === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Temperature_3303_urn) }
 
-	// TODO: update return type
-	const temperature = setLwM2MFormat({
-		[`${Temperature_3303_urn}`]: temperature_coiote,
-	})
-	// TODO: improve this
-	const temperature_LwM2M = temperature[
-		Temperature_3303_urn
-	] as Temperature_3303
+	const schema = getLwM2MSchemaDefinition(Temperature_3303_urn)
+	const temperature = convertToLwM2MArrayInstance(
+		objectWithCoioteFormat,
+		schema,
+	) as unknown as Temperature_3303 // TODO: return the type in the function
 
 	if (
-		temperature_LwM2M[0] !== undefined &&
-		isTimestampUndefinedIn(temperature_LwM2M) === true
+		temperature[0] !== undefined &&
+		isTimestampUndefinedIn(temperature) === true
 	) {
-		temperature_LwM2M[0][5518] = getTimestampFromMetadata(
+		temperature[0][5518] = getTimestampFromMetadata(
 			Temperature_3303_urn,
 			metadata,
 		)
 	}
 
 	const validatedLwM2MTemperature = checkLwM2MFormat({
-		[Temperature_3303_urn]: temperature_LwM2M,
+		[Temperature_3303_urn]: temperature,
 	})
 
 	if ('error' in validatedLwM2MTemperature) {
@@ -55,6 +53,6 @@ export const convertToLwM2MTemperature = (
 	}
 
 	return {
-		result: temperature_LwM2M,
+		result: temperature,
 	}
 }
