@@ -80,6 +80,18 @@ export const converter = async (
 	const _3323 = parseURN(Pressure_3323_urn).ObjectID
 	const _50009 = parseURN(Config_50009_urn).ObjectID
 
+	/**
+	 * TODO:
+	 * We are in a converter function. It is clear with the name of the function.
+	 *
+	 * I think names as 'convertToLwM2MDevice', 'convertToLwM2MHumidity', ... just make it
+	 * redudant. Also the name of the function is super long.
+	 *
+	 * getLwM2MDevice would be nice.
+	 * other options:
+	 * getDevice_LwM2M
+	 * getDevice
+	 */
 	const conversionResult = {
 		[Device_3_urn]: convertToLwM2MDevice(coioteObjects[_3]),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2MConnectivityMonitoring(
