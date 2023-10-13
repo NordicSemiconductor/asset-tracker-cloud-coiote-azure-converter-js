@@ -72,31 +72,27 @@ export const converter = async (
 	const output = {} as LwM2MAssetTrackerV2
 	const coioteObjects = deviceTwin.properties.reported.lwm2m
 
+	const _3 = parseURN(Device_3_urn).ObjectID
+	const _4 = parseURN(ConnectivityMonitoring_4_urn).ObjectID
+	const _6 = parseURN(Location_6_urn).ObjectID
+	const _3303 = parseURN(Temperature_3303_urn).ObjectID
+	const _3304 = parseURN(Humidity_3304_urn).ObjectID
+	const _3323 = parseURN(Pressure_3323_urn).ObjectID
+	const _50009 = parseURN(Config_50009_urn).ObjectID
+
 	const conversionResult = {
-		[Device_3_urn]: convertToLwM2MDevice(
-			coioteObjects[parseURN(Device_3_urn).ObjectID],
-		),
+		[Device_3_urn]: convertToLwM2MDevice(coioteObjects[_3]),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2MConnectivityMonitoring(
-			coioteObjects[parseURN(ConnectivityMonitoring_4_urn).ObjectID],
+			coioteObjects[_4],
 		),
-		[Location_6_urn]: convertToLwM2MLocation(
-			coioteObjects[parseURN(Location_6_urn).ObjectID],
-		),
+		[Location_6_urn]: convertToLwM2MLocation(coioteObjects[_6]),
 		[Temperature_3303_urn]: convertToLwM2MTemperature(
 			metadata,
-			coioteObjects[parseURN(Temperature_3303_urn).ObjectID],
+			coioteObjects[_3303],
 		),
-		[Humidity_3304_urn]: convertToLwM2MHumidity(
-			metadata,
-			coioteObjects[parseURN(Humidity_3304_urn).ObjectID],
-		),
-		[Pressure_3323_urn]: convertToLwM2MPressure(
-			metadata,
-			coioteObjects[parseURN(Pressure_3323_urn).ObjectID],
-		),
-		[Config_50009_urn]: convertToLwM2MConfig(
-			coioteObjects[parseURN(Config_50009_urn).ObjectID],
-		),
+		[Humidity_3304_urn]: convertToLwM2MHumidity(metadata, coioteObjects[_3304]),
+		[Pressure_3323_urn]: convertToLwM2MPressure(metadata, coioteObjects[_3323]),
+		[Config_50009_urn]: convertToLwM2MConfig(coioteObjects[_50009]),
 	}
 
 	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
