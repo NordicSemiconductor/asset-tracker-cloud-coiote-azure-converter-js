@@ -1,13 +1,13 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { convertToLwM2MPressure } from './convertToLwM2MPressure.js'
+import { getPressure } from './getPressure.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/index.js'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
-void describe('convertToLwM2MPressure', () => {
+void describe('getPressure', () => {
 	void it(`should create the LwM2M object 'Pressure' (3323) from the object '3323' reported by Coiote`, () => {
 		const metadata: Metadata = {
 			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
@@ -62,7 +62,7 @@ void describe('convertToLwM2MPressure', () => {
 			},
 		]
 
-		const pressure = convertToLwM2MPressure(metadata, pressure_coiote) as {
+		const pressure = getPressure(metadata, pressure_coiote) as {
 			result: unknown
 		}
 		assert.deepEqual(pressure.result, expected)
@@ -95,7 +95,7 @@ void describe('convertToLwM2MPressure', () => {
 			},
 		}
 
-		const pressure = convertToLwM2MPressure(metadata, pressure_coiote) as {
+		const pressure = getPressure(metadata, pressure_coiote) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
@@ -149,7 +149,7 @@ void describe('convertToLwM2MPressure', () => {
 			},
 		}
 
-		const temperature = convertToLwM2MPressure(
+		const temperature = getPressure(
 			metadata,
 			pressure_coiote as unknown as Instance,
 		) as {
@@ -203,7 +203,7 @@ void describe('convertToLwM2MPressure', () => {
 			},
 		}
 
-		const pressure = convertToLwM2MPressure(metadata, pressure_coiote) as {
+		const pressure = getPressure(metadata, pressure_coiote) as {
 			result: Pressure_3323
 		}
 		assert.deepEqual(pressure.result[0]?.[5518], timeToReportParsed)
