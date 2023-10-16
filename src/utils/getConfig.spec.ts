@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { convertToLwM2MConfig } from './convertToLwM2MConfig.js'
+import { getConfig } from './getConfig.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { Config_50009_urn } from 'src/schemas/Config_50009.js'
 
-void describe('convertToLwM2MConfig', () => {
+void describe('getConfig', () => {
 	void it(`should create the LwM2M object 'Config' (50009) from the object '50009' reported by Coiote`, () => {
 		const config_coiote = {
 			'0': {
@@ -46,12 +46,12 @@ void describe('convertToLwM2MConfig', () => {
 			'9': 0.5,
 		}
 
-		const config = convertToLwM2MConfig(config_coiote) as { result: unknown }
+		const config = getConfig(config_coiote) as { result: unknown }
 		assert.deepEqual(config.result, expected)
 	})
 
 	void it(`should return a warning if the object '50009' reported by Coiote is not defined`, () => {
-		const config = convertToLwM2MConfig(undefined) as {
+		const config = getConfig(undefined) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
@@ -94,7 +94,7 @@ void describe('convertToLwM2MConfig', () => {
             },
         }
 
-		const config = convertToLwM2MConfig(
+		const config = getConfig(
 			config_coiote as unknown as Instance,
 		) as {
 			error: LwM2MFormatError

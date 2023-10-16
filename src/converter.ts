@@ -24,7 +24,7 @@ import { getDevice } from './utils/getDevice.js'
 import { getTemperature } from './utils/getTemperature.js'
 import { getHumidity } from './utils/getHumidity.js'
 import { getPressure } from './utils/getPressure.js'
-import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'
+import { getConfig } from './utils/getConfig.js'
 import { getLocation } from './utils/getLocation.js'
 import { getConnectivityMonitoring } from './utils/getConnectivityMonitoring.js'
 
@@ -101,7 +101,7 @@ export const converter = async (
 		[Temperature_3303_urn]: getTemperature(metadata, coioteObjects[_3303]),
 		[Humidity_3304_urn]: getHumidity(metadata, coioteObjects[_3304]),
 		[Pressure_3323_urn]: getPressure(metadata, coioteObjects[_3323]),
-		[Config_50009_urn]: convertToLwM2MConfig(coioteObjects[_50009]),
+		[Config_50009_urn]: getConfig(coioteObjects[_50009]),
 	}
 
 	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
