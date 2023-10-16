@@ -1,13 +1,13 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { convertToLwM2MHumidity } from './convertToLwM2MHumidity.js'
+import { getHumidity } from './getHumidity.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 import { Humidity_3304_urn, type Humidity_3304 } from '../schemas/index.js'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
-void describe('convertToLwM2MHumidity', () => {
+void describe('getHumidity', () => {
 	void it(`should create the LwM2M object 'Humidity' (3304) from the object '3304' reported by Coiote`, () => {
 		const metadata: Metadata = {
 			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
@@ -62,7 +62,7 @@ void describe('convertToLwM2MHumidity', () => {
 			},
 		]
 
-		const humidity = convertToLwM2MHumidity(metadata, humidity_coiote) as {
+		const humidity = getHumidity(metadata, humidity_coiote) as {
 			result: unknown
 		}
 		assert.deepEqual(humidity.result, expected)
@@ -95,7 +95,7 @@ void describe('convertToLwM2MHumidity', () => {
 			},
 		}
 
-		const humidity = convertToLwM2MHumidity(metadata, humidity_coiote) as {
+		const humidity = getHumidity(metadata, humidity_coiote) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
@@ -152,7 +152,7 @@ void describe('convertToLwM2MHumidity', () => {
 			},
 		}
 
-		const humidity = convertToLwM2MHumidity(
+		const humidity = getHumidity(
 			metadata,
 			humidity_coiote as unknown as Instance,
 		) as {
@@ -206,7 +206,7 @@ void describe('convertToLwM2MHumidity', () => {
 			},
 		}
 
-		const humidity = convertToLwM2MHumidity(metadata, humidity_coiote) as {
+		const humidity = getHumidity(metadata, humidity_coiote) as {
 			result: Humidity_3304
 		}
 		assert.deepEqual(humidity.result[0]?.[5518], timeToReportParsed)

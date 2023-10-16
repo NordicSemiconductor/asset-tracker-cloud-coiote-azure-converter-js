@@ -10,7 +10,7 @@ import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
 
-type convertToLwM2MHumidityResult =
+type getHumidityResult =
 	| { result: Humidity_3304 }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: LwM2MFormatError }
@@ -18,10 +18,10 @@ type convertToLwM2MHumidityResult =
 /**
  * Build the Humidity object from LwM2M using the object 3304 reported by Coiote
  */
-export const convertToLwM2MHumidity = (
+export const getHumidity = (
 	metadata: Metadata,
 	objectWithCoioteFormat?: Instance,
-): convertToLwM2MHumidityResult => {
+): getHumidityResult => {
 	if (objectWithCoioteFormat === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Humidity_3304_urn) }
 

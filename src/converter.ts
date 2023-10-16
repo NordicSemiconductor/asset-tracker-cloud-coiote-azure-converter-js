@@ -22,7 +22,7 @@ import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObject
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import { getDevice } from './utils/getDevice.js'
 import { getTemperature } from './utils/getTemperature.js'
-import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
+import { getHumidity } from './utils/getHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
 import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'
 import { getLocation } from './utils/getLocation.js'
@@ -84,7 +84,7 @@ export const converter = async (
 	 * TODO:
 	 * We are in a converter function. It is clear with the name of the function.
 	 *
-	 * I think names as 'getDevice', 'convertToLwM2MHumidity', ... just make it
+	 * I think names as 'getDevice', 'getHumidity', ... just make it
 	 * redudant. Also the name of the function is super long.
 	 *
 	 * getLwM2MDevice would be nice.
@@ -99,7 +99,7 @@ export const converter = async (
 		),
 		[Location_6_urn]: getLocation(coioteObjects[_6]),
 		[Temperature_3303_urn]: getTemperature(metadata, coioteObjects[_3303]),
-		[Humidity_3304_urn]: convertToLwM2MHumidity(metadata, coioteObjects[_3304]),
+		[Humidity_3304_urn]: getHumidity(metadata, coioteObjects[_3304]),
 		[Pressure_3323_urn]: convertToLwM2MPressure(metadata, coioteObjects[_3323]),
 		[Config_50009_urn]: convertToLwM2MConfig(coioteObjects[_50009]),
 	}
