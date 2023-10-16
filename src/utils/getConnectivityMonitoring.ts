@@ -8,7 +8,7 @@ import type { Instance } from 'src/converter.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'
 
-export type convertToLwM2MConnectivityMonitoringResult =
+export type getConnectivityMonitoringResult =
 	| { result: ConnectivityMonitoring_4 }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: LwM2MFormatError }
@@ -16,9 +16,9 @@ export type convertToLwM2MConnectivityMonitoringResult =
 /**
  * Convert to LwM2M Connectivity Monitoring object (id 4) from the object 4 reported by Coiote
  */
-export const convertToLwM2MConnectivityMonitoring = (
+export const getConnectivityMonitoring = (
 	objectWithCoioteFormat?: Instance,
-): convertToLwM2MConnectivityMonitoringResult => {
+): getConnectivityMonitoringResult => {
 	if (objectWithCoioteFormat === undefined)
 		return {
 			warning: new UndefinedCoioteObjectWarning(ConnectivityMonitoring_4_urn),

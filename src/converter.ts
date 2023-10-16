@@ -26,7 +26,7 @@ import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
 import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'
 import { convertToLwM2MLocation } from './utils/convertToLwM2MLocation.js'
-import { convertToLwM2MConnectivityMonitoring } from './utils/convertToLwM2MConnectivityMonitoring.js'
+import { getConnectivityMonitoring } from './utils/getConnectivityMonitoring.js'
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -94,7 +94,7 @@ export const converter = async (
 	 */
 	const conversionResult = {
 		[Device_3_urn]: getDevice(coioteObjects[_3]),
-		[ConnectivityMonitoring_4_urn]: convertToLwM2MConnectivityMonitoring(
+		[ConnectivityMonitoring_4_urn]: getConnectivityMonitoring(
 			coioteObjects[_4],
 		),
 		[Location_6_urn]: convertToLwM2MLocation(coioteObjects[_6]),

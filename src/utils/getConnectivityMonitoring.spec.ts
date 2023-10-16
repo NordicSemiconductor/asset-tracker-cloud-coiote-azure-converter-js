@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { convertToLwM2MConnectivityMonitoring } from './convertToLwM2MConnectivityMonitoring.js'
+import { getConnectivityMonitoring } from './getConnectivityMonitoring.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { ConnectivityMonitoring_4_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 
-void describe('convertToLwM2MConnectivityMonitoring', () => {
+void describe('getConnectivityMonitoring', () => {
 	void it(`should create the LwM2M object 'Connectivity Monitoring' (4) from the object '4' reported by Coiote`, () => {
 		const connectivityMonitoring_coiote = {
 			'0': {
@@ -66,16 +66,14 @@ void describe('convertToLwM2MConnectivityMonitoring', () => {
 			'12': 12,
 		}
 
-		const connectivityMonitoring = convertToLwM2MConnectivityMonitoring(
+		const connectivityMonitoring = getConnectivityMonitoring(
 			connectivityMonitoring_coiote,
 		) as { result: unknown }
 		assert.deepEqual(connectivityMonitoring.result, expected)
 	})
 
 	void it(`should return a warning if the object '4' reported by Coiote is not defined`, () => {
-		const connectivityMonitoring = convertToLwM2MConnectivityMonitoring(
-			undefined,
-		) as {
+		const connectivityMonitoring = getConnectivityMonitoring(undefined) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
@@ -134,7 +132,7 @@ void describe('convertToLwM2MConnectivityMonitoring', () => {
 			attributes: {},
 		}
 
-		const connectivityMonitoring = convertToLwM2MConnectivityMonitoring(
+		const connectivityMonitoring = getConnectivityMonitoring(
 			connectivityMonitoring_coiote as unknown as Instance,
 		) as {
 			error: LwM2MFormatError
