@@ -25,7 +25,7 @@ import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
 import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
 import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'
-import { convertToLwM2MLocation } from './utils/convertToLwM2MLocation.js'
+import { getLocation } from './utils/getLocation.js'
 import { getConnectivityMonitoring } from './utils/getConnectivityMonitoring.js'
 
 export type Value = { value: string | number | boolean }
@@ -97,7 +97,7 @@ export const converter = async (
 		[ConnectivityMonitoring_4_urn]: getConnectivityMonitoring(
 			coioteObjects[_4],
 		),
-		[Location_6_urn]: convertToLwM2MLocation(coioteObjects[_6]),
+		[Location_6_urn]: getLocation(coioteObjects[_6]),
 		[Temperature_3303_urn]: convertToLwM2MTemperature(
 			metadata,
 			coioteObjects[_3303],

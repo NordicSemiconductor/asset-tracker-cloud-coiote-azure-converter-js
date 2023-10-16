@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { convertToLwM2MLocation } from './convertToLwM2MLocation.js'
+import { getLocation } from './getLocation.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { Location_6_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 
-void describe('convertToLwM2MLocation', () => {
+void describe('getLocation', () => {
 	void it(`should create the LwM2M object 'Location' (6) from the object '6' reported by Coiote`, () => {
 		const location_coiote = {
 			'0': {
@@ -28,14 +28,14 @@ void describe('convertToLwM2MLocation', () => {
 			'6': 5,
 		}
 
-		const location = convertToLwM2MLocation(location_coiote) as {
+		const location = getLocation(location_coiote) as {
 			result: unknown
 		}
 		assert.deepEqual(location.result, expected)
 	})
 
 	void it(`should return a warning if the object '6' reported by Coiote is not defined`, () => {
-		const location = convertToLwM2MLocation(undefined) as {
+		const location = getLocation(undefined) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
@@ -56,9 +56,7 @@ void describe('convertToLwM2MLocation', () => {
 			},
 		}
 
-		const location = convertToLwM2MLocation(
-			location_coiote as unknown as Instance,
-		) as {
+		const location = getLocation(location_coiote as unknown as Instance) as {
 			error: LwM2MFormatError
 		}
 
