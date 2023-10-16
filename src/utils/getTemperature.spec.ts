@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { convertToLwM2MTemperature } from './convertToLwM2MTemperature.js'
+import { getTemperature } from './getTemperature.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
@@ -10,7 +10,7 @@ import {
 } from '../schemas/index.js'
 import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
 
-void describe('convertToLwM2MTemperature', () => {
+void describe('getTemperature', () => {
 	void it(`should create the LwM2M object 'Temperature' (3303) from the object '3303' reported by Coiote`, () => {
 		const metadata: Metadata = {
 			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
@@ -65,10 +65,7 @@ void describe('convertToLwM2MTemperature', () => {
 			},
 		]
 
-		const temperature = convertToLwM2MTemperature(
-			metadata,
-			temperature_coiote,
-		) as {
+		const temperature = getTemperature(metadata, temperature_coiote) as {
 			result: unknown
 		}
 		assert.deepEqual(temperature.result, expected)
@@ -101,10 +98,7 @@ void describe('convertToLwM2MTemperature', () => {
 			},
 		}
 
-		const temperature = convertToLwM2MTemperature(
-			metadata,
-			temperature_coiote,
-		) as {
+		const temperature = getTemperature(metadata, temperature_coiote) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
@@ -158,7 +152,7 @@ void describe('convertToLwM2MTemperature', () => {
 			},
 		}
 
-		const temperature = convertToLwM2MTemperature(
+		const temperature = getTemperature(
 			metadata,
 			temperature_coiote as unknown as Instance,
 		) as {
@@ -212,10 +206,7 @@ void describe('convertToLwM2MTemperature', () => {
 			},
 		}
 
-		const temperature = convertToLwM2MTemperature(
-			metadata,
-			temperature_coiote,
-		) as {
+		const temperature = getTemperature(metadata, temperature_coiote) as {
 			result: Temperature_3303
 		}
 		assert.deepEqual(temperature.result[0]?.[5518], timeToReportParsed)

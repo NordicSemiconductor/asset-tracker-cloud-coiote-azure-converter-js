@@ -21,7 +21,7 @@ import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import { getDevice } from './utils/getDevice.js'
-import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
+import { getTemperature } from './utils/getTemperature.js'
 import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
 import { convertToLwM2MConfig } from './utils/convertToLwM2MConfig.js'
@@ -98,10 +98,7 @@ export const converter = async (
 			coioteObjects[_4],
 		),
 		[Location_6_urn]: getLocation(coioteObjects[_6]),
-		[Temperature_3303_urn]: convertToLwM2MTemperature(
-			metadata,
-			coioteObjects[_3303],
-		),
+		[Temperature_3303_urn]: getTemperature(metadata, coioteObjects[_3303]),
 		[Humidity_3304_urn]: convertToLwM2MHumidity(metadata, coioteObjects[_3304]),
 		[Pressure_3323_urn]: convertToLwM2MPressure(metadata, coioteObjects[_3323]),
 		[Config_50009_urn]: convertToLwM2MConfig(coioteObjects[_50009]),
