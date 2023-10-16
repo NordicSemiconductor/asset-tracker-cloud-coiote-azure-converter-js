@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { convertToLwM2MDevice } from './convertToLwM2MDevice.js'
+import { getDevice } from './getDevice.js'
 import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
 import { Device_3_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
 import type { LwM2MFormatError } from './checkLwM2MFormat.js'
 
-void describe('convertToLwM2MDevice', () => {
+void describe('getDevice', () => {
 	void it(`should create the LwM2M object 'Device' (3) from the object '3' reported by Coiote`, () => {
 		const device_coiote = {
 			'0': {
@@ -62,12 +62,12 @@ void describe('convertToLwM2MDevice', () => {
 			'19': '3.2.1',
 		}
 
-		const device = convertToLwM2MDevice(device_coiote) as { result: unknown }
+		const device = getDevice(device_coiote) as { result: unknown }
 		assert.deepEqual(device.result, expected)
 	})
 
 	void it(`should return a warning if the object '3' reported by Coiote is not defined`, () => {
-		const device = convertToLwM2MDevice(undefined) as {
+		const device = getDevice(undefined) as {
 			warning: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
@@ -114,9 +114,7 @@ void describe('convertToLwM2MDevice', () => {
 			},
 		}
 
-		const device = convertToLwM2MDevice(
-			device_coiote as unknown as Instance,
-		) as {
+		const device = getDevice(device_coiote as unknown as Instance) as {
 			error: LwM2MFormatError
 		}
 

@@ -5,7 +5,7 @@ import type { Instance } from 'src/converter.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'
 
-export type convertToLwM2MDeviceResult =
+export type getDeviceResult =
 	| { result: Device_3 }
 	| { warning: UndefinedCoioteObjectWarning }
 	| { error: LwM2MFormatError }
@@ -13,9 +13,9 @@ export type convertToLwM2MDeviceResult =
 /**
  * Convert to LwM2M Device object (id 3) from the object 3 reported by Coiote
  */
-export const convertToLwM2MDevice = (
+export const getDevice = (
 	objectWithCoioteFormat?: Instance,
-): convertToLwM2MDeviceResult => {
+): getDeviceResult => {
 	if (objectWithCoioteFormat === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Device_3_urn) }
 

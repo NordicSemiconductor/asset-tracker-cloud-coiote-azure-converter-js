@@ -20,7 +20,7 @@ import type {
 import { LwM2MFormatError } from './utils/checkLwM2MFormat.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
-import { convertToLwM2MDevice } from './utils/convertToLwM2MDevice.js'
+import { getDevice } from './utils/getDevice.js'
 import { convertToLwM2MTemperature } from './utils/convertToLwM2MTemperature.js'
 import { convertToLwM2MHumidity } from './utils/convertToLwM2MHumidity.js'
 import { convertToLwM2MPressure } from './utils/convertToLwM2MPressure.js'
@@ -84,7 +84,7 @@ export const converter = async (
 	 * TODO:
 	 * We are in a converter function. It is clear with the name of the function.
 	 *
-	 * I think names as 'convertToLwM2MDevice', 'convertToLwM2MHumidity', ... just make it
+	 * I think names as 'getDevice', 'convertToLwM2MHumidity', ... just make it
 	 * redudant. Also the name of the function is super long.
 	 *
 	 * getLwM2MDevice would be nice.
@@ -93,7 +93,7 @@ export const converter = async (
 	 * getDevice
 	 */
 	const conversionResult = {
-		[Device_3_urn]: convertToLwM2MDevice(coioteObjects[_3]),
+		[Device_3_urn]: getDevice(coioteObjects[_3]),
 		[ConnectivityMonitoring_4_urn]: convertToLwM2MConnectivityMonitoring(
 			coioteObjects[_4],
 		),
