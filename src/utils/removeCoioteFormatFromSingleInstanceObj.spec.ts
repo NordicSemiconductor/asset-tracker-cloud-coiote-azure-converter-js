@@ -214,6 +214,15 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 			schema,
 		) as any // TODO: update this
 
+		/**
+		 * TODO: remove schema from removeCoioteFormatFromSingleInstanceObj method
+		 *
+		 * Using this example and taking in consideration the schema definition:
+		 *
+		 * The decision of return undefined if resource does not follow the schema definition is wrong because when the resource is not required
+		 * the error will not be detected by the validateLwM2MFormat method.
+		 */
+
 		assert.equal(result['1'], undefined)
 		assert.equal(result['11'], undefined)
 		assert.deepEqual(result, expected)
