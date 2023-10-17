@@ -22,10 +22,8 @@ export const getDevice = (
 	if (objectWithCoioteFormat === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Device_3_urn) }
 
-	const schema = getLwM2MSchemaDefinition(Device_3_urn)
 	const device = removeCoioteFormatFromSingleInstanceObj(
 		objectWithCoioteFormat,
-		schema,
 	) as Device_3 // TODO: return the type in the function
 
 	return validateLwM2MFormat(Device_3_urn, device)

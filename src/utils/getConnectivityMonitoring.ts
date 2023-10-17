@@ -27,10 +27,8 @@ export const getConnectivityMonitoring = (
 			warning: new UndefinedCoioteObjectWarning(ConnectivityMonitoring_4_urn),
 		}
 
-	const schema = getLwM2MSchemaDefinition(ConnectivityMonitoring_4_urn)
 	const connectivityMonitoring = removeCoioteFormatFromSingleInstanceObj(
-		objectWithCoioteFormat,
-		schema,
+		objectWithCoioteFormat
 	) as ConnectivityMonitoring_4 // TODO: return the type in the function
 
 	return validateLwM2MFormat(

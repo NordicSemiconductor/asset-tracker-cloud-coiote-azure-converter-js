@@ -22,10 +22,8 @@ export const getLocation = (
 	if (objectWithCoioteFormat === undefined)
 		return { warning: new UndefinedCoioteObjectWarning(Location_6_urn) }
 
-	const schema = getLwM2MSchemaDefinition(Location_6_urn)
 	const location = removeCoioteFormatFromSingleInstanceObj(
 		objectWithCoioteFormat,
-		schema,
 	) as Location_6 // TODO: return the type in the function
 
 	return validateLwM2MFormat(Location_6_urn, location)
