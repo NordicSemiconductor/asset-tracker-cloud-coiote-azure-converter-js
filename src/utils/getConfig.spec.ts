@@ -52,10 +52,10 @@ void describe('getConfig', () => {
 
 	void it(`should return a warning if the object '50009' reported by Coiote is not defined`, () => {
 		const config = getConfig(undefined) as {
-			warning: UndefinedCoioteObjectWarning
+			error: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
-			config.warning.message,
+			config.error.message,
 			`'${Config_50009_urn}' object can not be converter because object id '50009' is undefined in input received`,
 		)
 	})

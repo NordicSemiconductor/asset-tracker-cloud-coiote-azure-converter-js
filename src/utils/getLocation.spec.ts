@@ -36,10 +36,10 @@ void describe('getLocation', () => {
 
 	void it(`should return a warning if the object '6' reported by Coiote is not defined`, () => {
 		const location = getLocation(undefined) as {
-			warning: UndefinedCoioteObjectWarning
+			error: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
-			location.warning.message,
+			location.error.message,
 			`'${Location_6_urn}' object can not be converter because object id '6' is undefined in input received`,
 		)
 	})

@@ -17,7 +17,7 @@ export type getConfigResult =
  */
 export const getConfig = (config_coiote?: Instance): getConfigResult => {
 	if (config_coiote === undefined)
-		return { warning: new UndefinedCoioteObjectWarning(Config_50009_urn) }
+		return { error: new UndefinedCoioteObjectWarning(Config_50009_urn) }
 
 	const config = setCustomFormat({
 		[`${Config_50009_urn}`]: config_coiote,

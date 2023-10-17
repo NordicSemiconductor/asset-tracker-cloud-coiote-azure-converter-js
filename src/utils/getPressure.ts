@@ -23,7 +23,7 @@ export const getPressure = (
 	objectWithCoioteFormat?: Instance,
 ): getPressureResult => {
 	if (objectWithCoioteFormat === undefined)
-		return { warning: new UndefinedCoioteObjectWarning(Pressure_3323_urn) }
+		return { error: new UndefinedCoioteObjectWarning(Pressure_3323_urn) }
 
 	const schema = getLwM2MSchemaDefinition(Pressure_3323_urn)
 	const pressure = convertToLwM2MArrayInstance(

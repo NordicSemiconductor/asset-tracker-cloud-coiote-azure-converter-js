@@ -99,10 +99,10 @@ void describe('getTemperature', () => {
 		}
 
 		const temperature = getTemperature(metadata, temperature_coiote) as {
-			warning: UndefinedCoioteObjectWarning
+			error: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
-			temperature.warning.message,
+			temperature.error.message,
 			`'${Temperature_3303_urn}' object can not be converter because object id '3303' is undefined in input received`,
 		)
 	})

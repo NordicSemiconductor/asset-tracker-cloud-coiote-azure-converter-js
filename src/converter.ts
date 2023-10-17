@@ -66,8 +66,7 @@ export type LwM2MAssetTrackerV2 = {
 export const converter = async (
 	deviceTwin: DeviceTwin,
 	metadata: Metadata,
-	onWarning?: (element: UndefinedCoioteObjectWarning) => void,
-	onError?: (element: LwM2MFormatError) => void,
+	onError?: (element: LwM2MFormatError | UndefinedCoioteObjectWarning) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const output = {} as LwM2MAssetTrackerV2
 	const coioteObjects = deviceTwin.properties.reported.lwm2m
@@ -96,9 +95,7 @@ export const converter = async (
 		if ('result' in LwM2MObject)
 			(output as any)[objectURN] = LwM2MObject.result // TODO: solve this any
 		else {
-			'warning' in LwM2MObject
-				? onWarning?.(LwM2MObject.warning)
-				: onError?.(LwM2MObject.error as any)
+			onError?.(LwM2MObject.error)
 		}
 	}
 

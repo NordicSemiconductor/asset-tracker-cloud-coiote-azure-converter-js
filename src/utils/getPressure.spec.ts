@@ -96,10 +96,10 @@ void describe('getPressure', () => {
 		}
 
 		const pressure = getPressure(metadata, pressure_coiote) as {
-			warning: UndefinedCoioteObjectWarning
+			error: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
-			pressure.warning.message,
+			pressure.error.message,
 			`'${Pressure_3323_urn}' object can not be converter because object id '3323' is undefined in input received`,
 		)
 	})

@@ -20,7 +20,7 @@ export const getDevice = (
 	objectWithCoioteFormat?: Instance,
 ): getDeviceResult => {
 	if (objectWithCoioteFormat === undefined)
-		return { warning: new UndefinedCoioteObjectWarning(Device_3_urn) }
+		return { error: new UndefinedCoioteObjectWarning(Device_3_urn) }
 
 	const device = removeCoioteFormatFromSingleInstanceObj(
 		objectWithCoioteFormat,

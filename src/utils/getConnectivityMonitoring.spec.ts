@@ -74,10 +74,10 @@ void describe('getConnectivityMonitoring', () => {
 
 	void it(`should return a warning if the object '4' reported by Coiote is not defined`, () => {
 		const connectivityMonitoring = getConnectivityMonitoring(undefined) as {
-			warning: UndefinedCoioteObjectWarning
+			error: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
-			connectivityMonitoring.warning.message,
+			connectivityMonitoring.error.message,
 			`'${ConnectivityMonitoring_4_urn}' object can not be converter because object id '4' is undefined in input received`,
 		)
 	})

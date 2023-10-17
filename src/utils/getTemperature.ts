@@ -26,7 +26,7 @@ export const getTemperature = (
 	objectWithCoioteFormat?: Instance,
 ): getTemperatureResult => {
 	if (objectWithCoioteFormat === undefined)
-		return { warning: new UndefinedCoioteObjectWarning(Temperature_3303_urn) }
+		return { error: new UndefinedCoioteObjectWarning(Temperature_3303_urn) }
 
 	const schema = getLwM2MSchemaDefinition(Temperature_3303_urn)
 	const temperature = convertToLwM2MArrayInstance(

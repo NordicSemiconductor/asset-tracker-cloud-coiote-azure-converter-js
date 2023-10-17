@@ -24,7 +24,7 @@ export const getConnectivityMonitoring = (
 ): getConnectivityMonitoringResult => {
 	if (objectWithCoioteFormat === undefined)
 		return {
-			warning: new UndefinedCoioteObjectWarning(ConnectivityMonitoring_4_urn),
+			error: new UndefinedCoioteObjectWarning(ConnectivityMonitoring_4_urn),
 		}
 
 	const connectivityMonitoring = removeCoioteFormatFromSingleInstanceObj(

@@ -23,7 +23,7 @@ export const getHumidity = (
 	objectWithCoioteFormat?: Instance,
 ): getHumidityResult => {
 	if (objectWithCoioteFormat === undefined)
-		return { warning: new UndefinedCoioteObjectWarning(Humidity_3304_urn) }
+		return { error: new UndefinedCoioteObjectWarning(Humidity_3304_urn) }
 
 	const schema = getLwM2MSchemaDefinition(Humidity_3304_urn)
 	const humidity = convertToLwM2MArrayInstance(

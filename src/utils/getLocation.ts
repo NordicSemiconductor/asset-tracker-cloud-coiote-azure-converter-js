@@ -20,7 +20,7 @@ export const getLocation = (
 	objectWithCoioteFormat?: Instance,
 ): getLocationResult => {
 	if (objectWithCoioteFormat === undefined)
-		return { warning: new UndefinedCoioteObjectWarning(Location_6_urn) }
+		return { error: new UndefinedCoioteObjectWarning(Location_6_urn) }
 
 	const location = removeCoioteFormatFromSingleInstanceObj(
 		objectWithCoioteFormat,

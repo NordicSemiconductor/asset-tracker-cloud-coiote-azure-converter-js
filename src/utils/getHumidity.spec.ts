@@ -96,10 +96,10 @@ void describe('getHumidity', () => {
 		}
 
 		const humidity = getHumidity(metadata, humidity_coiote) as {
-			warning: UndefinedCoioteObjectWarning
+			error: UndefinedCoioteObjectWarning
 		}
 		assert.deepEqual(
-			humidity.warning.message,
+			humidity.error.message,
 			`'${Humidity_3304_urn}' object can not be converter because object id '3304' is undefined in input received`,
 		)
 	})

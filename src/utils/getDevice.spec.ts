@@ -69,10 +69,10 @@ void describe('getDevice', () => {
 
 	void it(`should return a warning if the object '3' reported by Coiote is not defined`, () => {
 		const device = getDevice(undefined) as {
-			warning: UndefinedCoioteObjectWarning
+			error: UndefinedCoioteObjectWarning
 		}
 		assert.equal(
-			device.warning.message,
+			device.error.message,
 			`'${Device_3_urn}' object can not be converter because object id '3' is undefined in input received`,
 		)
 	})
