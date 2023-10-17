@@ -4,6 +4,9 @@ import { convertResourceUsingSchema } from './convertResourceUsingSchema.js'
 
 type LwM2MArrayInstance = (Record<string, unknown> | undefined)[]
 
+// TODO: rename
+// TODO: remove schema as parameter. It is not needed anymore.
+
 /**
  * Remove coiote format from instances of a LwM2M object and convert to list using the given schema
  */
