@@ -1,7 +1,7 @@
 import { type Pressure_3323, Pressure_3323_urn } from '../schemas/index.js'
-import type { Instance } from 'src/converter.js'
+import type { ConversionResult, Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { LwM2MFormatError, validateLwM2MFormat } from './validateLwM2MFormat.js'
+import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
@@ -10,18 +10,13 @@ import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
 
-type getPressureResult =
-	| { result: Pressure_3323 }
-	| { warning: UndefinedCoioteObjectWarning }
-	| { error: LwM2MFormatError }
-
 /**
  * Build the Pressure object from LwM2M using the object 3323 reported by Coiote
  */
 export const getPressure = (
 	metadata: Metadata,
 	objectWithCoioteFormat?: Instance,
-): getPressureResult => {
+): ConversionResult<Pressure_3323> => {
 	if (objectWithCoioteFormat === undefined)
 		return { error: new UndefinedCoioteObjectWarning(Pressure_3323_urn) }
 

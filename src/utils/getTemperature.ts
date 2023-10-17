@@ -2,9 +2,8 @@ import {
 	Temperature_3303_urn,
 	type Temperature_3303,
 } from '../schemas/index.js'
-import type { Instance } from 'src/converter.js'
+import type { ConversionResult, Instance } from 'src/converter.js'
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { LwM2MFormatError, validateLwM2MFormat } from './validateLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
@@ -12,11 +11,7 @@ import {
 import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
 import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
 import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
-
-type getTemperatureResult =
-	| { result: Temperature_3303 }
-	| { warning: UndefinedCoioteObjectWarning }
-	| { error: LwM2MFormatError }
+import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 
 /**
  * Build the Temperature object from LwM2M using the object 3303 reported by Coiote
@@ -24,7 +19,7 @@ type getTemperatureResult =
 export const getTemperature = (
 	metadata: Metadata,
 	objectWithCoioteFormat?: Instance,
-): getTemperatureResult => {
+): ConversionResult<Temperature_3303> => {
 	if (objectWithCoioteFormat === undefined)
 		return { error: new UndefinedCoioteObjectWarning(Temperature_3303_urn) }
 

@@ -1,21 +1,17 @@
 import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { type LwM2MFormatError } from './validateLwM2MFormat.js'
-import type { Instance } from 'src/converter.js'
+import type { ConversionResult, Instance } from 'src/converter.js'
 import {
 	Config_50009_urn,
 	type Config_50009,
 } from 'src/schemas/Config_50009.js'
 import { setCustomFormat } from './setCustomFormat.js'
 
-export type getConfigResult =
-	| { result: Config_50009 }
-	| { warning: UndefinedCoioteObjectWarning }
-	| { error: LwM2MFormatError }
-
 /**
  * Convert to LwM2M Config object (id 50009) from the object 50009 reported by Coiote
  */
-export const getConfig = (config_coiote?: Instance): getConfigResult => {
+export const getConfig = (
+	config_coiote?: Instance,
+): ConversionResult<Config_50009> => {
 	if (config_coiote === undefined)
 		return { error: new UndefinedCoioteObjectWarning(Config_50009_urn) }
 

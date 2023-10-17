@@ -28,6 +28,18 @@ import { getConfig } from './utils/getConfig.js'
 import { getLocation } from './utils/getLocation.js'
 import { getConnectivityMonitoring } from './utils/getConnectivityMonitoring.js'
 
+type LwM2MAssetTrackerV2Objects =
+	| Device_3
+	| ConnectivityMonitoring_4
+	| Location_6
+	| Temperature_3303
+	| Humidity_3304
+	| Pressure_3323
+	| Config_50009
+export type ConversionResult<Result extends LwM2MAssetTrackerV2Objects> =
+	| { result: Result }
+	| { error: LwM2MFormatError | UndefinedCoioteObjectWarning }
+
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
 export type Resource = { [key: string]: Value | List }
