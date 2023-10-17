@@ -92,7 +92,7 @@ export const converter = async (
 		[Config_50009_urn]: getConfig(coioteObjects[_50009]),
 	}
 
-	Object.entries(conversionResult).forEach(([objectURN, LwM2MObject]) => {
+	for (const [objectURN, LwM2MObject] of Object.entries(conversionResult)) {
 		if ('result' in LwM2MObject)
 			(output as any)[objectURN] = LwM2MObject.result // TODO: solve this any
 		else {
@@ -100,7 +100,7 @@ export const converter = async (
 				? onWarning?.(LwM2MObject.warning)
 				: onError?.(LwM2MObject.error as any)
 		}
-	})
+	}
 
 	return output
 }
