@@ -7,8 +7,7 @@ import {
 	type Metadata,
 } from './getTimestampFromMetadata.js'
 import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
-import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
-import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
+import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from './removeCoioteFormatFromArrayInstance.js'
 
 /**
  * Build the Humidity object from LwM2M using the object 3304 reported by Coiote
@@ -19,10 +18,8 @@ export const getHumidity = (
 ): ConversionResult<Humidity_3304> => {
 	if (objectWithCoioteFormat === undefined) return warning(Humidity_3304_urn)
 
-	const schema = getLwM2MSchemaDefinition(Humidity_3304_urn)
-	const humidity = convertToLwM2MArrayInstance(
+	const humidity = removeCoioteFormatFrom(
 		objectWithCoioteFormat,
-		schema,
 	) as unknown as Humidity_3304 // TODO: return the type in the function
 
 	if (humidity[0] !== undefined && isTimestampUndefinedIn(humidity) === true) {

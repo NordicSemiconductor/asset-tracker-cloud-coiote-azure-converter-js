@@ -7,8 +7,7 @@ import {
 	type Metadata,
 } from './getTimestampFromMetadata.js'
 import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
-import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
-import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
+import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from './removeCoioteFormatFromArrayInstance.js'
 
 /**
  * Build the Pressure object from LwM2M using the object 3323 reported by Coiote
@@ -19,10 +18,8 @@ export const getPressure = (
 ): ConversionResult<Pressure_3323> => {
 	if (objectWithCoioteFormat === undefined) return warning(Pressure_3323_urn)
 
-	const schema = getLwM2MSchemaDefinition(Pressure_3323_urn)
-	const pressure = convertToLwM2MArrayInstance(
+	const pressure = removeCoioteFormatFrom(
 		objectWithCoioteFormat,
-		schema,
 	) as unknown as Pressure_3323 // TODO: return the type in the function
 
 	if (pressure[0] !== undefined && isTimestampUndefinedIn(pressure) === true) {

@@ -6,7 +6,7 @@ type LwM2Instance = Record<string, unknown> | undefined
  *  Remove coiote format from single instance object following schema definition
  */
 export const removeCoioteFormatFromSingleInstanceObj = (
-	input: coioteInstance
+	input: coioteInstance,
 ): LwM2Instance => {
 	const resources = input['0'] ?? []
 	const instance = Object.entries(resources)
@@ -23,8 +23,10 @@ export const removeCoioteFormatFromSingleInstanceObj = (
 
 /**
  * Remove the key 'value' from input
+ *
+ * //TODO: check any return
  */
-const removeKeyFromResource = (resource: Value | List) => {
+export const removeKeyFromResource = (resource: Value | List): any => {
 	if ((resource as List).attributes !== undefined) {
 		return Object.values(resource)
 			.filter((element) => {

@@ -9,8 +9,7 @@ import {
 	type Metadata,
 } from './getTimestampFromMetadata.js'
 import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
-import { getLwM2MSchemaDefinition } from './getLwM2MSchemaDefinition.js'
-import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
+import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from './removeCoioteFormatFromArrayInstance.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 
 /**
@@ -22,10 +21,8 @@ export const getTemperature = (
 ): ConversionResult<Temperature_3303> => {
 	if (objectWithCoioteFormat === undefined) return warning(Temperature_3303_urn)
 
-	const schema = getLwM2MSchemaDefinition(Temperature_3303_urn)
-	const temperature = convertToLwM2MArrayInstance(
+	const temperature = removeCoioteFormatFrom(
 		objectWithCoioteFormat,
-		schema,
 	) as unknown as Temperature_3303 // TODO: return the type in the function
 
 	if (
