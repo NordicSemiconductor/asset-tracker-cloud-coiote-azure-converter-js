@@ -18,10 +18,10 @@ export const getConnectivityMonitoring = (
 ): ConversionResult<ConnectivityMonitoring_4> => {
 	if (object === undefined) return warning(ConnectivityMonitoring_4_urn)
 
-	const connectivityMonitoring = removeCoioteFormatFrom(object)
+	const maybeConnectivityMonitoring = removeCoioteFormatFrom(object)
 
 	return validateLwM2MFormat(
 		ConnectivityMonitoring_4_urn,
-		connectivityMonitoring as ConnectivityMonitoring_4,
+		maybeConnectivityMonitoring as ConnectivityMonitoring_4,
 	)
 }

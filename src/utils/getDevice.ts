@@ -15,7 +15,7 @@ export const getDevice = (
 ): ConversionResult<Device_3> => {
 	if (object === undefined) return warning(Device_3_urn)
 
-	const device = removeCoioteFormatFrom(object)
+	const maybeDevice = removeCoioteFormatFrom(object)
 
-	return validateLwM2MFormat(Device_3_urn, device as Device_3)
+	return validateLwM2MFormat(Device_3_urn, maybeDevice as Device_3)
 }
