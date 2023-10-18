@@ -458,7 +458,7 @@ void describe('converter', () => {
 		assert.deepEqual(result[Config_50009_urn], expected[Config_50009_urn])
 	})
 
-	void it(`should convert to 'LwM2M Asset Tracker v2' format when 'Coiote Asset Tracker v2' has some values as undefined`, async (context) => {
+	void it(`should convert to 'LwM2M Asset Tracker v2' format when 'Coiote Asset Tracker v2' has some values as undefined`, async () => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -580,10 +580,120 @@ void describe('converter', () => {
 			},
 		}
 
-		const onError = context.mock.fn()
-		const result = await converter(coioteAzureLwM2M, metadata, onError)
+		const result = await converter(coioteAzureLwM2M, metadata)
 		assert.deepEqual(result, expected)
+	})
 
+	void it(`should trigger a warning if an 'Asset Tracker v2 LwM2M' object can not be created because equivalent Coiote object is undefined`, async (context) => {
+		const coioteAzureLwM2M: DeviceTwin = {
+			properties: {
+				desired: {
+					$metadata: {
+						$lastUpdated: '2023-02-08T14:59:36.5459563Z',
+					},
+					$version: 1,
+				},
+				reported: {
+					lwm2m: {
+						'1': {
+							'0': {
+								'0': {
+									value: 1,
+								},
+								'1': {
+									value: 50,
+								},
+								'6': {
+									value: false,
+								},
+								'7': {
+									value: 'U',
+								},
+								'16': {
+									value: true,
+								},
+								'23': {
+									value: false,
+								},
+							},
+						},
+						'3': {
+							'0': {
+								'0': {
+									value: 'Nordic Semiconductor ASA',
+								},
+								'1': {
+									value: 'Thingy:91',
+								},
+								'2': {
+									value: '351358815340515',
+								},
+								'3': {
+									value: '22.8.1+0',
+								},
+								'7': {
+									'0': {
+										value: 80,
+									},
+									attributes: {
+										dim: '1',
+									},
+								},
+								'11': {
+									'0': {
+										value: 0,
+									},
+									attributes: {
+										dim: '1',
+									},
+								},
+								'13': {
+									value: 1675874731,
+								},
+								'16': {
+									value: 'UQ',
+								},
+								'19': {
+									value: '3.2.1',
+								},
+							},
+						},
+					},
+					$metadata: {
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$version: 31,
+				},
+			},
+		}
+
+		const metadata: Metadata = {
+			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5700': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						'5701': {
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							value: {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+						},
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+					},
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+				},
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+			},
+		}
+
+		const onError = context.mock.fn()
+		await converter(coioteAzureLwM2M, metadata, onError)
 		/**
 		 * Only the device object will be generated and Asset Tracker v2 has 7 objects in total,
 		 * for that reason is expected 6 warning call backs
@@ -952,13 +1062,11 @@ void describe('converter', () => {
 			},
 		}
 
-		
 		const onError = context.mock.fn()
 		await converter(coioteAzureLwM2M, metadata, onError)
 		/**
 		 * There is an error in definition of object 3 in Coiote, that is why it is expected 1 error
 		 */
 		assert.strictEqual(onError.mock.callCount(), 1)
-
 	})
 })
