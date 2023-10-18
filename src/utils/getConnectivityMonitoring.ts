@@ -2,7 +2,7 @@ import {
 	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from './UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import type {
 	ConversionResult,
@@ -16,10 +16,7 @@ import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } fro
 export const getConnectivityMonitoring = (
 	object?: CoioteFormat,
 ): ConversionResult<ConnectivityMonitoring_4> => {
-	if (object === undefined)
-		return {
-			error: new UndefinedCoioteObjectWarning(ConnectivityMonitoring_4_urn),
-		}
+	if (object === undefined) return warning(ConnectivityMonitoring_4_urn)
 
 	const connectivityMonitoring = removeCoioteFormatFrom(object)
 

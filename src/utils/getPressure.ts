@@ -1,6 +1,6 @@
 import { type Pressure_3323, Pressure_3323_urn } from '../schemas/index.js'
 import type { ConversionResult, Instance } from 'src/converter.js'
-import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from './UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
@@ -17,8 +17,7 @@ export const getPressure = (
 	metadata: Metadata,
 	objectWithCoioteFormat?: Instance,
 ): ConversionResult<Pressure_3323> => {
-	if (objectWithCoioteFormat === undefined)
-		return { error: new UndefinedCoioteObjectWarning(Pressure_3323_urn) }
+	if (objectWithCoioteFormat === undefined) return warning(Pressure_3323_urn)
 
 	const schema = getLwM2MSchemaDefinition(Pressure_3323_urn)
 	const pressure = convertToLwM2MArrayInstance(

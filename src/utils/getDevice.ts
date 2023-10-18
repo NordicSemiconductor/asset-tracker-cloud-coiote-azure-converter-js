@@ -1,5 +1,5 @@
 import { Device_3_urn, type Device_3 } from '@nordicsemiconductor/lwm2m-types'
-import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from './UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import type {
 	ConversionResult,
@@ -13,8 +13,7 @@ import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } fro
 export const getDevice = (
 	object?: CoioteFormat,
 ): ConversionResult<Device_3> => {
-	if (object === undefined)
-		return { error: new UndefinedCoioteObjectWarning(Device_3_urn) }
+	if (object === undefined) return warning(Device_3_urn)
 
 	const device = removeCoioteFormatFrom(object)
 

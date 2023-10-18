@@ -3,7 +3,7 @@ import {
 	type Temperature_3303,
 } from '../schemas/index.js'
 import type { ConversionResult, Instance } from 'src/converter.js'
-import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from './UndefinedCoioteObjectWarning.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
@@ -20,8 +20,7 @@ export const getTemperature = (
 	metadata: Metadata,
 	objectWithCoioteFormat?: Instance,
 ): ConversionResult<Temperature_3303> => {
-	if (objectWithCoioteFormat === undefined)
-		return { error: new UndefinedCoioteObjectWarning(Temperature_3303_urn) }
+	if (objectWithCoioteFormat === undefined) return warning(Temperature_3303_urn)
 
 	const schema = getLwM2MSchemaDefinition(Temperature_3303_urn)
 	const temperature = convertToLwM2MArrayInstance(

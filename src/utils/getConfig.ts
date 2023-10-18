@@ -1,4 +1,4 @@
-import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from './UndefinedCoioteObjectWarning.js'
 import type { ConversionResult, Instance } from 'src/converter.js'
 import {
 	Config_50009_urn,
@@ -12,8 +12,7 @@ import { setCustomFormat } from './setCustomFormat.js'
 export const getConfig = (
 	config_coiote?: Instance,
 ): ConversionResult<Config_50009> => {
-	if (config_coiote === undefined)
-		return { error: new UndefinedCoioteObjectWarning(Config_50009_urn) }
+	if (config_coiote === undefined) return warning(Config_50009_urn)
 
 	const config = setCustomFormat({
 		[`${Config_50009_urn}`]: config_coiote,

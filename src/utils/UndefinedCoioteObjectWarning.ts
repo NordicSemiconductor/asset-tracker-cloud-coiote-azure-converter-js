@@ -13,3 +13,12 @@ export class UndefinedCoioteObjectWarning extends Error {
 		)
 	}
 }
+
+/**
+ * Return a warning
+ */
+export const warning = (
+	objectUrn: keyof LwM2MAssetTrackerV2,
+): { error: UndefinedCoioteObjectWarning } => {
+	return { error: new UndefinedCoioteObjectWarning(objectUrn) }
+}

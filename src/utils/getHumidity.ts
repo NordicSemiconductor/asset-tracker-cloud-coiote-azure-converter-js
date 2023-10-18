@@ -1,6 +1,6 @@
 import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
 import type { ConversionResult, Instance } from 'src/converter.js'
-import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from './UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
@@ -17,8 +17,7 @@ export const getHumidity = (
 	metadata: Metadata,
 	objectWithCoioteFormat?: Instance,
 ): ConversionResult<Humidity_3304> => {
-	if (objectWithCoioteFormat === undefined)
-		return { error: new UndefinedCoioteObjectWarning(Humidity_3304_urn) }
+	if (objectWithCoioteFormat === undefined) return warning(Humidity_3304_urn)
 
 	const schema = getLwM2MSchemaDefinition(Humidity_3304_urn)
 	const humidity = convertToLwM2MArrayInstance(

@@ -1,5 +1,5 @@
 import { Location_6_urn, type Location_6 } from '../schemas/index.js'
-import { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from './UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import type {
 	ConversionResult,
@@ -13,8 +13,7 @@ import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } fro
 export const getLocation = (
 	object?: CoioteFormat,
 ): ConversionResult<Location_6> => {
-	if (object === undefined)
-		return { error: new UndefinedCoioteObjectWarning(Location_6_urn) }
+	if (object === undefined) return warning(Location_6_urn)
 
 	const maybeLocation = removeCoioteFormatFrom(object)
 
