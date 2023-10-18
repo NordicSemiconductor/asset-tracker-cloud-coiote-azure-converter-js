@@ -16,7 +16,6 @@ export const removeCoioteFormatFromSingleInstanceObj = (
 				[`${resourceId}`]: newFormat,
 			}
 		})
-		//.filter((result) => result !== undefined) // remove empty values
 		.reduce((previous: any, current) => ({ ...current, ...previous }), {}) // TODO: remove any
 	return instance as LwM2Instance
 }
