@@ -81,7 +81,7 @@ export const converter = async (
 	onError?: (element: LwM2MFormatError | UndefinedCoioteObjectWarning) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const output = {} as LwM2MAssetTrackerV2
-	const coioteObjects = deviceTwin.properties.reported.lwm2m
+	const coiote = deviceTwin.properties.reported.lwm2m
 
 	const _3 = parseURN(Device_3_urn).ObjectID
 	const _4 = parseURN(ConnectivityMonitoring_4_urn).ObjectID
@@ -92,15 +92,13 @@ export const converter = async (
 	const _50009 = parseURN(Config_50009_urn).ObjectID
 
 	const conversionResult = {
-		[Device_3_urn]: getDevice(coioteObjects[_3]),
-		[ConnectivityMonitoring_4_urn]: getConnectivityMonitoring(
-			coioteObjects[_4],
-		),
-		[Location_6_urn]: getLocation(coioteObjects[_6]),
-		[Temperature_3303_urn]: getTemperature(metadata, coioteObjects[_3303]),
-		[Humidity_3304_urn]: getHumidity(metadata, coioteObjects[_3304]),
-		[Pressure_3323_urn]: getPressure(metadata, coioteObjects[_3323]),
-		[Config_50009_urn]: getConfig(coioteObjects[_50009]),
+		[Device_3_urn]: getDevice(coiote[_3]),
+		[ConnectivityMonitoring_4_urn]: getConnectivityMonitoring(coiote[_4]),
+		[Location_6_urn]: getLocation(coiote[_6]),
+		[Temperature_3303_urn]: getTemperature(metadata, coiote[_3303]),
+		[Humidity_3304_urn]: getHumidity(metadata, coiote[_3304]),
+		[Pressure_3323_urn]: getPressure(metadata, coiote[_3323]),
+		[Config_50009_urn]: getConfig(coiote[_50009]),
 	}
 
 	for (const [objectURN, LwM2MObject] of Object.entries(conversionResult)) {
