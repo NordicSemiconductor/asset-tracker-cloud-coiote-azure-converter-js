@@ -1,5 +1,8 @@
 import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
-import type { ConversionResult, Instance } from 'src/converter.js'
+import type {
+	ConversionResult,
+	Instance as CoioteFormat,
+} from 'src/converter.js'
 import { warning } from './UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import {
@@ -14,17 +17,23 @@ import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from '.
  */
 export const getHumidity = (
 	metadata: Metadata,
-	objectWithCoioteFormat?: Instance,
+	object?: CoioteFormat,
 ): ConversionResult<Humidity_3304> => {
-	if (objectWithCoioteFormat === undefined) return warning(Humidity_3304_urn)
+	if (object === undefined) return warning(Humidity_3304_urn)
 
-	const humidity = removeCoioteFormatFrom(
-		objectWithCoioteFormat,
+	const maybeHumidity = removeCoioteFormatFrom(
+		object,
 	) as unknown as Humidity_3304 // TODO: return the type in the function
 
-	if (humidity[0] !== undefined && isTimestampUndefinedIn(humidity) === true) {
-		humidity[0][5518] = getTimestampFromMetadata(Humidity_3304_urn, metadata)
+	if (
+		maybeHumidity[0] !== undefined &&
+		isTimestampUndefinedIn(maybeHumidity) === true
+	) {
+		maybeHumidity[0][5518] = getTimestampFromMetadata(
+			Humidity_3304_urn,
+			metadata,
+		)
 	}
 
-	return validateLwM2MFormat(Humidity_3304_urn, humidity)
+	return validateLwM2MFormat(Humidity_3304_urn, maybeHumidity)
 }
