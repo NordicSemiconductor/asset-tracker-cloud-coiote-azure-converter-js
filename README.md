@@ -27,12 +27,6 @@ npm test
 npm test -- --coverage
 ```
 
-## End-to-end test
-
-```
-npx tsx e2e-tests/index.ts
-```
-
 ## `AssetTrackerv2` firmware to `LwM2M Asset Tracker v2` through `Coiote-Azure` objects version mapping
 
 | Name                    | AssetTrackerv2 Firmware                                                                                                                         | Coiote-Azure                                                                                        | LwM2M Asset Tracker v2 |
