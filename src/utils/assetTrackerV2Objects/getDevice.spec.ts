@@ -4,7 +4,7 @@ import { getDevice } from './getDevice.js'
 import type { UndefinedCoioteObjectWarning } from '../UndefinedCoioteObjectWarning.js'
 import { Device_3_urn } from '../../schemas/index.js'
 import type { Instance } from 'src/converter.js'
-import type { LwM2MFormatError } from '../validateLwM2MFormat.js'
+import { ValidationError } from '../ValidationError.js'
 
 void describe('getDevice', () => {
 	void it(`should create the LwM2M object 'Device' (3) from the object '3' reported by Coiote`, () => {
@@ -63,7 +63,6 @@ void describe('getDevice', () => {
 		}
 
 		const device = getDevice(device_coiote) as { result: unknown }
-		console.log(device.result)
 		assert.deepEqual(device.result, expected)
 	})
 
@@ -116,9 +115,12 @@ void describe('getDevice', () => {
 		}
 
 		const device = getDevice(device_coiote as unknown as Instance) as {
-			error: LwM2MFormatError
+			error: ValidationError
 		}
 
-		assert.equal(device.error.message, 'format error')
+		const errorMessage = device.error.description[0]?.message
+		const keyword = device.error.description[0]?.keyword
+		assert.equal(errorMessage, `must be array`)
+		assert.equal(keyword, 'type')
 	})
 })

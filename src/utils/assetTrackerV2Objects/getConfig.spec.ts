@@ -97,7 +97,7 @@ void describe('getConfig', () => {
 		const config = getConfig(
 			config_coiote as unknown as Instance,
 		) as {
-			error: LwM2MFormatError
+			error: ValidationError
 		}
 
 		assert.equal(config.error.message, 'format error')

@@ -17,7 +17,6 @@ import type {
 	Pressure_3323,
 	Config_50009,
 } from './schemas/index.js'
-import { LwM2MFormatError } from './utils/validateLwM2MFormat.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import {
@@ -29,6 +28,7 @@ import {
 	getLocation,
 	getConnectivityMonitoring,
 } from './utils/assetTrackerV2Objects/index.js'
+import type { ValidationError } from './utils/ValidationError.js'
 
 type LwM2MAssetTrackerV2Objects =
 	| Device_3
@@ -44,7 +44,7 @@ type LwM2MAssetTrackerV2Objects =
  */
 export type ConversionResult<Result extends LwM2MAssetTrackerV2Objects> =
 	| { result: Result }
-	| { error: LwM2MFormatError | UndefinedCoioteObjectWarning }
+	| { error: ValidationError | UndefinedCoioteObjectWarning }
 
 export type Value = { value: string | number | boolean }
 export type List = Record<string, { dim: string } | Value>
@@ -84,7 +84,7 @@ export type LwM2MAssetTrackerV2 = {
 export const converter = async (
 	deviceTwin: DeviceTwin,
 	metadata: Metadata,
-	onError?: (element: LwM2MFormatError | UndefinedCoioteObjectWarning) => void,
+	onError?: (element: ValidationError | UndefinedCoioteObjectWarning) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const output = {} as LwM2MAssetTrackerV2
 	const coiote = deviceTwin.properties.reported.lwm2m

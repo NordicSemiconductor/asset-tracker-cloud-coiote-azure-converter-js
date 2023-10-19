@@ -1,7 +1,8 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { Device_3_urn, Location_6_urn } from '../schemas/index.js'
-import { LwM2MFormatError, validateLwM2MFormat } from './validateLwM2MFormat.js'
+import { validateLwM2MFormat } from './validateLwM2MFormat.js'
+import type { ValidationError } from './ValidationError.js'
 
 void describe('validateLwM2MFormat', () => {
 	void it('should return object if it has the LwM2M struct', () => {
@@ -38,7 +39,7 @@ void describe('validateLwM2MFormat', () => {
 		}
 
 		const check = validateLwM2MFormat(Device_3_urn, object) as {
-			error: LwM2MFormatError
+			error: ValidationError
 		}
 
 		const instancePathError = check.error.description[0]?.instancePath

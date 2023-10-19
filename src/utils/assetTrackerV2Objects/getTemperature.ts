@@ -10,7 +10,7 @@ import { warning } from '../UndefinedCoioteObjectWarning.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
-} from './getTimestampFromMetadata.js'
+} from '../getTimestampFromMetadata.js'
 import { isTimestampUndefinedIn } from '../isTimestampUndefinedIn.js'
 import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from '../removeCoioteFormatFromArrayInstance.js'
 import { validateLwM2MFormat } from '../validateLwM2MFormat.js'

@@ -3,9 +3,9 @@ import assert from 'node:assert'
 import { getHumidity } from './getHumidity.js'
 import type { UndefinedCoioteObjectWarning } from '../UndefinedCoioteObjectWarning.js'
 import type { Instance } from 'src/converter.js'
-import type { LwM2MFormatError } from '../validateLwM2MFormat.js'
+import { ValidationError } from '../ValidationError.js'
 import { Humidity_3304_urn, type Humidity_3304 } from '../../schemas/index.js'
-import { parseTime, type Metadata } from './getTimestampFromMetadata.js'
+import { parseTime, type Metadata } from '../getTimestampFromMetadata.js'
 
 void describe('getHumidity', () => {
 	void it(`should create the LwM2M object 'Humidity' (3304) from the object '3304' reported by Coiote`, () => {
@@ -156,9 +156,12 @@ void describe('getHumidity', () => {
 			metadata,
 			humidity_coiote as unknown as Instance,
 		) as {
-			error: LwM2MFormatError
+			error: ValidationError
 		}
-		assert.equal(humidity.error.message, 'format error')
+		const errorMessage = humidity.error.description[0]?.message
+		const keyword = humidity.error.description[0]?.keyword
+		assert.equal(errorMessage, `must have required property '5700'`)
+		assert.equal(keyword, 'required')
 	})
 
 	void it(`should use metadata object to report timestamp when it is not present in object`, () => {
