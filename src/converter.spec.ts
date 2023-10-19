@@ -10,7 +10,7 @@ import {
 	Config_50009_urn,
 } from './schemas/index.js'
 import { converter, type DeviceTwin } from './converter.js'
-import type { Metadata } from './utils/assetTrackerV2Objects/getTimestampFromMetadata.js'
+import type { Metadata } from './utils/getTimestampFromMetadata.js'
 
 void describe('converter', () => {
 	void it(`should convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format`, async () => {

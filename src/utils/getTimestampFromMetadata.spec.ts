@@ -7,7 +7,7 @@ import {
 	type Instance,
 	type Obj,
 } from './getTimestampFromMetadata.js'
-import { Temperature_3303_urn } from '../../schemas/index.js'
+import { Temperature_3303_urn } from '../schemas/index.js'
 
 void describe('getTimestampFromMetadata', () => {
 	void it(`should get timestamp from the resource value reported in device twin`, () => {
