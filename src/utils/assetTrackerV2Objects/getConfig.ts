@@ -1,4 +1,4 @@
-import { warning } from './UndefinedCoioteObjectWarning.js'
+import { warning } from '../UndefinedCoioteObjectWarning.js'
 import type {
 	ConversionResult,
 	Instance as CoioteFormat,
@@ -7,7 +7,7 @@ import {
 	Config_50009_urn,
 	type Config_50009,
 } from 'src/schemas/Config_50009.js'
-import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } from './removeCoioteFormatFromSingleInstanceObj.js'
+import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } from '../removeCoioteFormatFromSingleInstanceObj.js'
 
 /**
  * Convert to LwM2M Config object (id 50009) from the object 50009 reported by Coiote

@@ -19,14 +19,16 @@ import type {
 } from './schemas/index.js'
 import { LwM2MFormatError } from './utils/validateLwM2MFormat.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
-import type { Metadata } from './utils/getTimestampFromMetadata.js'
-import { getDevice } from './utils/getDevice.js'
-import { getTemperature } from './utils/getTemperature.js'
-import { getHumidity } from './utils/getHumidity.js'
-import { getPressure } from './utils/getPressure.js'
-import { getConfig } from './utils/getConfig.js'
-import { getLocation } from './utils/getLocation.js'
-import { getConnectivityMonitoring } from './utils/getConnectivityMonitoring.js'
+import type { Metadata } from './utils/assetTrackerV2Objects/getTimestampFromMetadata.js'
+import {
+	getDevice,
+	getTemperature,
+	getHumidity,
+	getPressure,
+	getConfig,
+	getLocation,
+	getConnectivityMonitoring,
+} from './utils/assetTrackerV2Objects/index.js'
 
 type LwM2MAssetTrackerV2Objects =
 	| Device_3
@@ -36,6 +38,10 @@ type LwM2MAssetTrackerV2Objects =
 	| Humidity_3304
 	| Pressure_3323
 	| Config_50009
+
+/**
+ * Result type interface of './utils/assetTrackerV2Objects' methods
+ */
 export type ConversionResult<Result extends LwM2MAssetTrackerV2Objects> =
 	| { result: Result }
 	| { error: LwM2MFormatError | UndefinedCoioteObjectWarning }

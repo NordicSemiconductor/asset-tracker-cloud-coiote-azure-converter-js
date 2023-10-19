@@ -1,16 +1,16 @@
-import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
+import { type Humidity_3304, Humidity_3304_urn } from '../../schemas/index.js'
 import type {
 	ConversionResult,
 	Instance as CoioteFormat,
 } from 'src/converter.js'
-import { warning } from './UndefinedCoioteObjectWarning.js'
-import { validateLwM2MFormat } from './validateLwM2MFormat.js'
+import { warning } from '../UndefinedCoioteObjectWarning.js'
+import { validateLwM2MFormat } from '../validateLwM2MFormat.js'
 import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from './getTimestampFromMetadata.js'
-import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
-import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from './removeCoioteFormatFromArrayInstance.js'
+import { isTimestampUndefinedIn } from '../isTimestampUndefinedIn.js'
+import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from '../removeCoioteFormatFromArrayInstance.js'
 
 /**
  * Build the Humidity object from LwM2M using the object 3304 reported by Coiote

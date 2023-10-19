@@ -1,6 +1,6 @@
 import type { DeviceTwin } from './converter.js'
 import { converter } from './converter.js'
-import type { Metadata } from './utils/getTimestampFromMetadata.js'
+import type { Metadata } from './utils/assetTrackerV2Objects/getTimestampFromMetadata.js'
 
 const deviceTwin: DeviceTwin = {
 	properties: {

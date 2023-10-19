@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getConnectivityMonitoring } from './getConnectivityMonitoring.js'
-import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
-import { ConnectivityMonitoring_4_urn } from '../schemas/index.js'
+import type { UndefinedCoioteObjectWarning } from '../UndefinedCoioteObjectWarning.js'
+import { ConnectivityMonitoring_4_urn } from '../../schemas/index.js'
 import type { Instance } from 'src/converter.js'
-import type { LwM2MFormatError } from './validateLwM2MFormat.js'
+import type { LwM2MFormatError } from '../validateLwM2MFormat.js'
 
 void describe('getConnectivityMonitoring', () => {
 	void it(`should create the LwM2M object 'Connectivity Monitoring' (4) from the object '4' reported by Coiote`, () => {
