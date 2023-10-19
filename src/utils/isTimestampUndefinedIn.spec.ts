@@ -30,12 +30,3 @@ void describe('getTimestampFromMetadata', () => {
 		assert.equal(isTimestampUndefinedIn(temperature), false)
 	})
 })
-
-/*
-
-
-*/
-/*
-
-
-*/
