@@ -3,6 +3,7 @@ import assert from 'node:assert'
 import { getConfig } from './getConfig.js'
 import type { UndefinedCoioteObjectWarning } from '../UndefinedCoioteObjectWarning.js'
 import { Config_50009_urn } from 'src/schemas/Config_50009.js'
+import type { ValidationError } from '../ValidationError.js'
 
 void describe('getConfig', () => {
 	void it(`should create the LwM2M object 'Config' (50009) from the object '50009' reported by Coiote`, () => {
@@ -26,6 +27,12 @@ void describe('getConfig', () => {
 				'5': {
 					value: 8.5,
 				},
+				'6': {
+					value: true,
+				},
+				'7': {
+					value: false,
+				},
 				'8': {
 					value: 2.5,
 				},
@@ -41,6 +48,8 @@ void describe('getConfig', () => {
 			'3': 600,
 			'4': 7200,
 			'1': 60,
+			'6': true,
+			'7': false,
 			'5': 8.5,
 			'8': 2.5,
 			'9': 0.5,
@@ -60,47 +69,52 @@ void describe('getConfig', () => {
 		)
 	})
 
-	/*
 	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M obejct 50009`, () => {
 		const config_coiote = {
-            '0': {
-                '0': {
-                    value: true,
-                },
-               
-                // required value is missing
-                // '2': {
-                //    value: 120,
-                // },
-                
-                '3': {
-                    value: 600,
-                },
-                '4': {
-                    value: 7200,
-                },
-                '1': {
-                    value: 60,
-                },
-                '5': {
-                    value: 8.5,
-                },
-                '8': {
-                    value: 2.5,
-                },
-                '9': {
-                    value: 0.5,
-                },
-            },
-        }
+			'0': {
+				'0': {
+					value: true,
+				},
 
-		const config = getConfig(
-			config_coiote as unknown as Instance,
-		) as {
+				// required value is missing
+				// '2': {
+				//    value: 120,
+				// },
+
+				'3': {
+					value: 600,
+				},
+				'4': {
+					value: 7200,
+				},
+				'1': {
+					value: 60,
+				},
+				'5': {
+					value: 8.5,
+				},
+				'6': {
+					value: true,
+				},
+				'7': {
+					value: false,
+				},
+				'8': {
+					value: 2.5,
+				},
+				'9': {
+					value: 0.5,
+				},
+			},
+		}
+
+		const config = getConfig(config_coiote) as {
 			error: ValidationError
 		}
 
-		assert.equal(config.error.message, 'format error')
+		const errorMessage = config.error.description[0]?.message
+		const keyword = config.error.description[0]?.keyword
+		assert.equal(errorMessage, `must have required property '2'`)
+		assert.equal(keyword, 'required')
 	})
-    */
 })

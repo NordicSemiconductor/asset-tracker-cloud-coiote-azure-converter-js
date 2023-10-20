@@ -6,8 +6,10 @@ import type {
 import {
 	Config_50009_urn,
 	type Config_50009,
+	Config_50009_Typebox,
 } from 'src/schemas/Config_50009.js'
 import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } from '../removeCoioteFormatFromSingleInstanceObj.js'
+import { validateAgainstSchema } from '../validateAgainstSchema.js'
 
 /**
  * Convert to LwM2M Config object (id 50009) from the object 50009 reported by Coiote
@@ -19,7 +21,8 @@ export const getConfig = (
 
 	const maybeConfig = removeCoioteFormatFrom(object)
 
-	// TODO: validate the veracity of the new format
-
-	return { result: maybeConfig as unknown as Config_50009 }
+	return validateAgainstSchema(
+		maybeConfig as Config_50009,
+		Config_50009_Typebox,
+	)
 }

@@ -267,6 +267,12 @@ void describe('converter', () => {
 								'5': {
 									value: 8.5,
 								},
+								'6': {
+									value: true,
+								},
+								'7': {
+									value: true,
+								},
 								'8': {
 									value: 2.5,
 								},
@@ -436,6 +442,8 @@ void describe('converter', () => {
 				'4': 7200,
 				'1': 60,
 				'5': 8.5,
+				'6': true,
+				'7': true,
 				'8': 2.5,
 				'9': 0.5,
 			},
@@ -962,6 +970,12 @@ void describe('converter', () => {
 								},
 								'5': {
 									value: 8.5,
+								},
+								'6': {
+									value: true,
+								},
+								'7': {
+									value: true,
 								},
 								'8': {
 									value: 2.5,
