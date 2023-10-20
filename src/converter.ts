@@ -28,6 +28,8 @@ import {
 	getLocation,
 	getConnectivityMonitoring,
 } from './utils/assetTrackerV2Objects/index.js'
+// TODO: place getTimestampFromMetadata in src. Not inside utils
+// TODO: remove ./utils/assetTrackerV2Objects/index.js . We dont use that format.
 import type { ValidationError } from './utils/ValidationError.js'
 
 type LwM2MAssetTrackerV2Objects =

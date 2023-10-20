@@ -274,6 +274,7 @@ const deviceTwin: DeviceTwin = {
 		},
 	},
 }
+// TODO: place device twin in a separe json file
 
 const metadata: Metadata = {
 	$lastUpdated: '2023-08-18T14:39:11.9414162Z',
