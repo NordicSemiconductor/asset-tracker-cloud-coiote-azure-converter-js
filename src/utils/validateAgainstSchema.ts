@@ -23,9 +23,6 @@ export const validateAgainstSchema = <T extends TSchema>(
 }
 
 const ajv = new Ajv()
-// see @https://github.com/sinclairzx81/typebox/issues/51
-ajv.addKeyword('kind')
-ajv.addKeyword('modifier')
 
 /**
  * Use typebox to check if object follow the schema definition
