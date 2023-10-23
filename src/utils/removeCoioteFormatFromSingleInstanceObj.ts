@@ -29,16 +29,20 @@ export const removeCoioteFormatFromSingleInstanceObj = (
 				[`${resourceId}`]: newFormat,
 			}
 		})
-		.reduce((previous: any, current) => ({ ...current, ...previous }), {}) // TODO: remove any
-	return instance as LwM2Instance
+		.reduce(
+			(previous: Record<string, unknown>, current) => ({
+				...current,
+				...previous,
+			}),
+			{},
+		)
+	return instance as SingleInstancesObjs
 }
 
 /**
  * Remove the key 'value' from input
- *
- * //TODO: check any return
  */
-export const removeKeyFromResource = (resource: Value | List): any => {
+export const removeKeyFromResource = (resource: Value | List): unknown => {
 	if ((resource as List).attributes !== undefined) {
 		return Object.values(resource)
 			.filter((element) => {
