@@ -3,7 +3,7 @@ import assert from 'node:assert'
 import { removeCoioteFormatFromArrayInstance } from './removeCoioteFormatFromArrayInstance.js'
 
 void describe('removeCoioteFormatFromArrayInstance', () => {
-	void it(`should convert list using array type definition schema`, () => {
+	void it(`should remove coiote format from multiple instance object`, () => {
 		const object = {
 			'0': {
 				'0': {
@@ -26,6 +26,14 @@ void describe('removeCoioteFormatFromArrayInstance', () => {
 				'1': {
 					value: 50,
 				},
+				'2': {
+					'0': {
+						value: 0,
+					},
+					attributes: {
+						dim: '1',
+					},
+				},
 				'7': {
 					value: 'U',
 				},
@@ -44,6 +52,7 @@ void describe('removeCoioteFormatFromArrayInstance', () => {
 			{
 				'0': 1,
 				'1': 50,
+				'2': [0],
 				'7': 'U',
 				'23': 0,
 			},
@@ -51,32 +60,13 @@ void describe('removeCoioteFormatFromArrayInstance', () => {
 		assert.deepEqual(removeCoioteFormatFromArrayInstance(object), result)
 	})
 
-	void it(`should remove empty values when they are not required in schema definition`, () => {
+	void it(`should return undefined when resource does not follow Coiote format`, () => {
 		const object = {
 			'0': {
 				'0': {
 					value: 1,
 				},
-				'1': {},
-			},
-		}
-		const result = [
-			{
-				'0': 1,
-				'1': undefined,
-			},
-		]
-
-		assert.deepEqual(removeCoioteFormatFromArrayInstance(object), result)
-	})
-
-	void it(`should return undefined when a required value is not defined`, () => {
-		const object = {
-			'0': {
-				'0': {
-					value: 1,
-				},
-				'1': {},
+				'1': {}, // uknown format here
 			},
 			'1': {
 				'0': {
