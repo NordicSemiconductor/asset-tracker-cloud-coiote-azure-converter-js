@@ -1,8 +1,4 @@
-import type {
-	Humidity_3304,
-	Pressure_3323,
-	Temperature_3303,
-} from 'src/schemas'
+import type { Humidity_3304, Pressure_3323, Temperature_3303 } from '../schemas'
 import type { Instance } from '../converter'
 import { removeKeyFromResource } from './removeCoioteFormatFromSingleInstanceObj.js'
 
@@ -14,7 +10,7 @@ type MultipleInstancesObjs = Temperature_3303 | Humidity_3304 | Pressure_3323
 /**
  * Remove coiote format from instances of Temperature, Humidity or Pressure objects
  */
-export const removeCoioteFormatFromArrayInstance = (
+export const removeCoioteFormatFromMultipleInstanceObj = (
 	input: Instance,
 ): MultipleInstancesObjs => {
 	const instances = Object.entries(input)

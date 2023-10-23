@@ -10,7 +10,7 @@ import {
 	type Metadata,
 } from '../utils/getTimestampFromMetadata.js'
 import { isTimestampUndefinedIn } from '../utils/isTimestampUndefinedIn.js'
-import { removeCoioteFormatFromArrayInstance as removeCoioteFormatFrom } from '../utils/removeCoioteFormatFromArrayInstance.js'
+import { removeCoioteFormatFromMultipleInstanceObj as removeCoioteFormatFrom } from '../utils/removeCoioteFormatFromMultipleInstanceObj.js'
 
 /**
  * Build the Pressure object from LwM2M using the object 3323 reported by Coiote

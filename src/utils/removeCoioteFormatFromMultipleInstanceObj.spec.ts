@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { removeCoioteFormatFromArrayInstance } from './removeCoioteFormatFromArrayInstance.js'
+import { removeCoioteFormatFromMultipleInstanceObj } from './removeCoioteFormatFromMultipleInstanceObj.js'
 
-void describe('removeCoioteFormatFromArrayInstance', () => {
+void describe('removeCoioteFormatFromMultipleInstanceObj', () => {
 	void it(`should remove coiote format from multiple instance object`, () => {
 		const object = {
 			'0': {
@@ -57,7 +57,7 @@ void describe('removeCoioteFormatFromArrayInstance', () => {
 				'23': 0,
 			},
 		]
-		assert.deepEqual(removeCoioteFormatFromArrayInstance(object), result)
+		assert.deepEqual(removeCoioteFormatFromMultipleInstanceObj(object), result)
 	})
 
 	void it(`should return undefined when resource does not follow Coiote format`, () => {
@@ -88,6 +88,6 @@ void describe('removeCoioteFormatFromArrayInstance', () => {
 			},
 		]
 
-		assert.deepEqual(removeCoioteFormatFromArrayInstance(object), result)
+		assert.deepEqual(removeCoioteFormatFromMultipleInstanceObj(object), result)
 	})
 })
