@@ -97,7 +97,13 @@ export const converter = async (
 	const _3323 = parseURN(Pressure_3323_urn).ObjectID
 	const _50009 = parseURN(Config_50009_urn).ObjectID
 
-	const conversionResult = {
+	const conversionResult: Record<
+		string,
+		| {
+				error: ValidationError | UndefinedCoioteObjectWarning
+		  }
+		| { result: LwM2MAssetTrackerV2Objects }
+	> = {
 		[Device_3_urn]: getDevice(coiote[_3]),
 		[ConnectivityMonitoring_4_urn]: getConnectivityMonitoring(coiote[_4]),
 		[Location_6_urn]: getLocation(coiote[_6]),
@@ -109,7 +115,7 @@ export const converter = async (
 
 	for (const [objectURN, LwM2MObject] of Object.entries(conversionResult)) {
 		if ('result' in LwM2MObject)
-			(output as any)[objectURN] = LwM2MObject.result // TODO: solve this any
+			Object.assign(output, { [objectURN]: LwM2MObject.result })
 		else {
 			onError?.(LwM2MObject.error)
 		}
