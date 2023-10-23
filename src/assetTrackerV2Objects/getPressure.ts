@@ -21,9 +21,7 @@ export const getPressure = (
 ): ConversionResult<Pressure_3323> => {
 	if (object === undefined) return warning(Pressure_3323_urn)
 
-	const maybePressure = removeCoioteFormatFrom(
-		object,
-	) as unknown as Pressure_3323 // TODO: return the type in the function
+	const maybePressure = removeCoioteFormatFrom(object)
 
 	if (
 		maybePressure[0] !== undefined &&
