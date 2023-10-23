@@ -17,19 +17,17 @@ import type {
 	Pressure_3323,
 	Config_50009,
 } from './schemas/index.js'
+
+import { getDevice } from './assetTrackerV2Objects/getDevice.js'
+import { getConnectivityMonitoring } from './assetTrackerV2Objects/getConnectivityMonitoring.js'
+import { getLocation } from './assetTrackerV2Objects/getLocation.js'
+import { getTemperature } from './assetTrackerV2Objects/getTemperature.js'
+import { getHumidity } from './assetTrackerV2Objects/getHumidity.js'
+import { getPressure } from './assetTrackerV2Objects/getPressure.js'
+import { getConfig } from './assetTrackerV2Objects/getConfig.js'
+
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
-import {
-	getDevice,
-	getTemperature,
-	getHumidity,
-	getPressure,
-	getConfig,
-	getLocation,
-	getConnectivityMonitoring,
-} from './utils/assetTrackerV2Objects/index.js'
-// TODO: place getTimestampFromMetadata in src. Not inside utils
-// TODO: remove ./utils/assetTrackerV2Objects/index.js . We dont use that format.
 import type { ValidationError } from './utils/ValidationError.js'
 
 type LwM2MAssetTrackerV2Objects =
@@ -42,7 +40,7 @@ type LwM2MAssetTrackerV2Objects =
 	| Config_50009
 
 /**
- * Result type interface of './utils/assetTrackerV2Objects' methods
+ * Result type interface of './assetTrackerV2Objects' methods
  */
 export type ConversionResult<Result extends LwM2MAssetTrackerV2Objects> =
 	| { result: Result }

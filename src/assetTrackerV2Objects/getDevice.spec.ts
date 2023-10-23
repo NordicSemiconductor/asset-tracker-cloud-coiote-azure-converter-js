@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getDevice } from './getDevice.js'
-import type { UndefinedCoioteObjectWarning } from '../UndefinedCoioteObjectWarning.js'
-import { Device_3_urn } from '../../schemas/index.js'
+import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
+import { Device_3_urn } from '../schemas/index.js'
 import type { Instance } from 'src/converter.js'
-import { ValidationError } from '../ValidationError.js'
+import { ValidationError } from '../utils/ValidationError.js'
 
 void describe('getDevice', () => {
 	void it(`should create the LwM2M object 'Device' (3) from the object '3' reported by Coiote`, () => {
