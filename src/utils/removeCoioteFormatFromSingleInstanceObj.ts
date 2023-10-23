@@ -1,13 +1,26 @@
 import type { List, Value, Instance as coioteInstance } from '../converter.js'
+import {
+	type Device_3,
+	type ConnectivityMonitoring_4,
+	type Location_6,
+	type Config_50009,
+} from '../schemas/index.js'
 
-type LwM2Instance = Record<string, unknown> | undefined
+/**
+ * Single Instances objects in Assset Tracker v2
+ */
+type SingleInstancesObjs =
+	| Device_3
+	| ConnectivityMonitoring_4
+	| Location_6
+	| Config_50009
 
 /**
  *  Remove coiote format from single instance object following schema definition
  */
 export const removeCoioteFormatFromSingleInstanceObj = (
 	input: coioteInstance,
-): LwM2Instance => {
+): SingleInstancesObjs => {
 	const resources = input['0'] ?? []
 	const instance = Object.entries(resources)
 		.map(([resourceId, value]) => {
