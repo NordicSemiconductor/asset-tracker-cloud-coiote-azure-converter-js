@@ -1,14 +1,22 @@
+import type {
+	Humidity_3304,
+	Pressure_3323,
+	Temperature_3303,
+} from 'src/schemas'
 import type { Instance } from '../converter'
 import { removeKeyFromResource } from './removeCoioteFormatFromSingleInstanceObj.js'
 
-type LwM2MArrayInstance = (Record<string, unknown> | undefined)[]
+/**
+ * Multiple Instances objects in Assset Tracker v2
+ */
+type MultipleInstancesObjs = Temperature_3303 | Humidity_3304 | Pressure_3323
 
 /**
- * Remove coiote format from instances of a LwM2M object
+ * Remove coiote format from instances of Temperature, Humidity or Pressure objects
  */
 export const removeCoioteFormatFromArrayInstance = (
 	input: Instance,
-): LwM2MArrayInstance => {
+): MultipleInstancesObjs => {
 	const instances = Object.entries(input)
 	return instances.map(([, resources]) => {
 		const instance = Object.entries(resources)
@@ -20,5 +28,5 @@ export const removeCoioteFormatFromArrayInstance = (
 			})
 			.reduce((previous, current) => ({ ...current, ...previous }), {})
 		return instance
-	}) as LwM2MArrayInstance
+	}) as unknown as MultipleInstancesObjs
 }
