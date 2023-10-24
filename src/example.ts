@@ -1,6 +1,5 @@
 import type { DeviceTwin } from './converter.js'
 import { converter } from './converter.js'
-import type { Metadata } from './utils/getTimestampFromMetadata.js'
 
 const deviceTwin: DeviceTwin = {
 	properties: {
@@ -247,27 +246,27 @@ const deviceTwin: DeviceTwin = {
 				},
 			},
 			$metadata: {
-				$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 				lwm2m: {
-					'3347': {
+					'3303': {
 						'0': {
-							'5501': {
-								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							'5700': {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 								value: {
-									$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 								},
 							},
-							'5750': {
-								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							'5701': {
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 								value: {
-									$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 								},
 							},
-							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 						},
-						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 					},
-					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 				},
 			},
 			$version: 31,
@@ -276,32 +275,7 @@ const deviceTwin: DeviceTwin = {
 }
 // TODO: place device twin in a separe json file
 
-const metadata: Metadata = {
-	$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-	lwm2m: {
-		'3303': {
-			'0': {
-				'5700': {
-					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					value: {
-						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					},
-				},
-				'5701': {
-					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					value: {
-						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					},
-				},
-				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-			},
-			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-		},
-		$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-	},
-}
-
-const result = await converter(deviceTwin, metadata)
+const result = await converter(deviceTwin)
 console.log(result)
 
 /**

@@ -59,7 +59,7 @@ export type DeviceTwin = {
 		desired: unknown
 		reported: {
 			lwm2m: LwM2MCoiote
-			$metadata: unknown
+			$metadata: Metadata
 			$version: number
 		}
 	}
@@ -83,11 +83,11 @@ export type LwM2MAssetTrackerV2 = {
  */
 export const converter = async (
 	deviceTwin: DeviceTwin,
-	metadata: Metadata,
 	onError?: (element: ValidationError | UndefinedCoioteObjectWarning) => void,
 ): Promise<LwM2MAssetTrackerV2> => {
 	const output = {} as LwM2MAssetTrackerV2
 	const coiote = deviceTwin.properties.reported.lwm2m
+	const metadata = deviceTwin.properties.reported.$metadata
 
 	const _3 = parseURN(Device_3_urn).ObjectID
 	const _4 = parseURN(ConnectivityMonitoring_4_urn).ObjectID

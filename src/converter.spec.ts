@@ -10,7 +10,6 @@ import {
 	Config_50009_urn,
 } from './schemas/index.js'
 import { converter, type DeviceTwin } from './converter.js'
-import type { Metadata } from './utils/getTimestampFromMetadata.js'
 
 void describe('converter', () => {
 	void it(`should convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format`, async () => {
@@ -283,92 +282,67 @@ void describe('converter', () => {
 						},
 					},
 					$metadata: {
-						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 						lwm2m: {
-							'3347': {
+							'3303': {
 								'0': {
-									'5501': {
-										$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									'5700': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										value: {
-											$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										},
 									},
-									'5750': {
-										$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									'5701': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										value: {
-											$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										},
 									},
-									$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 								},
-								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 							},
-							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							'3304': {
+								'0': {
+									'5700': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									'5701': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+								},
+								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+							},
+							'3323': {
+								'0': {
+									'5700': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									'5701': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+								},
+								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+							},
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 						},
 					},
 					$version: 31,
 				},
-			},
-		}
-
-		const metadata: Metadata = {
-			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-			lwm2m: {
-				'3303': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					},
-					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-				},
-				'3304': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-					},
-					$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-				},
-				'3323': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-					},
-					$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-				},
-				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 			},
 		}
 
@@ -449,7 +423,7 @@ void describe('converter', () => {
 			},
 		}
 
-		const result = await converter(coioteAzureLwM2M, metadata)
+		const result = await converter(coioteAzureLwM2M)
 
 		assert.deepEqual(result[Device_3_urn], expected[Device_3_urn])
 		assert.deepEqual(
@@ -542,35 +516,31 @@ void describe('converter', () => {
 						},
 					},
 					$metadata: {
-						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+						lwm2m: {
+							'3303': {
+								'0': {
+									'5700': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										value: {
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										},
+									},
+									'5701': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										value: {
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										},
+									},
+									$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+								},
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+						},
 					},
 					$version: 31,
 				},
-			},
-		}
-
-		const metadata: Metadata = {
-			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-			lwm2m: {
-				'3303': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					},
-					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-				},
-				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 			},
 		}
 
@@ -588,7 +558,7 @@ void describe('converter', () => {
 			},
 		}
 
-		const result = await converter(coioteAzureLwM2M, metadata)
+		const result = await converter(coioteAzureLwM2M)
 		assert.deepEqual(result, expected)
 	})
 
@@ -668,40 +638,36 @@ void describe('converter', () => {
 						},
 					},
 					$metadata: {
-						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+						lwm2m: {
+							'3303': {
+								'0': {
+									'5700': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										value: {
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										},
+									},
+									'5701': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										value: {
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+										},
+									},
+									$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+								},
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+							},
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
+						},
 					},
 					$version: 31,
 				},
 			},
 		}
 
-		const metadata: Metadata = {
-			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-			lwm2m: {
-				'3303': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					},
-					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-				},
-				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-			},
-		}
-
 		const onError = context.mock.fn()
-		await converter(coioteAzureLwM2M, metadata, onError)
+		await converter(coioteAzureLwM2M, onError)
 		/**
 		 * Only the device object will be generated and Asset Tracker v2 has 7 objects in total,
 		 * for that reason is expected 6 warning call backs
@@ -987,27 +953,63 @@ void describe('converter', () => {
 						},
 					},
 					$metadata: {
-						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 						lwm2m: {
-							'3347': {
+							'3303': {
 								'0': {
-									'5501': {
-										$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									'5700': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										value: {
-											$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										},
 									},
-									'5750': {
-										$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									'5701': {
+										$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										value: {
-											$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+											$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 										},
 									},
-									$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+									$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 								},
-								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 							},
-							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							'3304': {
+								'0': {
+									'5700': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									'5701': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+								},
+								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+							},
+							'3323': {
+								'0': {
+									'5700': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									'5701': {
+										$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										value: {
+											$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+										},
+									},
+									$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+								},
+								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
+							},
+							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
 						},
 					},
 					$version: 31,
@@ -1015,69 +1017,8 @@ void describe('converter', () => {
 			},
 		}
 
-		const metadata: Metadata = {
-			$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-			lwm2m: {
-				'3303': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							value: {
-								$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-							},
-						},
-						$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-					},
-					$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-				},
-				'3304': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-					},
-					$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-				},
-				'3323': {
-					'0': {
-						'5700': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						'5701': {
-							$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							value: {
-								$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-							},
-						},
-						$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-					},
-					$lastUpdated: '2023-08-13T18:52:20.8691663Z',
-				},
-				$lastUpdated: '2023-08-18T14:39:11.9414162Z',
-			},
-		}
-
 		const onError = context.mock.fn()
-		await converter(coioteAzureLwM2M, metadata, onError)
+		await converter(coioteAzureLwM2M, onError)
 		/**
 		 * There is an error in definition of object 3 in Coiote, that is why it is expected 1 error
 		 */
