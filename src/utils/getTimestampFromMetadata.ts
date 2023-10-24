@@ -33,7 +33,7 @@ type Resource = {
 }
 
 /**
- * TODO: ADD description. Explain why /1000
+ * Convert string date to seconds
  */
 export const parseTime = (time: string): number =>
 	Math.trunc(new Date(time).getTime() / 1000)
@@ -48,6 +48,7 @@ export const parseTime = (time: string): number =>
  *
  * Default instance to be used is 0
  * Default resource to be used is 5700
+ * Value returned is in seconds
  *
  * @see {@link ../../adr/004-timestamp-hierarchy.md}
  */
