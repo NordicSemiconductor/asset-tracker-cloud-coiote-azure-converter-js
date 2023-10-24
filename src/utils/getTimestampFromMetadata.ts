@@ -78,6 +78,5 @@ export const getTimestampFromMetadata = (
 	const lwm2m = metadata.lwm2m.$lastUpdated
 	if (lwm2m !== undefined) return parseTime(lwm2m)
 
-	// TODO: check this
 	return 0
 }

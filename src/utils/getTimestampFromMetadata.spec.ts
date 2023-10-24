@@ -6,6 +6,7 @@ import {
 	type Metadata,
 	type Instance,
 	type Obj,
+	type LwM2M_Metadata,
 } from './getTimestampFromMetadata.js'
 import { Temperature_3303_urn } from '../schemas/index.js'
 
@@ -121,5 +122,14 @@ void describe('getTimestampFromMetadata', () => {
 			getTimestampFromMetadata(Temperature_3303_urn, metadata),
 			timeToReportParsed,
 		)
+	})
+
+	void it(`should return 0 when no timestamp was found in the metadata object`, () => {
+		const metadata: Metadata = {
+			$lastUpdated: '',
+			lwm2m: {} as LwM2M_Metadata,
+		}
+
+		assert.equal(getTimestampFromMetadata(Temperature_3303_urn, metadata), 0)
 	})
 })
