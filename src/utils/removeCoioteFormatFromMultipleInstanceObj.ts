@@ -8,7 +8,7 @@ import { removeKeyFromResource } from './removeCoioteFormatFromSingleInstanceObj
 type MultipleInstancesObjs = Temperature_3303 | Humidity_3304 | Pressure_3323
 
 /**
- * Remove coiote format from instances of Temperature, Humidity or Pressure objects
+ * Remove coiote format from multiple instance object
  */
 export const removeCoioteFormatFromMultipleInstanceObj = (
 	input: Instance,
