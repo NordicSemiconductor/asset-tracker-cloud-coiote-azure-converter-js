@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { removeCoioteFormatFromSingleInstanceObj } from './removeCoioteFormatFromSingleInstanceObj.js'
+import type { Instance } from './LwM2MCoioteType.js'
 
 void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 	void it('should remove coiote format from single instance object', () => {
@@ -33,6 +34,37 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 			'1': 'Thingy:91',
 			'11': [0, 0],
 			'16': 'UQ',
+		}
+
+		assert.deepEqual(removeCoioteFormatFromSingleInstanceObj(object), result)
+	})
+
+	void it(`should return undefined when resource does not follow Coiote format`, () => {
+		const object = {
+			'0': {
+				'0': {}, // uknown format here
+				'1': {
+					value: 'Thingy:91',
+				},
+				'11': {
+					'0': {}, // uknown format here
+					'1': {
+						value: 0,
+					},
+					attributes: {
+						dim: '2',
+					},
+				},
+				'16': {
+					values: 'UQ', // uknown format here
+				},
+			},
+		} as unknown as Instance
+		const result = {
+			'0': undefined,
+			'1': 'Thingy:91',
+			'11': [undefined, 0],
+			'16': undefined,
 		}
 
 		assert.deepEqual(removeCoioteFormatFromSingleInstanceObj(object), result)
