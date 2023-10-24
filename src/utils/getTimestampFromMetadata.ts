@@ -44,7 +44,11 @@ export const parseTime = (time: string): number =>
  */
 
 /**
- * objectUrn only could be temperature, humidity or pressure because timestamp hierarchy only applies to them
+ * Find timestamp value for given object following timestamp hierarchy
+ *
+ * Default instance to be used is 0
+ * Default resource to be used is 5700
+ *
  * @see {@link ../../adr/004-timestamp-hierarchy.md}
  */
 export const getTimestampFromMetadata = (
@@ -59,25 +63,20 @@ export const getTimestampFromMetadata = (
 
 	if (object !== undefined) {
 		if (object['0'] !== undefined) {
-			// value from the resource 5700 of the given object
-			// default instance is the first one
-			const level2 = object['0']['5700']?.value.$lastUpdated
-			if (level2 !== undefined) return parseTime(level2)
+			const resource = object['0']['5700']?.value.$lastUpdated
+			if (resource !== undefined) return parseTime(resource)
 
-			// value from the instance of the given object
-			// default instance is the first one
-			const level3 = object['0']?.$lastUpdated
-			if (level3 !== undefined) return parseTime(level3)
+			const instance = object['0']?.$lastUpdated
+			if (instance !== undefined) return parseTime(instance)
 		}
 
-		// value of the given object
-		const level4 = object?.$lastUpdated
-		if (level4 !== undefined) return parseTime(level4)
+		// timestamp reported from object
+		const obj = object?.$lastUpdated
+		if (obj !== undefined) return parseTime(obj)
 	}
 
-	// value of the lwm2m property in the device twin
-	const level5 = metadata.lwm2m.$lastUpdated
-	if (level5 !== undefined) return parseTime(level5)
+	const lwm2m = metadata.lwm2m.$lastUpdated
+	if (lwm2m !== undefined) return parseTime(lwm2m)
 
 	// TODO: check this
 	return 0
