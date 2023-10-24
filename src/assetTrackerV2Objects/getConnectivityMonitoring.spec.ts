@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getConnectivityMonitoring } from './getConnectivityMonitoring.js'
-import type { Instance } from '../converter.js'
+import type { Instance } from '../utils/LwM2MCoioteType.js'
 import type { ValidationError } from '../utils/ValidationError.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
 import { ConnectivityMonitoring_4_urn } from '../schemas/index.js'

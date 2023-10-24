@@ -29,6 +29,7 @@ import { getConfig } from './assetTrackerV2Objects/getConfig.js'
 import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import type { ValidationError } from './utils/ValidationError.js'
+import type { LwM2MCoiote } from './utils/LwM2MCoioteType.js'
 
 type LwM2MAssetTrackerV2Objects =
 	| Device_3
@@ -45,14 +46,6 @@ type LwM2MAssetTrackerV2Objects =
 export type ConversionResult<Result extends LwM2MAssetTrackerV2Objects> =
 	| { result: Result }
 	| { error: ValidationError | UndefinedCoioteObjectWarning }
-
-export type Value = { value: string | number | boolean }
-export type List = Record<string, { dim: string } | Value>
-export type Resource = { [key: string]: Value | List }
-type instanceId = string
-export type Instance = Record<instanceId, Resource>
-type objectId = string
-export type LwM2MCoiote = Record<objectId, Instance>
 
 /**
  * Expected input format

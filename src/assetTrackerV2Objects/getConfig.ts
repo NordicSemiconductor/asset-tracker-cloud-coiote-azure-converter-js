@@ -1,8 +1,6 @@
 import { warning } from '../utils/UndefinedCoioteObjectWarning.js'
-import type {
-	ConversionResult,
-	Instance as CoioteFormat,
-} from 'src/converter.js'
+import type { ConversionResult } from 'src/converter.js'
+import type { Instance as CoioteFormat } from '../utils/LwM2MCoioteType.js'
 import {
 	Config_50009_urn,
 	type Config_50009,

@@ -1,8 +1,6 @@
 import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
-import type {
-	ConversionResult,
-	Instance as CoioteFormat,
-} from 'src/converter.js'
+import type { ConversionResult } from 'src/converter.js'
+import type { Instance as CoioteFormat } from '../utils/LwM2MCoioteType.js'
 import { warning } from '../utils/UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from '../utils/validateLwM2MFormat.js'
 import {

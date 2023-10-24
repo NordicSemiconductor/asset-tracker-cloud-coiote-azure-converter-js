@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getTemperature } from './getTemperature.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
-import type { Instance } from 'src/converter.js'
+import type { Instance } from '../utils/LwM2MCoioteType.js'
 import { ValidationError } from '../utils/ValidationError.js'
 import {
 	Temperature_3303_urn,

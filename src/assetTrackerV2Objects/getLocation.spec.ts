@@ -3,7 +3,7 @@ import assert from 'node:assert'
 import { getLocation } from './getLocation.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
 import { Location_6_urn } from '../schemas/index.js'
-import type { Instance } from 'src/converter.js'
+import type { Instance } from '../utils/LwM2MCoioteType.js'
 import { ValidationError } from '../utils/ValidationError.js'
 
 void describe('getLocation', () => {

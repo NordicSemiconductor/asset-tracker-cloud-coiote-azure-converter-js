@@ -1,4 +1,8 @@
-import type { List, Value, Instance as coioteInstance } from '../converter.js'
+import type {
+	List,
+	Value,
+	Instance as coioteInstance,
+} from '../utils/LwM2MCoioteType.js'
 import {
 	type Device_3,
 	type ConnectivityMonitoring_4,
