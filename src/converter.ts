@@ -54,6 +54,9 @@ export type Instance = Record<instanceId, Resource>
 type objectId = string
 export type LwM2MCoiote = Record<objectId, Instance>
 
+/**
+ * Expected input format
+ */
 export type DeviceTwin = {
 	properties: {
 		desired: unknown
