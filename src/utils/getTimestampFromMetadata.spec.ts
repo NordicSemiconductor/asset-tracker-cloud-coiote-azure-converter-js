@@ -11,7 +11,7 @@ import {
 import { Temperature_3303_urn } from '../schemas/index.js'
 
 void describe('getTimestampFromMetadata', () => {
-	void it(`should get timestamp from the resource value reported in device twin`, () => {
+	void it(`should get timestamp from the resource '5700' reported in device twin`, () => {
 		/**
 		 * This is the second level of Timestamp hierarchy.
 		 * This applies when the resource 5518 is not defined in the object being evaluated
@@ -81,7 +81,7 @@ void describe('getTimestampFromMetadata', () => {
 
 	void it(`should get timestamp from the object value reported in device twin`, () => {
 		/**
-		 * This is the third level of Timestamp hierarchy.
+		 * This is the fourth level of Timestamp hierarchy.
 		 * This applies when the reported value for instance is not defined in device twin.
 		 * @see {@link ../../adr/004-timestamp-hierarchy.md}
 		 */
@@ -105,7 +105,7 @@ void describe('getTimestampFromMetadata', () => {
 
 	void it(`should get timestamp from the LwM2M value reported in device twin`, () => {
 		/**
-		 * This is the fourth level of Timestamp hierarchy.
+		 * This is the fifth level of Timestamp hierarchy.
 		 * This applies when the reported value for object is not defined in device twin.
 		 * @see {@link ../../adr/004-timestamp-hierarchy.md}
 		 */
