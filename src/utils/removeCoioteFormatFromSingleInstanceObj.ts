@@ -20,7 +20,7 @@ type SingleInstancesObjs =
 	| Config_50009
 
 /**
- *  Remove coiote format from single instance object following schema definition
+ *  Remove coiote format from single instance object
  */
 export const removeCoioteFormatFromSingleInstanceObj = (
 	input: coioteInstance,
