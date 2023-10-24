@@ -39,11 +39,6 @@ export const parseTime = (time: string): number =>
 	Math.trunc(new Date(time).getTime() / 1000)
 
 /**
- * metadata example
- * @see https://github.com/MLopezJ/asset-tracker-lwm2m-js/issues/2
- */
-
-/**
  * Find timestamp value for given object following timestamp hierarchy
  *
  * Default instance to be used is 0
