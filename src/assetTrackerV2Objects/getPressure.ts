@@ -1,5 +1,5 @@
 import { type Pressure_3323, Pressure_3323_urn } from '../schemas/index.js'
-import type { ConversionResult } from 'src/converter.js'
+import type { ConversionResult } from '../utils/ConversionResult.js'
 import type { Instance as CoioteFormat } from '../utils/LwM2MCoioteType.js'
 import { warning } from '../utils/UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from '../utils/validateLwM2MFormat.js'

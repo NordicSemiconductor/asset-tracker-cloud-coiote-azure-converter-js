@@ -31,22 +31,6 @@ import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import type { ValidationError } from './utils/ValidationError.js'
 import type { LwM2MCoiote } from './utils/LwM2MCoioteType.js'
 
-type LwM2MAssetTrackerV2Objects =
-	| Device_3
-	| ConnectivityMonitoring_4
-	| Location_6
-	| Temperature_3303
-	| Humidity_3304
-	| Pressure_3323
-	| Config_50009
-
-/**
- * Result type interface of './assetTrackerV2Objects' methods
- */
-export type ConversionResult<Result extends LwM2MAssetTrackerV2Objects> =
-	| { result: Result }
-	| { error: ValidationError | UndefinedCoioteObjectWarning }
-
 /**
  * Expected input format
  */
@@ -98,7 +82,7 @@ export const converter = async (
 		| {
 				error: ValidationError | UndefinedCoioteObjectWarning
 		  }
-		| { result: LwM2MAssetTrackerV2Objects }
+		| { result: unknown }
 	> = {
 		[Device_3_urn]: getDevice(coiote[_3]),
 		[ConnectivityMonitoring_4_urn]: getConnectivityMonitoring(coiote[_4]),
