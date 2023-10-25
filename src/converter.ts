@@ -61,10 +61,10 @@ export type LwM2MAssetTrackerV2 = {
 /**
  * Convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format
  */
-export const converter = async (
+export const converter = (
 	deviceTwin: DeviceTwin,
 	onError?: (element: ValidationError | UndefinedCoioteObjectWarning) => void,
-): Promise<LwM2MAssetTrackerV2> => {
+): LwM2MAssetTrackerV2 => {
 	const output = {} as LwM2MAssetTrackerV2
 	const coiote = deviceTwin.properties.reported.lwm2m
 	const metadata = deviceTwin.properties.reported.$metadata

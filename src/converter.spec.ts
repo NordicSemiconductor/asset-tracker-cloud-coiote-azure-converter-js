@@ -12,7 +12,7 @@ import {
 import { converter, type DeviceTwin } from './converter.js'
 
 void describe('converter', () => {
-	void it(`should convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format`, async () => {
+	void it(`should convert 'Coiote Asset Tracker v2' format into 'LwM2M Asset Tracker v2' format`, () => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -423,7 +423,7 @@ void describe('converter', () => {
 			},
 		}
 
-		const result = await converter(coioteAzureLwM2M)
+		const result = converter(coioteAzureLwM2M)
 
 		assert.deepEqual(result[Device_3_urn], expected[Device_3_urn])
 		assert.deepEqual(
@@ -440,7 +440,7 @@ void describe('converter', () => {
 		assert.deepEqual(result[Config_50009_urn], expected[Config_50009_urn])
 	})
 
-	void it(`should convert to 'LwM2M Asset Tracker v2' format when 'Coiote Asset Tracker v2' has some values as undefined`, async () => {
+	void it(`should convert to 'LwM2M Asset Tracker v2' format when 'Coiote Asset Tracker v2' has some values as undefined`, () => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -558,11 +558,11 @@ void describe('converter', () => {
 			},
 		}
 
-		const result = await converter(coioteAzureLwM2M)
+		const result = converter(coioteAzureLwM2M)
 		assert.deepEqual(result, expected)
 	})
 
-	void it(`should trigger a warning if an 'Asset Tracker v2 LwM2M' object can not be created because equivalent Coiote object is undefined`, async (context) => {
+	void it(`should trigger a warning if an 'Asset Tracker v2 LwM2M' object can not be created because equivalent Coiote object is undefined`, (context) => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -667,7 +667,7 @@ void describe('converter', () => {
 		}
 
 		const onError = context.mock.fn()
-		await converter(coioteAzureLwM2M, onError)
+		converter(coioteAzureLwM2M, onError)
 		/**
 		 * Only the device object will be generated and Asset Tracker v2 has 7 objects in total,
 		 * for that reason is expected 6 warning call backs
@@ -675,7 +675,7 @@ void describe('converter', () => {
 		assert.strictEqual(onError.mock.callCount(), 6)
 	})
 
-	void it(`should trigger an error if an 'Asset Tracker v2 LwM2M' object can not be created because conversion went wrong`, async (context) => {
+	void it(`should trigger an error if an 'Asset Tracker v2 LwM2M' object can not be created because conversion went wrong`, (context) => {
 		const coioteAzureLwM2M: DeviceTwin = {
 			properties: {
 				desired: {
@@ -1018,7 +1018,7 @@ void describe('converter', () => {
 		}
 
 		const onError = context.mock.fn()
-		await converter(coioteAzureLwM2M, onError)
+		converter(coioteAzureLwM2M, onError)
 		/**
 		 * There is an error in definition of object 3 in Coiote, that is why it is expected 1 error
 		 */
