@@ -30,6 +30,7 @@ import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObject
 import type { Metadata } from './utils/getTimestampFromMetadata.js'
 import type { ValidationError } from './utils/ValidationError.js'
 import type { LwM2MCoiote } from './utils/LwM2MCoioteType.js'
+import { unwrapResult } from './utils/unwrapResult.js'
 
 /**
  * Expected input format
@@ -65,41 +66,43 @@ export const converter = (
 	deviceTwin: DeviceTwin,
 	onError?: (element: ValidationError | UndefinedCoioteObjectWarning) => void,
 ): LwM2MAssetTrackerV2 => {
-	const output = {} as LwM2MAssetTrackerV2
 	const coiote = deviceTwin.properties.reported.lwm2m
 	const metadata = deviceTwin.properties.reported.$metadata
 
-	const _3 = parseURN(Device_3_urn).ObjectID
-	const _4 = parseURN(ConnectivityMonitoring_4_urn).ObjectID
-	const _6 = parseURN(Location_6_urn).ObjectID
-	const _3303 = parseURN(Temperature_3303_urn).ObjectID
-	const _3304 = parseURN(Humidity_3304_urn).ObjectID
-	const _3323 = parseURN(Pressure_3323_urn).ObjectID
-	const _50009 = parseURN(Config_50009_urn).ObjectID
+	const id3 = parseURN(Device_3_urn).ObjectID
+	const id4 = parseURN(ConnectivityMonitoring_4_urn).ObjectID
+	const id6 = parseURN(Location_6_urn).ObjectID
+	const id3303 = parseURN(Temperature_3303_urn).ObjectID
+	const id3304 = parseURN(Humidity_3304_urn).ObjectID
+	const id3323 = parseURN(Pressure_3323_urn).ObjectID
+	const id50009 = parseURN(Config_50009_urn).ObjectID
 
-	const conversionResult: Record<
-		string,
-		| {
-				error: ValidationError | UndefinedCoioteObjectWarning
-		  }
-		| { result: unknown }
-	> = {
-		[Device_3_urn]: getDevice(coiote[_3]),
-		[ConnectivityMonitoring_4_urn]: getConnectivityMonitoring(coiote[_4]),
-		[Location_6_urn]: getLocation(coiote[_6]),
-		[Temperature_3303_urn]: getTemperature(metadata, coiote[_3303]),
-		[Humidity_3304_urn]: getHumidity(metadata, coiote[_3304]),
-		[Pressure_3323_urn]: getPressure(metadata, coiote[_3323]),
-		[Config_50009_urn]: getConfig(coiote[_50009]),
-	}
+	const unwrap = unwrapResult(onError)
 
-	for (const [objectURN, LwM2MObject] of Object.entries(conversionResult)) {
-		if ('result' in LwM2MObject)
-			Object.assign(output, { [objectURN]: LwM2MObject.result })
-		else {
-			onError?.(LwM2MObject.error)
-		}
-	}
+	const convertedDevice = unwrap(getDevice(coiote[id3]))
+	const convertedConnectivityMonitoring = unwrap(
+		getConnectivityMonitoring(coiote[id4]),
+	)
+	const convertedLocation = unwrap(getLocation(coiote[id6]))
+	const convertedTemperature = unwrap(getTemperature(metadata, coiote[id3303]))
+	const convertedHumidity = unwrap(getHumidity(metadata, coiote[id3304]))
+	const convertedPressure = unwrap(getPressure(metadata, coiote[id3323]))
+	const convertedConfig = unwrap(getConfig(coiote[id50009]))
+
+	const output: LwM2MAssetTrackerV2 = {}
+
+	if (convertedDevice !== undefined) output[Device_3_urn] = convertedDevice
+	if (convertedConnectivityMonitoring !== undefined)
+		output[ConnectivityMonitoring_4_urn] = convertedConnectivityMonitoring
+	if (convertedLocation !== undefined)
+		output[Location_6_urn] = convertedLocation
+	if (convertedTemperature !== undefined)
+		output[Temperature_3303_urn] = convertedTemperature
+	if (convertedHumidity !== undefined)
+		output[Humidity_3304_urn] = convertedHumidity
+	if (convertedPressure !== undefined)
+		output[Pressure_3323_urn] = convertedPressure
+	if (convertedConfig !== undefined) output[Config_50009_urn] = convertedConfig
 
 	return output
 }
