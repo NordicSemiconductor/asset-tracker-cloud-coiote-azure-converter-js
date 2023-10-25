@@ -84,7 +84,7 @@ Result of the integration between Coiote and Azure.
         "3": {
           "0": {
             "0": {
-              "value": "Nordic Semiconductor"
+              "value": "Nordic Semiconductor ASA"
             },
             "1": {
               "value": "Thingy:91"
@@ -95,6 +95,14 @@ Result of the integration between Coiote and Azure.
             "3": {
               "value": "22.8.1+0"
             },
+            "7": {
+              "0": {
+                "value": 80
+              },
+              "attributes": {
+                "dim": "1"
+              }
+            },
             "11": {
               "0": {
                 "value": 0
@@ -104,7 +112,7 @@ Result of the integration between Coiote and Azure.
               }
             },
             "13": {
-              "value": 1675874731000
+              "value": 1675874731
             },
             "16": {
               "value": "UQ"
@@ -152,51 +160,34 @@ Result of the integration between Coiote and Azure.
             },
             "10": {
               "value": 242
+            },
+            "12": {
+              "value": 12
             }
           },
-          "attributes": {
-            "ver": "1.2"
-          }
+          "attributes": {}
         },
         "6": {
           "0": {
             "0": { "value": -43.5723 },
             "1": { "value": 153.2176 },
             "2": { "value": 2 },
-            "3": {},
+            "3": { "value": 24.798573 },
             "5": { "value": 1665149633 },
             "6": { "value": 5 }
           }
         },
         "3303": {
           "0": {
-            "5601": {
-              "value": 27.18
-            },
-            "5602": {
-              "value": 27.71
-            },
             "5700": {
-              "value": 27.18
-            },
-            "5701": {
-              "value": "Cel"
+              "value": 15
             }
           }
         },
         "3304": {
           "0": {
-            "5601": {
-              "value": 23.535
-            },
-            "5602": {
-              "value": 24.161
-            },
             "5700": {
-              "value": 24.057
-            },
-            "5701": {
-              "value": "%RH"
+              "value": 30
             }
           }
         },
@@ -231,10 +222,16 @@ Result of the integration between Coiote and Azure.
               "value": 7200
             },
             "1": {
-              "value": 120
+              "value": 60
             },
             "5": {
               "value": 8.5
+            },
+            "6": {
+              "value": true
+            },
+            "7": {
+              "value": true
             },
             "8": {
               "value": 2.5
@@ -257,25 +254,45 @@ Result of the integration between Coiote and Azure.
 }
 ```
 
-full device twin object here: [./documents/input.ts](./documents/input.ts)
+full device twin object here:
+[./src/deviceTwinExample.json](./src/deviceTwinExample.json)
 
 ## Expected output
 
 ```typescript
-
 export const output = {
-  '3:1.2@1.1': {
+  "6": {
+    "0": -43.5723,
+    "1": 153.2176,
+    "2": 2,
+    "3": 24.798573,
+    "5": 1665149633,
+    "6": 5,
+  },
+  "50009": {
+    "0": true,
+    "1": 60,
+    "2": 120,
+    "3": 600,
+    "4": 7200,
+    "5": 8.5,
+    "6": true,
+    "7": true,
+    "8": 2.5,
+    "9": 0.5,
+  },
+  "3:1.2@1.1": {
     "0": "Nordic Semiconductor ASA",
     "1": "Thingy:91",
     "2": "351358815340515",
     "3": "22.8.1+0",
+    "7": [80],
     "11": [0],
-    "13": 1675874731
+    "13": 1675874731,
     "16": "UQ",
     "19": "3.2.1",
   },
-
-  '4:1.3@1.1': {
+  "4:1.3@1.1": {
     "0": 6,
     "1": [6, 7],
     "2": -85,
@@ -286,56 +303,19 @@ export const output = {
     "10": 242,
     "12": 12,
   },
-
-  '6': {
-    "0": -43.5723,
-    "1": 153.2176,
-    "2": 2,
-    "5": 1665149633,
-    "6": 5,
-  },
-
-  '3303:1.1': [
+  "3303:1.1": [{ "5518": 1692369551, "5700": 15 }],
+  "3304:1.1": [{ "5518": 1692369551, "5700": 30 }],
+  "3323:1.1": [
     {
-      "5601": 27.18,
-      "5602": 27.71,
-      "5700": 27.18,
-      "5701": "Cel",
-    },
-  ],
-
-  '3304:1.1': [
-    {
-      "5601": 23.535,
-      "5602": 24.161,
-      "5700": 24.057,
-      "5701": "%RH",
-    },
-  ],
-
-  '3323:1.1': [
-    {
+      "5518": 1692369551,
       "5601": 101697,
       "5602": 101705,
       "5700": 10,
       "5701": "Pa",
     },
   ],
-
-  '50009': {
-    "0": true,
-    "2": 120,
-    "3": 600,
-    "4": 7200,
-    "1": 120,
-    "5": 8.5,
-    "8": 2.5,
-    "9": 0.5,
-  },
 };
 ```
-
-Expected output here: [./documents/output.ts](./documents/output.ts)
 
 ## Architecture decision records (ADRs)
 
