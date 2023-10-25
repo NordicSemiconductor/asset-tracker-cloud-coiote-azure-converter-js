@@ -256,18 +256,9 @@ full device twin object here: [input.js](documents/input.ts)
 ## Expected output
 
 ```typescript
-import {
-  Device_3_urn,
-  ConnectivityMonitoring_4_urn,
-  Location_6_urn,
-  Temperature_3303_urn,
-  Humidity_3304_urn,
-  Pressure_3323_urn,
-} from "@nordicsemiconductor/lwm2m-types";
-import { Config_50009_urn } from "schemas/Config_50009";
 
 export const output = {
-  [Device_3_urn]: {
+  '3:1.2@1.1': {
     "0": "Nordic Semiconductor ASA",
     "1": "Thingy:91",
     "2": "351358815340515",
@@ -278,7 +269,7 @@ export const output = {
     "19": "3.2.1",
   },
 
-  [ConnectivityMonitoring_4_urn]: {
+  '4:1.3@1.1': {
     "0": 6,
     "1": [6, 7],
     "2": -85,
@@ -290,7 +281,7 @@ export const output = {
     "12": 12,
   },
 
-  [Location_6_urn]: {
+  '6': {
     "0": -43.5723,
     "1": 153.2176,
     "2": 2,
@@ -298,7 +289,7 @@ export const output = {
     "6": 5,
   },
 
-  [Temperature_3303_urn]: [
+  '3303:1.1': [
     {
       "5601": 27.18,
       "5602": 27.71,
@@ -307,7 +298,7 @@ export const output = {
     },
   ],
 
-  [Humidity_3304_urn]: [
+  '3304:1.1': [
     {
       "5601": 23.535,
       "5602": 24.161,
@@ -316,7 +307,7 @@ export const output = {
     },
   ],
 
-  [Pressure_3323_urn]: [
+  '3323:1.1': [
     {
       "5601": 101697,
       "5602": 101705,
@@ -325,7 +316,7 @@ export const output = {
     },
   ],
 
-  [Config_50009_urn]: {
+  '50009': {
     "0": true,
     "2": 120,
     "3": 600,
