@@ -3,7 +3,6 @@ import type { LwM2MAssetTrackerV2 } from 'src/converter.js'
 
 /**
  * Warning handler type
- * TODO: add ADR link
  */
 export class UndefinedCoioteObjectWarning extends Error {
 	constructor(LwM2MObjectUrn: keyof LwM2MAssetTrackerV2) {
