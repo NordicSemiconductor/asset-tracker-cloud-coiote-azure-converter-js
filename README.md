@@ -40,11 +40,8 @@ npm test -- --coverage
 | Config                  | [50009](https://github.com/nrfconnect/sdk-nrf/blob/v2.4.0/applications/asset_tracker_v2/src/cloud/lwm2m_integration/config_object_descript.xml) | 50009                                                                                               | 50009                  |
 
 Where "`:`" indicates the **object** version and "`@`" indicates the **LwM2M**
-version.
-
-if not present, values will be the default option.
-
-Default **LwM2M** version is `1.0`. Default **object** version is `1.0`.
+version. if not present, values will be the default option. Default **LwM2M**
+version is `1.0`. Default **object** version is `1.0`.
 
 ## Expected input
 
