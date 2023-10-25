@@ -68,7 +68,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@nordicsemiconductor/lwm2m-types": "2.5.1"
+    "@nordicsemiconductor/lwm2m-types": "2.5.1",
+    "@sinclair/typebox": "0.31.14"
   },
   "devDependencies": {
     "@nordicsemiconductor/asset-tracker-cloud-code-style": "12.0.68",
