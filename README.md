@@ -9,24 +9,6 @@
 > Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration
 > to LwM2M Asset Tracker v2 JSON encoding
 
-## Installation
-
-```
-npm install
-```
-
-## Test
-
-```
-npm test
-```
-
-## Coverage
-
-```
-npm test -- --coverage
-```
-
 ## `AssetTrackerv2` firmware to `LwM2M Asset Tracker v2` through `Coiote-Azure` objects version mapping
 
 | Name                    | AssetTrackerv2 Firmware                                                                                                                         | Coiote-Azure                                                                                        | LwM2M Asset Tracker v2 |
@@ -43,11 +25,35 @@ Where "`:`" indicates the **object** version and "`@`" indicates the **LwM2M**
 version. if not present, values will be the default option. Default **LwM2M**
 version is `1.0`. Default **object** version is `1.0`.
 
+## Installation
+
+```
+npm install --save-exact
+```
+
+## Running the tests
+
+After cloning the repository:
+
+```
+npm ci
+npm test
+```
+
+## Example usage
+
+```TypeScript
+import { converter } from './converter.js'
+const deviceTwin = {} // ... full device twin
+const result = await converter(deviceTwin)
+console.log(result)
+```
+
+See [./src/example.ts](./src/example.ts) for more details.
+
 ## Expected input
 
-Result of the
-[integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection)
-between Coiote and Azure.
+Result of the integration between Coiote and Azure.
 
 ```json
 {
@@ -251,7 +257,7 @@ between Coiote and Azure.
 }
 ```
 
-full device twin object here: [input.js](documents/input.ts)
+full device twin object here: [./documents/input.ts](./documents/input.ts)
 
 ## Expected output
 
@@ -329,15 +335,4 @@ export const output = {
 };
 ```
 
-Expected output here: [output.js](documents/output.ts)
-
-## Example
-
-```TypeScript
-import { converter } from './converter.js'
-const deviceTwin = {} // ... full device twin
-const result = await converter(deviceTwin)
-console.log(result)
-```
-
-See [example.js](./src/example.ts) for more details.
+Expected output here: [./documents/output.ts](./documents/output.ts)
