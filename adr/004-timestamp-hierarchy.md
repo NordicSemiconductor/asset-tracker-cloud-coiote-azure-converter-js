@@ -6,9 +6,10 @@ LwM2M objects in its integration with Azure:
 - Temperature (3303)
 - Pressure (3304)
 - Humidity (3323)
-  > check
-  > [objects version mapping](../README.md#assettrackerv2-firmware-to-lwm2m-asset-tracker-v2-through-coiote-azure-objects-version-mapping)
-  > for more information.
+
+> check
+> [objects version mapping](../README.md#assettrackerv2-firmware-to-lwm2m-asset-tracker-v2-through-coiote-azure-objects-version-mapping)
+> for more information.
 
 Instead, Coiote uses version 1.0 as the object version by default. This means
 that in the `device twin` object, the objects Temperature, Pressure and Humidity
@@ -28,5 +29,3 @@ undefined.
 3. `$lastUpdated` value from the **instance** in device twin metadata
 4. `$lastUpdated` value from the **object** in device twin metadata
 5. `$lastUpdated` value from the **LwM2M** reported in device twin metadata
-
-// TODO: improve the way the `Timestamp hierarchy levels` is described
