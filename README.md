@@ -336,3 +336,7 @@ export const output = {
 ```
 
 Expected output here: [./documents/output.ts](./documents/output.ts)
+
+## Architecture decision records (ADRs)
+
+See [./adr](./adr/).
