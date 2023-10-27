@@ -1,7 +1,7 @@
 import { converter } from './converter.js'
 import * as deviceTwin from './deviceTwinExample.json'
 
-const result = await converter(deviceTwin)
+const result = converter(deviceTwin)
 console.log(result)
 
 /**
