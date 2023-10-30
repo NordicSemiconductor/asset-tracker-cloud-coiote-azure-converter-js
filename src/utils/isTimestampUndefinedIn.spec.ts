@@ -1,6 +1,6 @@
 import { describe, test as it } from 'node:test'
 import assert from 'node:assert'
-import type { Temperature_3303 } from 'src/schemas/index.js'
+import type { Temperature_3303 } from '../schemas/lwm2m.js'
 import { isTimestampUndefinedIn } from './isTimestampUndefinedIn.js'
 
 void describe('getTimestampFromMetadata', () => {

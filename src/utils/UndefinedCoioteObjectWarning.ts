@@ -1,5 +1,5 @@
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
-import type { LwM2MAssetTrackerV2 } from 'src/converter.js'
+import type { LwM2MAssetTrackerV2 } from '../converter.js'
 
 /**
  * Warning handler type

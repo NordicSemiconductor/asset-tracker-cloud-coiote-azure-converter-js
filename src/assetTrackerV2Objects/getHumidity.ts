@@ -1,4 +1,4 @@
-import { type Humidity_3304, Humidity_3304_urn } from '../schemas/index.js'
+import { type Humidity_3304, Humidity_3304_urn } from '../schemas/lwm2m.js'
 import type { ConversionResult } from '../utils/ConversionResult.js'
 import type { Instance as CoioteFormat } from '../utils/LwM2MCoioteType.js'
 import { warning } from '../utils/UndefinedCoioteObjectWarning.js'

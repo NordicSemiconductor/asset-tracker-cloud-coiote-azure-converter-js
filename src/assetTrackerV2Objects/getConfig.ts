@@ -5,7 +5,7 @@ import {
 	Config_50009_urn,
 	type Config_50009,
 	Config_50009_Typebox,
-} from 'src/schemas/Config_50009.js'
+} from '../schemas/Config_50009.js'
 import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } from '../utils/removeCoioteFormatFromSingleInstanceObj.js'
 import { validateAgainstSchema } from '../utils/validateAgainstSchema.js'
 

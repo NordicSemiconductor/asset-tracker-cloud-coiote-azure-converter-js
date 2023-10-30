@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getDevice } from './getDevice.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
-import { Device_3_urn } from '../schemas/index.js'
+import { Device_3_urn } from '../schemas/lwm2m.js'
 import type { Instance } from '../utils/LwM2MCoioteType.js'
 import { ValidationError } from '../utils/ValidationError.js'
 

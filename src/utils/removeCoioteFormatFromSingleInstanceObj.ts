@@ -8,7 +8,7 @@ import {
 	type ConnectivityMonitoring_4,
 	type Location_6,
 	type Config_50009,
-} from '../schemas/index.js'
+} from '../schemas/lwm2m.js'
 
 /**
  * Single Instances objects in Assset Tracker v2

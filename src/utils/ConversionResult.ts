@@ -2,7 +2,7 @@ import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarnin
 import type { ValidationError } from './ValidationError.js'
 
 /**
- * Result type interface of 'src/assetTrackerV2Objects' methods
+ * Result type interface of './assetTrackerV2Objects' methods
  */
 export type ConversionResult<Result> =
 	| { result: Result }

@@ -1,4 +1,8 @@
-import type { Humidity_3304, Pressure_3323, Temperature_3303 } from '../schemas'
+import type {
+	Humidity_3304,
+	Pressure_3323,
+	Temperature_3303,
+} from '../schemas/lwm2m'
 import type { Instance } from '../utils/LwM2MCoioteType.js'
 import { removeKeyFromResource } from './removeCoioteFormatFromSingleInstanceObj.js'
 

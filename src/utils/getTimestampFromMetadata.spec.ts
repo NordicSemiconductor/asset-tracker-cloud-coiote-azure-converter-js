@@ -8,7 +8,7 @@ import {
 	type Obj,
 	type LwM2M_Metadata,
 } from './getTimestampFromMetadata.js'
-import { Temperature_3303_urn } from '../schemas/index.js'
+import { Temperature_3303_urn } from '../schemas/lwm2m.js'
 
 void describe('getTimestampFromMetadata', () => {
 	void it(`should get timestamp from the resource '5700' reported in device twin`, () => {

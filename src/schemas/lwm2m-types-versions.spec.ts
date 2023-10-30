@@ -5,7 +5,7 @@ import {
 	Location_6_urn,
 	Pressure_3323_urn,
 	Temperature_3303_urn,
-} from './index.js'
+} from './lwm2m.js'
 
 import { describe, test } from 'node:test'
 import assert from 'node:assert'

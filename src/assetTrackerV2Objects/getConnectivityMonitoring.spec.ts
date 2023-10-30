@@ -4,7 +4,7 @@ import { getConnectivityMonitoring } from './getConnectivityMonitoring.js'
 import type { Instance } from '../utils/LwM2MCoioteType.js'
 import type { ValidationError } from '../utils/ValidationError.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
-import { ConnectivityMonitoring_4_urn } from '../schemas/index.js'
+import { ConnectivityMonitoring_4_urn } from '../schemas/lwm2m.js'
 
 void describe('getConnectivityMonitoring', () => {
 	void it(`should create the LwM2M object 'Connectivity Monitoring' (4) from the object '4' reported by Coiote`, () => {

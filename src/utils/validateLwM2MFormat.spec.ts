@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { Device_3_urn, Location_6_urn } from '../schemas/index.js'
+import { Device_3_urn, Location_6_urn } from '../schemas/lwm2m.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 import type { ValidationError } from './ValidationError.js'
 

@@ -8,7 +8,7 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 	Config_50009_urn,
-} from './schemas/index.js'
+} from './schemas/lwm2m.js'
 import { converter, type DeviceTwin } from './converter.js'
 
 void describe('converter', () => {

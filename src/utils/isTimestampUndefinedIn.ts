@@ -2,7 +2,7 @@ import {
 	type Humidity_3304,
 	type Pressure_3323,
 	type Temperature_3303,
-} from '../schemas/index.js'
+} from '../schemas/lwm2m.js'
 
 /**
  * Returns true if resource 5518 is defined, false if is undefined.

@@ -1,4 +1,4 @@
-import { Location_6_urn, type Location_6 } from '../schemas/index.js'
+import { Location_6_urn, type Location_6 } from '../schemas/lwm2m.js'
 import { warning } from '../utils/UndefinedCoioteObjectWarning.js'
 import { validateLwM2MFormat } from '../utils/validateLwM2MFormat.js'
 import type { ConversionResult } from '../utils/ConversionResult.js'

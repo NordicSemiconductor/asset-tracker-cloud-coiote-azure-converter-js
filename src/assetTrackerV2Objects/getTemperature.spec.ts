@@ -7,7 +7,7 @@ import { ValidationError } from '../utils/ValidationError.js'
 import {
 	Temperature_3303_urn,
 	type Temperature_3303,
-} from '../schemas/index.js'
+} from '../schemas/lwm2m.js'
 import { parseTime, type Metadata } from '../utils/getTimestampFromMetadata.js'
 
 void describe('getTemperature', () => {

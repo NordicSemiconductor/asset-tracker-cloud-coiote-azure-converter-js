@@ -6,7 +6,7 @@ import type {
 	Temperature_3303_urn,
 	Humidity_3304_urn,
 	Pressure_3323_urn,
-} from 'src/schemas'
+} from '../schemas/lwm2m.js'
 import { ValidationError } from './ValidationError.js'
 
 /**

@@ -2,7 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getConfig } from './getConfig.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
-import { Config_50009_urn } from 'src/schemas/Config_50009.js'
+import { Config_50009_urn } from '../schemas/Config_50009.js'
 import type { ValidationError } from '../utils/ValidationError.js'
 
 void describe('getConfig', () => {

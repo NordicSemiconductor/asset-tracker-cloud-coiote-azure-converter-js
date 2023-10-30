@@ -7,7 +7,7 @@ import {
 	Humidity_3304_urn,
 	Pressure_3323_urn,
 	Config_50009_urn,
-} from './schemas/index.js'
+} from './schemas/lwm2m.js'
 import type {
 	Device_3,
 	ConnectivityMonitoring_4,
@@ -16,7 +16,7 @@ import type {
 	Humidity_3304,
 	Pressure_3323,
 	Config_50009,
-} from './schemas/index.js'
+} from './schemas/lwm2m.js'
 
 import { getDevice } from './assetTrackerV2Objects/getDevice.js'
 import { getConnectivityMonitoring } from './assetTrackerV2Objects/getConnectivityMonitoring.js'

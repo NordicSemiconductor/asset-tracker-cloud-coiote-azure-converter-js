@@ -4,7 +4,7 @@ import { getPressure } from './getPressure.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
 import type { Instance } from '../utils/LwM2MCoioteType.js'
 import { ValidationError } from '../utils/ValidationError.js'
-import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/index.js'
+import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/lwm2m.js'
 import { parseTime, type Metadata } from '../utils/getTimestampFromMetadata.js'
 
 void describe('getPressure', () => {

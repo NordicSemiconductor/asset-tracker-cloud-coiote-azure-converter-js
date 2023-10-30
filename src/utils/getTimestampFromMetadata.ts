@@ -3,7 +3,7 @@ import {
 	type Humidity_3304_urn,
 	type Pressure_3323_urn,
 	type Temperature_3303_urn,
-} from '../schemas/index.js'
+} from '../schemas/lwm2m.js'
 
 export type Metadata = {
 	$lastUpdated: string

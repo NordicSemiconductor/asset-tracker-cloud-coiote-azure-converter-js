@@ -4,7 +4,7 @@ import { getHumidity } from './getHumidity.js'
 import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
 import type { Instance } from '../utils/LwM2MCoioteType.js'
 import { ValidationError } from '../utils/ValidationError.js'
-import { Humidity_3304_urn, type Humidity_3304 } from '../schemas/index.js'
+import { Humidity_3304_urn, type Humidity_3304 } from '../schemas/lwm2m.js'
 import { parseTime, type Metadata } from '../utils/getTimestampFromMetadata.js'
 
 void describe('getHumidity', () => {
