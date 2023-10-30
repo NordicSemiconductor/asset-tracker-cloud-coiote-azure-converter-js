@@ -9,7 +9,6 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { isTimestampUndefinedIn } from '../converter/isTimestampUndefinedIn.js'
 import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 
@@ -26,7 +25,7 @@ export const getTemperature = (
 
 	if (
 		maybeTemperature[0] !== undefined &&
-		isTimestampUndefinedIn(maybeTemperature) === true
+		maybeTemperature[0]?.[5518] === undefined
 	)
 		maybeTemperature[0][5518] = getTimestampFromMetadata(
 			Temperature_3303_urn,

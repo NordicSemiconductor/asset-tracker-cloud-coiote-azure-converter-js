@@ -7,7 +7,6 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { isTimestampUndefinedIn } from '../converter/isTimestampUndefinedIn.js'
 import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
 
 /**
@@ -23,7 +22,7 @@ export const getPressure = (
 
 	if (
 		maybePressure[0] !== undefined &&
-		isTimestampUndefinedIn(maybePressure) === true
+		maybePressure[0]?.[5518] === undefined
 	) {
 		maybePressure[0][5518] = getTimestampFromMetadata(
 			Pressure_3323_urn,

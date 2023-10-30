@@ -7,7 +7,6 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { isTimestampUndefinedIn } from '../converter/isTimestampUndefinedIn.js'
 import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
 
 /**
@@ -23,7 +22,7 @@ export const getHumidity = (
 
 	if (
 		maybeHumidity[0] !== undefined &&
-		isTimestampUndefinedIn(maybeHumidity) === true
+		maybeHumidity[0]?.[5518] === undefined
 	) {
 		maybeHumidity[0][5518] = getTimestampFromMetadata(
 			Humidity_3304_urn,
