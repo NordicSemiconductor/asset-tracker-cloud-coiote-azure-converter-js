@@ -1,14 +1,17 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getTemperature } from './getTemperature.js'
-import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
-import type { Instance } from '../utils/LwM2MCoioteType.js'
-import { ValidationError } from '../utils/ValidationError.js'
+import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
+import type { Instance } from '../coiote/LwM2MCoioteType.js'
+import { ValidationError } from '../converter/ValidationError.js'
 import {
 	Temperature_3303_urn,
 	type Temperature_3303,
 } from '../schemas/lwm2m.js'
-import { parseTime, type Metadata } from '../utils/getTimestampFromMetadata.js'
+import {
+	parseTime,
+	type Metadata,
+} from '../converter/getTimestampFromMetadata.js'
 
 void describe('getTemperature', () => {
 	void it(`should create the LwM2M object 'Temperature' (3303) from the object '3303' reported by Coiote`, () => {

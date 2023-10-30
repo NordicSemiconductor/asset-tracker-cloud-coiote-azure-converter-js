@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getConnectivityMonitoring } from './getConnectivityMonitoring.js'
-import type { Instance } from '../utils/LwM2MCoioteType.js'
-import type { ValidationError } from '../utils/ValidationError.js'
-import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
+import type { Instance } from '../coiote/LwM2MCoioteType.js'
+import type { ValidationError } from '../converter/ValidationError.js'
+import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 import { ConnectivityMonitoring_4_urn } from '../schemas/lwm2m.js'
 
 void describe('getConnectivityMonitoring', () => {

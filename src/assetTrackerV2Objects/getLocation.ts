@@ -1,9 +1,9 @@
 import { Location_6_urn, type Location_6 } from '../schemas/lwm2m.js'
-import { warning } from '../utils/UndefinedCoioteObjectWarning.js'
-import { validateLwM2MFormat } from '../utils/validateLwM2MFormat.js'
-import type { ConversionResult } from '../utils/ConversionResult.js'
-import type { Instance as CoioteFormat } from '../utils/LwM2MCoioteType.js'
-import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } from '../utils/removeCoioteFormatFromSingleInstanceObj.js'
+import { warning } from '../converter/UndefinedCoioteObjectWarning.js'
+import { validateLwM2MFormat } from './validateLwM2MFormat.js'
+import type { ConversionResult } from '../converter/ConversionResult.js'
+import type { Instance as CoioteFormat } from '../coiote/LwM2MCoioteType.js'
+import { unwrapSingleInstance as removeCoioteFormatFrom } from '../coiote/unwrapSingleInstance.js'
 
 /**
  * Convert to LwM2M Location object (id 6) from the object 6 reported by Coiote

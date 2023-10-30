@@ -1,11 +1,14 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getHumidity } from './getHumidity.js'
-import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
-import type { Instance } from '../utils/LwM2MCoioteType.js'
-import { ValidationError } from '../utils/ValidationError.js'
+import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
+import type { Instance } from '../coiote/LwM2MCoioteType.js'
+import { ValidationError } from '../converter/ValidationError.js'
 import { Humidity_3304_urn, type Humidity_3304 } from '../schemas/lwm2m.js'
-import { parseTime, type Metadata } from '../utils/getTimestampFromMetadata.js'
+import {
+	parseTime,
+	type Metadata,
+} from '../converter/getTimestampFromMetadata.js'
 
 void describe('getHumidity', () => {
 	void it(`should create the LwM2M object 'Humidity' (3304) from the object '3304' reported by Coiote`, () => {

@@ -1,7 +1,7 @@
 import type { Static, TSchema } from '@sinclair/typebox'
 import Ajv, { type ErrorObject } from 'ajv'
-import { ValidationError } from './ValidationError.js'
-import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarning.js'
+import { ValidationError } from '../converter/ValidationError.js'
+import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 
 const ajv = new Ajv()
 

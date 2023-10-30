@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getLocation } from './getLocation.js'
-import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
+import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 import { Location_6_urn } from '../schemas/lwm2m.js'
-import type { Instance } from '../utils/LwM2MCoioteType.js'
-import { ValidationError } from '../utils/ValidationError.js'
+import type { Instance } from '../coiote/LwM2MCoioteType.js'
+import { ValidationError } from '../converter/ValidationError.js'
 
 void describe('getLocation', () => {
 	void it(`should create the LwM2M object 'Location' (6) from the object '6' reported by Coiote`, () => {

@@ -26,11 +26,11 @@ import { getHumidity } from './assetTrackerV2Objects/getHumidity.js'
 import { getPressure } from './assetTrackerV2Objects/getPressure.js'
 import { getConfig } from './assetTrackerV2Objects/getConfig.js'
 
-import type { UndefinedCoioteObjectWarning } from './utils/UndefinedCoioteObjectWarning.js'
-import type { Metadata } from './utils/getTimestampFromMetadata.js'
-import type { ValidationError } from './utils/ValidationError.js'
-import type { LwM2MCoiote } from './utils/LwM2MCoioteType.js'
-import { unwrapResult } from './utils/unwrapResult.js'
+import type { UndefinedCoioteObjectWarning } from './converter/UndefinedCoioteObjectWarning.js'
+import type { Metadata } from './converter/getTimestampFromMetadata.js'
+import type { ValidationError } from './converter/ValidationError.js'
+import type { LwM2MCoiote } from './coiote/LwM2MCoioteType.js'
+import { unwrapResult } from './converter/unwrapResult.js'
 
 /**
  * Expected input format

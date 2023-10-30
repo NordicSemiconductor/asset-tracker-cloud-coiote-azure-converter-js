@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getConfig } from './getConfig.js'
-import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
+import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 import { Config_50009_urn } from '../schemas/Config_50009.js'
-import type { ValidationError } from '../utils/ValidationError.js'
+import type { ValidationError } from '../converter/ValidationError.js'
 
 void describe('getConfig', () => {
 	void it(`should create the LwM2M object 'Config' (50009) from the object '50009' reported by Coiote`, () => {

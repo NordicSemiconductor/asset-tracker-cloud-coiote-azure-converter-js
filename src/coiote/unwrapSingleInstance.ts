@@ -2,7 +2,7 @@ import type {
 	List,
 	Value,
 	Instance as coioteInstance,
-} from '../utils/LwM2MCoioteType.js'
+} from './LwM2MCoioteType.js'
 import {
 	type Device_3,
 	type ConnectivityMonitoring_4,
@@ -22,7 +22,7 @@ type SingleInstancesObjs =
 /**
  *  Remove coiote format from single instance object
  */
-export const removeCoioteFormatFromSingleInstanceObj = (
+export const unwrapSingleInstance = (
 	input: coioteInstance,
 ): SingleInstancesObjs => {
 	const resources = input['0'] ?? []

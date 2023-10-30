@@ -3,8 +3,8 @@ import type {
 	Pressure_3323,
 	Temperature_3303,
 } from '../schemas/lwm2m'
-import type { Instance } from '../utils/LwM2MCoioteType.js'
-import { removeKeyFromResource } from './removeCoioteFormatFromSingleInstanceObj.js'
+import type { Instance } from './LwM2MCoioteType.js'
+import { removeKeyFromResource } from './unwrapSingleInstance.js'
 
 /**
  * Multiple Instances objects in Assset Tracker v2
@@ -14,7 +14,7 @@ type MultipleInstancesObjs = Temperature_3303 | Humidity_3304 | Pressure_3323
 /**
  * Remove coiote format from multiple instance object
  */
-export const removeCoioteFormatFromMultipleInstanceObj = (
+export const unwrapMultipleInstance = (
 	input: Instance,
 ): MultipleInstancesObjs => {
 	const instances = Object.entries(input)

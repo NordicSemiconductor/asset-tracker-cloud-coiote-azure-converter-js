@@ -7,7 +7,7 @@ import type {
 	Humidity_3304_urn,
 	Pressure_3323_urn,
 } from '../schemas/lwm2m.js'
-import { ValidationError } from './ValidationError.js'
+import { ValidationError } from '../converter/ValidationError.js'
 
 /**
  * Validate that object follow the LwM2M definition

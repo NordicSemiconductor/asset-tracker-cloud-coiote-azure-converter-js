@@ -2,11 +2,11 @@ import {
 	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { warning } from '../utils/UndefinedCoioteObjectWarning.js'
-import { validateLwM2MFormat } from '../utils/validateLwM2MFormat.js'
-import type { ConversionResult } from '../utils/ConversionResult.js'
-import type { Instance as CoioteFormat } from '../utils/LwM2MCoioteType.js'
-import { removeCoioteFormatFromSingleInstanceObj as removeCoioteFormatFrom } from '../utils/removeCoioteFormatFromSingleInstanceObj.js'
+import { warning } from '../converter/UndefinedCoioteObjectWarning.js'
+import { validateLwM2MFormat } from './validateLwM2MFormat.js'
+import type { ConversionResult } from '../converter/ConversionResult.js'
+import type { Instance as CoioteFormat } from '../coiote/LwM2MCoioteType.js'
+import { unwrapSingleInstance as removeCoioteFormatFrom } from '../coiote/unwrapSingleInstance.js'
 
 /**
  * Convert to LwM2M Connectivity Monitoring object (id 4) from the object 4 reported by Coiote

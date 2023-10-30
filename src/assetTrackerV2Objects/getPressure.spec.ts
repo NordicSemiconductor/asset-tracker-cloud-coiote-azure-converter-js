@@ -1,11 +1,14 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getPressure } from './getPressure.js'
-import type { UndefinedCoioteObjectWarning } from '../utils/UndefinedCoioteObjectWarning.js'
-import type { Instance } from '../utils/LwM2MCoioteType.js'
-import { ValidationError } from '../utils/ValidationError.js'
+import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
+import type { Instance } from '../coiote/LwM2MCoioteType.js'
+import { ValidationError } from '../converter/ValidationError.js'
 import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/lwm2m.js'
-import { parseTime, type Metadata } from '../utils/getTimestampFromMetadata.js'
+import {
+	parseTime,
+	type Metadata,
+} from '../converter/getTimestampFromMetadata.js'
 
 void describe('getPressure', () => {
 	void it(`should create the LwM2M object 'Pressure' (3323) from the object '3323' reported by Coiote`, () => {
