@@ -2,9 +2,9 @@ import type { UndefinedCoioteObjectWarning } from './UndefinedCoioteObjectWarnin
 import type { ValidationError } from './ValidationError.js'
 
 /**
- * Unwrap convertion process result.
+ * Unwrap conversion process result.
  *
- * If the result of the convertion process is an error, return undefined and trigger the error.
+ * If the result of the conversion process is an error, return undefined and trigger the error.
  * Otherwise return the result value
  */
 export const unwrapResult =
