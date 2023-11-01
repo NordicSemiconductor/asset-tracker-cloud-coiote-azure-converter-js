@@ -9,7 +9,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
+import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrap.js'
 import { validateLwM2MFormat } from './validateLwM2MFormat.js'
 
 /**
@@ -21,7 +21,7 @@ export const getTemperature = (
 ): ConversionResult<Temperature_3303> => {
 	if (object === undefined) return warning(Temperature_3303_urn)
 
-	const maybeTemperature = removeCoioteFormatFrom(object)
+	const maybeTemperature = removeCoioteFormatFrom<Temperature_3303>(object)
 
 	if (
 		maybeTemperature[0] !== undefined &&

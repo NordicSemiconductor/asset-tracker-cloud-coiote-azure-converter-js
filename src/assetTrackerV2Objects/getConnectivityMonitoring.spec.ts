@@ -1,7 +1,6 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getConnectivityMonitoring } from './getConnectivityMonitoring.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import type { ValidationError } from '../converter/ValidationError.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 import { ConnectivityMonitoring_4_urn } from '../schemas/lwm2m.js'
@@ -69,6 +68,7 @@ void describe('getConnectivityMonitoring', () => {
 		const connectivityMonitoring = getConnectivityMonitoring(
 			connectivityMonitoring_coiote,
 		) as { result: unknown }
+
 		assert.deepEqual(connectivityMonitoring.result, expected)
 	})
 
@@ -78,11 +78,11 @@ void describe('getConnectivityMonitoring', () => {
 		}
 		assert.equal(
 			connectivityMonitoring.error.message,
-			`'${ConnectivityMonitoring_4_urn}' object can not be converter because object id '4' is undefined in input received`,
+			`'${ConnectivityMonitoring_4_urn}' object can not be converted because object id '4' is undefined in input received`,
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M obejct 4`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M object 4`, () => {
 		const connectivityMonitoring_coiote = {
 			'0': {
 				/*
@@ -133,7 +133,7 @@ void describe('getConnectivityMonitoring', () => {
 		}
 
 		const connectivityMonitoring = getConnectivityMonitoring(
-			connectivityMonitoring_coiote as unknown as Instance,
+			connectivityMonitoring_coiote as any,
 		) as {
 			error: ValidationError
 		}

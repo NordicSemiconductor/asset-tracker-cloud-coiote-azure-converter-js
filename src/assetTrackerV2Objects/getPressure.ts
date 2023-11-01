@@ -7,7 +7,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
+import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrap.js'
 
 /**
  * Build the Pressure object from LwM2M using the object 3323 reported by Coiote
@@ -18,7 +18,7 @@ export const getPressure = (
 ): ConversionResult<Pressure_3323> => {
 	if (object === undefined) return warning(Pressure_3323_urn)
 
-	const maybePressure = removeCoioteFormatFrom(object)
+	const maybePressure = removeCoioteFormatFrom<Pressure_3323>(object)
 
 	if (
 		maybePressure[0] !== undefined &&

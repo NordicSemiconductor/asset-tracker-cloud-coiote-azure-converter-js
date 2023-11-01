@@ -3,7 +3,6 @@ import assert from 'node:assert'
 import { getDevice } from './getDevice.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
 import { Device_3_urn } from '../schemas/lwm2m.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import { ValidationError } from '../converter/ValidationError.js'
 
 void describe('getDevice', () => {
@@ -72,11 +71,11 @@ void describe('getDevice', () => {
 		}
 		assert.equal(
 			device.error.message,
-			`'${Device_3_urn}' object can not be converter because object id '3' is undefined in input received`,
+			`'${Device_3_urn}' object can not be converted because object id '3' is undefined in input received`,
 		)
 	})
 
-	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M obejct 3`, () => {
+	void it(`should return an error if the result of the conversion does not meet the schema definition of LwM2M object 3`, () => {
 		const device_coiote = {
 			'0': {
 				'0': {
@@ -114,7 +113,7 @@ void describe('getDevice', () => {
 			},
 		}
 
-		const device = getDevice(device_coiote as unknown as Instance) as {
+		const device = getDevice(device_coiote as any) as {
 			error: ValidationError
 		}
 

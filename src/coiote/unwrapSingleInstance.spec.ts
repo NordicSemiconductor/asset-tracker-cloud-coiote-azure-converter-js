@@ -1,11 +1,10 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import { unwrapSingleInstance } from './unwrapSingleInstance.js'
-import type { Instance } from './LwM2MCoioteType.js'
+import { unwrapSingleInstance } from './unwrap.js'
 
 void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 	void it('should remove coiote format from single instance object', () => {
-		const object = {
+		const object: Parameters<typeof unwrapSingleInstance>[0] = {
 			'0': {
 				'0': {
 					value: 'Nordic Semiconductor ASA',
@@ -29,7 +28,7 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 				},
 			},
 		}
-		const result = {
+		const result: ReturnType<typeof unwrapSingleInstance> = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',
 			'11': [0, 0],
@@ -42,12 +41,12 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 	void it(`should return undefined when resource does not follow Coiote format`, () => {
 		const object = {
 			'0': {
-				'0': {}, // uknown format here
+				'0': {}, // unknown format here
 				'1': {
 					value: 'Thingy:91',
 				},
 				'11': {
-					'0': {}, // uknown format here
+					'0': {}, // unknown format here
 					'1': {
 						value: 0,
 					},
@@ -56,11 +55,11 @@ void describe('removeCoioteFormatFromSingleInstanceObj', () => {
 					},
 				},
 				'16': {
-					values: 'UQ', // uknown format here
+					values: 'UQ', // unknown format here
 				},
 			},
-		} as unknown as Instance
-		const result = {
+		} as any
+		const result: ReturnType<typeof unwrapSingleInstance> = {
 			'0': undefined,
 			'1': 'Thingy:91',
 			'11': [undefined, 0],

@@ -2,7 +2,6 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getTemperature } from './getTemperature.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import { ValidationError } from '../converter/ValidationError.js'
 import {
 	Temperature_3303_urn,
@@ -106,7 +105,7 @@ void describe('getTemperature', () => {
 		}
 		assert.deepEqual(
 			temperature.error.message,
-			`'${Temperature_3303_urn}' object can not be converter because object id '3303' is undefined in input received`,
+			`'${Temperature_3303_urn}' object can not be converted because object id '3303' is undefined in input received`,
 		)
 	})
 
@@ -155,10 +154,7 @@ void describe('getTemperature', () => {
 			},
 		}
 
-		const temperature = getTemperature(
-			metadata,
-			temperature_coiote as unknown as Instance,
-		) as {
+		const temperature = getTemperature(metadata, temperature_coiote as any) as {
 			error: ValidationError
 		}
 		const errorMessage = temperature.error.description[0]?.message

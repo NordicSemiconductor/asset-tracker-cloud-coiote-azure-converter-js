@@ -7,7 +7,7 @@ import {
 	getTimestampFromMetadata,
 	type Metadata,
 } from '../converter/getTimestampFromMetadata.js'
-import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrapMultipleInstance.js'
+import { unwrapMultipleInstance as removeCoioteFormatFrom } from '../coiote/unwrap.js'
 
 /**
  * Build the Humidity object from LwM2M using the object 3304 reported by Coiote
@@ -18,7 +18,7 @@ export const getHumidity = (
 ): ConversionResult<Humidity_3304> => {
 	if (object === undefined) return warning(Humidity_3304_urn)
 
-	const maybeHumidity = removeCoioteFormatFrom(object)
+	const maybeHumidity = removeCoioteFormatFrom<Humidity_3304>(object)
 
 	if (
 		maybeHumidity[0] !== undefined &&

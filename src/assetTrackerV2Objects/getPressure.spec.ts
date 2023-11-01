@@ -2,7 +2,6 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { getPressure } from './getPressure.js'
 import type { UndefinedCoioteObjectWarning } from '../converter/UndefinedCoioteObjectWarning.js'
-import type { Instance } from '../coiote/LwM2MCoioteType.js'
 import { ValidationError } from '../converter/ValidationError.js'
 import { Pressure_3323_urn, type Pressure_3323 } from '../schemas/lwm2m.js'
 import {
@@ -103,7 +102,7 @@ void describe('getPressure', () => {
 		}
 		assert.deepEqual(
 			pressure.error.message,
-			`'${Pressure_3323_urn}' object can not be converter because object id '3323' is undefined in input received`,
+			`'${Pressure_3323_urn}' object can not be converted because object id '3323' is undefined in input received`,
 		)
 	})
 
@@ -152,10 +151,7 @@ void describe('getPressure', () => {
 			},
 		}
 
-		const temperature = getPressure(
-			metadata,
-			pressure_coiote as unknown as Instance,
-		) as {
+		const temperature = getPressure(metadata, pressure_coiote as any) as {
 			error: ValidationError
 		}
 
