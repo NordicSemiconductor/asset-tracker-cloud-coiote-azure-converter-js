@@ -1,7 +1,7 @@
 {
-  "name": "@nordicsemiconductor/asset-tracker-coiote-azure-lwm2m",
+  "name": "@nordicsemiconductor/coiote-azure-converter-js",
   "version": "0.0.0-development",
-  "description": "Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration to LwM2M Asset Tracker v2 JSON encoding",
+  "description": "Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration to nRF Asset Tracker's LwM2M JSON encoding.",
   "scripts": {
     "test": "find ./ -type f -name '*.spec.ts' -not -path './node_modules/*' -print | xargs npx tsx --no-warnings --test",
     "prepare": "husky install",
@@ -17,18 +17,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-lwm2m-converter-js.git"
+    "url": "git+https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-converter-js.git"
   },
   "bugs": {
-    "url": "https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-lwm2m-converter-js/issues"
+    "url": "https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-converter-js/issues"
   },
-  "homepage": "https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-lwm2m-converter-js#readme",
+  "homepage": "https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-converter-js#readme",
   "keywords": [
-    "coiote",
-    "avsystem",
+    "nrf-asset-tracker",
     "lwm2m",
-    "asset-tracker-v2",
-    "nrf-asset-tracker"
+    "coiote"
   ],
   "author": "Nordic Semiconductor ASA | nordicsemi.no",
   "license": "BSD-3-Clause",

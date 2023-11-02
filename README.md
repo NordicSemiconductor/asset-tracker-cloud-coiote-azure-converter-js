@@ -1,13 +1,15 @@
-# Coiote to LwM2M Asset Tracker v2 [![npm version](https://img.shields.io/npm/v/@nordicsemiconductor/asset-tracker-coiote-azure-lwm2m.svg)](https://www.npmjs.com/package/@nordicsemiconductor/asset-tracker-coiote-azure-lwm2m)
+# Coiote LwM2M JSON encoding to nRF Asset Tracker LwM2M JSON encoding [![npm version](https://img.shields.io/npm/v/@nordicsemiconductor/coiote-azure-converter-js.svg)](https://www.npmjs.com/package/@nordicsemiconductor/coiote-azure-converter-js)
 
-[![Test and Release](https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-lwm2m-converter-js/actions/workflows/test-and-release.yaml/badge.svg)](https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-lwm2m-converter-js/actions/workflows/test-and-release.yaml)
+[![Test and Release](https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-converter-js/actions/workflows/test-and-release.yaml/badge.svg)](https://github.com/NordicSemiconductor/asset-tracker-cloud-coiote-azure-converter-js/actions/workflows/test-and-release.yaml)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com)
 [![@commitlint/config-conventional](https://img.shields.io/badge/%40commitlint-config--conventional-brightgreen)](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier/)
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
-> Convert the LwM2M JSON encoding written by AVSystem's Coiote Azure integration
-> to LwM2M Asset Tracker v2 JSON encoding
+Convert the LwM2M JSON encoding written by
+[AVSystem's Coiote Azure integration](https://iotdevzone.avsystem.com/docs/Cloud_integrations/Azure_IoT/Azure_IoT_Hub/Configure_Azure_IoT_Hub_integration/)
+to
+[nRF Asset Tracker's LwM2M JSON encoding](https://github.com/NordicSemiconductor/lwm2m-types-js).
 
 ## `AssetTrackerv2` firmware to `LwM2M Asset Tracker v2` through `Coiote-Azure` objects version mapping
 
