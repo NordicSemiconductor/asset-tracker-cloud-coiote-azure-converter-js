@@ -75,7 +75,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@nordicsemiconductor/lwm2m-types": "2.6.1",
+    "@nordicsemiconductor/lwm2m-types": "2.7.0",
     "@sinclair/typebox": "0.31.22"
   },
   "devDependencies": {
