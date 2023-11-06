@@ -90,7 +90,7 @@
     "eslint-plugin-unicorn": "49.0.0",
     "husky": "8.0.3",
     "prettier": "3.0.3",
-    "semantic-release": "22.0.5",
+    "semantic-release": "22.0.7",
     "tsx": "3.14.0",
     "typescript": "5.2.2"
   }
