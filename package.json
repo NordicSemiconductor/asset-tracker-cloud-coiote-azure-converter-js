@@ -76,7 +76,7 @@
   ],
   "dependencies": {
     "@nordicsemiconductor/lwm2m-types": "2.7.0",
-    "@sinclair/typebox": "0.31.23"
+    "@sinclair/typebox": "0.31.24"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "18.4.0",
